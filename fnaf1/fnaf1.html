@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Five Nights at Freddy's 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="fnaf1.css">
+<style>
+.fnaf1-nav {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    padding: 12px 28px;
+    border-radius: 16px;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5, 10, 30, 0.72);
+    border: 1px solid rgba(74,134,255,0.5);
+    backdrop-filter: blur(16px);
+    box-shadow:
+        0 0 28px rgba(74,134,255,0.3),
+        inset 0 0 20px rgba(74,134,255,0.06);
+}
+.fnaf1-nav-left { display: flex; align-items: center; gap: 20px; }
+.fnaf1-nav-right { display: flex; align-items: center; gap: 28px; }
+.fnaf1-nav a, .fnaf1-nav span {
+    font-family: 'Consolas', monospace;
+    text-decoration: none;
+    color: #C8D7F1;
+    letter-spacing: 2px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.fnaf1-nav a:hover {
+    color: #fff;
+    text-shadow: 0 0 6px #4A86FF, 0 0 16px #4A86FF;
+}
+.fnaf1-nav-home { font-size: 0.82rem; letter-spacing: 3px; }
+.fnaf1-nav-play {
+    padding: 7px 18px;
+    border: 1px solid rgba(74,134,255,0.6);
+    background: rgba(74,134,255,0.08);
+    letter-spacing: 3px;
+    transition: 0.3s ease;
+}
+.fnaf1-nav-play:hover {
+    background: rgba(74,134,255,0.18) !important;
+    box-shadow: 0 0 14px rgba(74,134,255,0.4);
+}
+.fnaf1-dropdown { position: relative; }
+.fnaf1-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    padding-top: 14px;
+    right: 0;
+    min-width: 210px;
+    background: rgba(5, 10, 30, 0.97);
+    border: 1px solid rgba(74,134,255,0.45);
+    border-radius: 10px;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 0 28px rgba(74,134,255,0.35);
+    overflow: hidden;
+    z-index: 500;
+}
+.fnaf1-dropdown:hover .fnaf1-dropdown-menu { display: block; }
+.fnaf1-dropdown-menu a {
+    display: block;
+    padding: 11px 20px;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    color: #C8D7F1 !important;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(74,134,255,0.12);
+    transition: background 0.2s ease, padding-left 0.2s ease;
+    text-transform: uppercase;
+}
+.fnaf1-dropdown-menu a:last-child { border-bottom: none; }
+.fnaf1-dropdown-menu a:hover {
+    background: rgba(74,134,255,0.12);
+    color: #fff !important;
+    text-shadow: 0 0 8px #4A86FF;
+    padding-left: 26px;
+}
+.fnaf1-discord {
+    color: #7aaeff;
+    display: flex;
+    align-items: center;
+    transition: 0.3s ease;
+}
+.fnaf1-discord:hover {
+    color: #fff;
+    text-shadow: 0 0 14px #4A86FF !important;
+}
+
+#fnaf-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 9000;
+    pointer-events: none;
+    transition: opacity 1.3s ease;
+}
+
+#h1-wrap {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#sub-wrap {
+    opacity: 0;
+}
+
+@keyframes flickerFadeIn {
+    0%   { opacity: 0; }
+    35%  { opacity: 0.6; }
+    37%  { opacity: 0.05; }
+    50%  { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+#sub-wrap.go {
+    opacity: 1;
+    animation: flickerFadeIn 0.9s linear, fnafFlicker 4s infinite 0.9s;
+}
+</style>
+</head>
+<body>
+    <div id="fnaf-overlay"></div>
+    <div class="tv-noise" style="z-index:9001;"></div>
+    <header class="fnaf1-header">
+        <nav class="fnaf1-nav" id="fnaf1-nav" style="opacity:0; z-index:9003;">            <div class="fnaf1-nav-left">
+                <a href="../index.html" class="fnaf1-nav-home">&#8592; Home</a>
+            </div>
+            <div class="fnaf1-nav-right">
+                <div class="fnaf1-dropdown">
+                    <a>Gamemodes</a>
+                    <div class="fnaf1-dropdown-menu">
+                        <a href="../fnaf1/fnaf1.html">FNAF 1</a>
+                        <a href="../fnaf2/fnaf2.html">FNAF 2</a>
+                        <a href="../fnaf3/fnaf3.html">FNAF 3</a>
+                        <a href="../fnaf4/fnaf4.html">FNAF 4</a>
+                        <a href="../fnafsl/fnafsl.html">Sister Location</a>
+                        <a href="../fnaf6/fnaf6.html">FNAF 6</a>
+                        <a href="../puppetsrevenge/puppetsrevenge.html">Puppet's Revenge</a>
+                        <a href="../basementhunt/basementhunt.html">Basement Hunt</a>
+                    </div>
+                </div>
+                <a href="https://www.roblox.com/games/12495498157/FNAF-Co-op" target="_blank" class="fnaf1-nav-play">Play</a>
+                <a href="https://discord.com/invite/fnafroblox" target="_blank" class="fnaf1-discord">
+                    <svg width="22" height="22" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="currentColor" d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.8 97.68 97.68 0 0 0-29.1 0A72.37 72.37 0 0 0 45.65 0 105.89 105.89 0 0 0 19.42 8.08C2.7 33.24-1.69 57.79.53 82a105.73 105.73 0 0 0 32.17 16.3 77.7 77.7 0 0 0 6.94-11.3 68.42 68.42 0 0 1-10.92-5.18c.92-.67 1.82-1.37 2.69-2.1 20.92 9.53 43.66 9.53 64.37 0 .88.73 1.78 1.43 2.7 2.1a68.68 68.68 0 0 1-10.92 5.18 77.73 77.73 0 0 0 6.94 11.3A105.25 105.25 0 0 0 126.6 82c2.6-28.75-4.42-53.07-18.9-73.93zM42.45 65.69c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8zm42.24 0c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+        <div class="header-content" style="position:relative; z-index:9002;">
+            <div id="h1-wrap"><h1>Five Nights at Freddy's</h1></div>
+            <div id="sub-wrap"><p class="subtitle">FREDDY FAZBEAR'S PIZZA</p></div>
+        </div>
+    </header>
+    <section class="fnaf1-content">
+        <div class="intro-box">
+            <h2>WELCOME TO FREDDY FAZBEAR'S PIZZERIA</h2>
+        </div>
+        <div class="grid">
+            <div class="description">
+                <h3>ABOUT THE GAME</h3>
+                <p>You're an employee at the newly established Freddy Fazbear's Pizzeria. The animatronics move dangerously at night. Use cameras, doors, and lights with limited power to survive five nights. Each night gets harder. They don't like being watched, stay alert and plan carefully.</p>
+            </div>
+            <div class="video-preview">
+                <video autoplay muted loop playsinline>
+                    <source src="../videos/fnaf1footage.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+    <section class="characters-section">
+        <div class="section-title">
+            <span class="line"></span>
+            <h2>CHARACTERS</h2>
+            <span class="line"></span>
+        </div>
+        <div class="character-carousel">
+            <button class="arrow left">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="11,3 5,9 11,15" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" fill="none"/>
+                </svg>
+            </button>
+            <div class="character-card">
+                <h3 id="char-name">FREDDY</h3>
+                <img id="char-image" src="../characters/freddyfazbear.webp" alt="Freddy">
+                <div class="character-info">
+                    <p id="char-desc">Only moves when not being stared at in the monitor. Attacks from the right door and when the power runs out to 0%.</p>
+                    <a id="char-link" href="https://fnaf-coop.fandom.com/wiki/Freddy_Fazbear" target="_blank" class="discover-btn">DISCOVER</a>
+                </div>
+            </div>
+            <button class="arrow right">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="7,3 13,9 7,15" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" fill="none"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+    <script>
+    const characters = [
+        { name: "FREDDY", image: "../characters/freddyfazbear.webp", desc: "Only moves when not being stared at in the monitor. Attacks from the right door and when the power runs out to 0%.", link: "https://fnaf-coop.fandom.com/wiki/Freddy_Fazbear" },
+        { name: "BONNIE", image: "../characters/bonnie.webp", desc: "Most active animatronic. Attacks from the left door. Can move to any room on the left side instantly.", link: "https://fnaf-coop.fandom.com/wiki/Bonnie" },
+        { name: "CHICA", image: "../characters/chica.webp", desc: "Moves in a set loop on the right side. Spends time in the kitchen (audio-only). Attacks from the right door.", link: "https://fnaf-coop.fandom.com/wiki/Chica" },
+        { name: "FOXY", image: "../characters/foxy.webp", desc: "Aggression builds based on how often he's monitored. Runs down the West Hall and drains your power if he hits the left door.", link: "https://fnaf-coop.fandom.com/wiki/Foxy" }
+    ];
+    let current = 0;
+    const nameEl = document.getElementById("char-name");
+    const imgEl = document.getElementById("char-image");
+    const descEl = document.getElementById("char-desc");
+    const linkEl = document.getElementById("char-link");
+    document.querySelector(".arrow.right").addEventListener("click", () => {
+        current = (current + 1) % characters.length;
+        updateCharacter();
+    });
+    document.querySelector(".arrow.left").addEventListener("click", () => {
+        current = (current - 1 + characters.length) % characters.length;
+        updateCharacter();
+    });
+    function updateCharacter() {
+        imgEl.style.opacity = "0";
+        setTimeout(() => {
+            nameEl.textContent = characters[current].name;
+            imgEl.src = characters[current].image;
+            descEl.textContent = characters[current].desc;
+            linkEl.href = characters[current].link;
+            imgEl.style.opacity = "1";
+        }, 150);
+    }
+
+    const overlay = document.getElementById('fnaf-overlay');
+    const h1wrap  = document.getElementById('h1-wrap');
+    const subwrap = document.getElementById('sub-wrap');
+
+    setTimeout(() => { h1wrap.style.opacity = '1'; }, 600);
+    setTimeout(() => { subwrap.classList.add('go'); }, 1800);
+    setTimeout(() => {
+        overlay.style.opacity = '0';
+        const nav = document.getElementById('fnaf1-nav');
+        nav.style.transition = 'opacity 0.8s ease';
+        nav.style.opacity = '1';
+        setTimeout(() => overlay.remove(), 1400);
+    }, 3100);
+    </script>
+    <section class="roles-section">
+        <div class="section-title">
+            <span class="line"></span>
+            <h2>ROLES</h2>
+            <span class="line"></span>
+        </div>
+        <div class="role-block">
+            <div class="role-text">
+                <div class="role-header">
+                    <img src="../images/nightguard.webp" class="role-icon">
+                    <h3>NIGHTGUARD</h3>
+                </div>
+                <div class="role-desc">
+                    <p>Monitor security cameras, manage limited power usage, and strategically defend your office while surviving until 6 AM as the animatronics roam the halls.</p>
+                </div>
+            </div>
+            <div class="role-video">
+                <video autoplay muted loop playsinline>
+                    <source src="../videos/fnaf1Nightguard.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="role-block reverse">
+            <div class="role-text">
+                <div class="role-header">
+                    <img src="../images/janitor.webp" class="role-icon">
+                    <h3>JANITOR</h3>
+                </div>
+                <div class="role-desc">
+                    <p>The janitor maintains the hallways of the pizzeria by cleaning up the messes that the kids left behind while strange sounds echo through the building.</p>
+                </div>
+            </div>
+            <div class="role-video">
+                <video autoplay muted loop playsinline>
+                    <source src="../videos/fnaf1Janitor.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="role-block">
+            <div class="role-text">
+                <div class="role-header">
+                    <img src="../images/engineer.webp" class="role-icon">
+                    <h3>ENGINEER</h3>
+                </div>
+                <div class="role-desc">
+                    <p>Restore failing systems and respond to unexpected technical malfunctions to keep the pizzeria operational throughout the night, all while staying alert to the subtle signs of trouble lurking in the halls.</p>
+                </div>
+            </div>
+            <div class="role-video">
+                <video autoplay muted loop playsinline>
+                    <source src="../videos/fnaf1Engineer.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="role-block reverse">
+            <div class="role-text">
+                <div class="role-header">
+                    <img src="../images/policeman.webp" class="role-icon">
+                    <h3>POLICEMAN</h3>
+                </div>
+                <div class="role-desc">
+                    <p>The policeman is an externally hired entity by Freddy Fazbear's investigating the disappearances of the missing children that happened that one night while assisting the night guard during his duty.</p>
+                </div>
+            </div>
+            <div class="role-video">
+                <video autoplay muted loop playsinline>
+                    <source src="../videos/fnaf1Policeman.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+    <section class="play-section">
+        <div class="section-title play-title">
+            <span class="line"></span>
+            <a href="https://www.roblox.com/games/12495498157/FNAF-Co-op" target="_blank" class="play-btn">&#9654; PLAY</a>
+            <span class="line"></span>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,539 @@
+@font-face {
+    font-family: "Stellar";
+    src: url("../fonts/stellar.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    background: #050000;
+    color: #6e0000;
+    font-family: "Stellar", Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+html::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url("../images/grim.png") center / cover no-repeat;
+    mix-blend-mode: soft-light;
+    opacity: 0.59;
+filter: sepia(1) hue-rotate(300deg) brightness(0.65);
+}
+
+.header-content h1,
+.subtitle,
+.intro-box h2,
+.description h3,
+.section-title h2,
+.character-card h3,
+.play-btn,
+.discover-btn,
+.animatronics-title {
+    font-family: "Stellar", Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-weight: normal;
+    color: #8b0000;
+    text-shadow:
+        0 0 5px #5a0000,
+        0 0 15px #300000;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    background: radial-gradient(circle, transparent 40%,rgba(40,0,0,0.25) 100%);
+}
+
+@keyframes nightmareFlicker {
+    0%, 92%, 100% { 
+        transform: translate(0,0);
+        opacity: 1;
+    }
+    93% { transform: translate(-2px, 0); }
+    94% { transform: translate(3px, 0); }
+    95% { transform: translate(-1px, 0); opacity: 0.8; }
+    96% { transform: translate(2px, 0); }
+    97% { transform: translate(0,0); }
+}
+
+.fnaf4-header {
+    position: relative;
+    height: 80vh;
+    background:
+        linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(3,0,0,0.3) 20%, rgba(4,0,0,0.5) 40%, rgba(5,0,0,0.7) 55%, rgba(5,0,0,0.88) 68%, rgba(5,0,0,0.96) 78%, #050000 88%),
+        url("../images/fnaf4header.webp") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    letter-spacing: 6px;
+    margin-top: -8px;
+    opacity: 0.85;
+    position: relative;
+    animation: subtitleFlicker 4s infinite;
+}
+
+.header-content h1 {
+    font-size: 4.2rem;  
+    letter-spacing: 14px;
+    margin: 0;
+}
+
+.fnaf4-content {
+    padding: 100px 10% 0px 10%;
+    margin-top: -60px;
+    text-align: center;
+}
+
+.intro-box h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;         
+    margin-top: 60px;   
+    margin-bottom: 40px;
+    align-items: center;
+    text-align: left;
+}
+
+.description h3 {
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+    margin-bottom: 25px;
+}
+
+.description p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #5a0000;
+}
+
+.video-preview {
+    border: 2px solid rgba(122,0,0,0.3);
+    background: #000;
+}
+
+.video-preview video {
+    width: 100%;
+    display: block;
+}
+
+.characters-section {
+    padding: -40px 10% 0px 10%;
+    text-align: center;
+}
+
+.character-carousel {
+    display: grid;
+    grid-template-columns: 60px 520px 60px; 
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: -60px;
+    position: relative;
+    z-index: 15;
+}
+
+.character-card img {
+    height: 400px; 
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    filter: grayscale(0.3) contrast(1.2);
+    display: block;
+    margin: 0 auto;
+}
+
+.arrow.left {
+    margin-left: 15px;
+}
+
+.arrow {
+    background: rgba(139, 0, 0, 0.18); 
+    border: 1.5px solid #8b0000;
+    width: 38px;
+    height: 120px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.4s ease-in-out;
+    position: relative;
+    outline: none;
+}
+
+.arrow span {
+    display: block;
+    width: 22px;
+    height: 85px;
+    position: relative;
+    background-color: #ff0000; 
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%, 0% 50%);
+    transition: all 0.4s ease;
+}
+
+.arrow span::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 4px;
+    right: 1.5px;
+    background: rgba(100, 0, 0, 0.4); 
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%, 0% 50%);
+    z-index: 1;
+}
+
+.arrow.right span {
+    transform: scaleX(-1);
+}
+
+.arrow:hover {
+    background: rgba(139, 0, 0, 0.25);
+    border-color: #ff0000;
+}
+
+.arrow:hover span {
+    background-color: #ff3333;
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.6));
+}
+
+.play-btn {
+    position: relative;
+    z-index: 5;
+    font-size: 2.6rem;
+    letter-spacing: 16px;
+    text-decoration: none;
+    color: #8b0000;
+    padding: 0;
+    border: none !important;
+    background: none !important;
+    transition: 
+        color 0.4s ease-out, 
+        letter-spacing 0.4s ease-out, 
+        text-shadow 0.4s ease-out,
+        opacity 0.4s ease-out !important;
+}
+
+.play-btn:hover {
+    color: #ff0000;
+    text-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #7a0000;
+    letter-spacing: 20px;
+    opacity: 1;
+    transition: 
+        color 0.2s ease-out, 
+        letter-spacing 0.2s ease-out, 
+        text-shadow 0.2s ease-out !important;
+}
+
+.glitch-line {
+    height: 1.5px;
+    width: 100%;
+    opacity: 0.6;
+    transition: all 0.8s ease-in-out;
+}
+
+.play-wrapper:hover .glitch-line {
+    opacity: 1;
+    height: 2px;
+}
+
+.play-wrapper:hover .glitch-line:nth-child(1) {
+    transform: translateY(10px) scaleX(1.1);
+    background: #ff0000;
+}
+
+.play-wrapper:hover .glitch-line:nth-child(4) {
+    transform: translateY(-10px) scaleX(1.1);
+    background: #ff0000;
+}
+
+.play-wrapper:hover .glitch-line:nth-child(2),
+.play-wrapper:hover .glitch-line:nth-child(3) {
+    animation: lineGlitch 0.2s infinite; 
+    background: #8b0000;
+}
+
+.discover-btn {
+    color: #7a0000;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    display: inline-block;
+}
+
+.discover-btn::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #7a0000;
+    transform: scaleX(0); 
+    transform-origin: bottom left;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.discover-btn:hover {
+    color: #ff0000;
+    text-shadow: 0 0 8px #8b0000;
+}
+
+.discover-btn:hover::after {
+    transform: scaleX(1);
+}
+
+.animatronics-title-wrapper {
+    position: relative;
+    text-align: center;
+    margin: 100px 0 60px 0;
+}
+
+.animatronics-title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    z-index: 5;
+}
+
+.animatronics-lines {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw; 
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.glitch-line:nth-child(1) { background: #3a0000; }
+.glitch-line:nth-child(2) { background: #7a0000; }
+.glitch-line:nth-child(3) { background: #7a0000; }
+.glitch-line:nth-child(4) { background: #2a0000; }
+
+@keyframes lineGlitch {
+    0%, 100% { transform: scaleX(1); opacity: 0.3; }
+    10% { transform: scaleX(1.02) translateX(2px); opacity: 0.7; }
+    20% { transform: scaleX(0.98) translateX(-2px); }
+    50% { opacity: 0.5; }
+    52% { opacity: 0; }
+    55% { opacity: 0.6; }
+    90% { transform: translateY(1px); }
+}
+
+.glitch-line:nth-child(1) { animation: lineGlitch 2s infinite linear; }
+.glitch-line:nth-child(2) { animation: lineGlitch 1.7s infinite linear 0.2s; }
+.glitch-line:nth-child(3) { animation: lineGlitch 2.3s infinite linear 0.4s; }
+.glitch-line:nth-child(4) { animation: lineGlitch 1.9s infinite linear 0.6s; }
+
+.play-section {
+    padding: 50px 10% 100px 10%;
+    text-align: center;
+}
+
+.play-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.play-lines {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.title-container {
+    position: relative;
+    display: inline-block;
+}
+
+.text-stack {
+    position: relative;
+    z-index: 5;
+}
+
+.header-content {
+    position: relative;
+}
+
+.big-4 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Stellar", Arial, sans-serif;
+    font-size: 32rem;
+    color: #7a0000;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 1;
+    text-shadow:
+        0 0 60px #7a0000,
+        0 0 120px #300000;
+    animation: fourPulse 5s infinite;
+}
+
+@keyframes fourPulse {
+    0%, 92%, 100% { opacity: 0.18; filter: brightness(1); }
+    93% { opacity: 0.35; filter: brightness(1.6); }
+    94% { opacity: 0.1; filter: brightness(0.6); }
+    95% { opacity: 0.25; filter: brightness(1.3); }
+}
+
+.glitch-title {
+    animation: nightmareFlicker 3s infinite;
+}
+
+@keyframes subtitleFlicker {
+    0%, 85%, 100% { opacity: 0.85; }
+    86% { opacity: 0.1; }
+    87% { opacity: 0.9; }
+    88% { opacity: 0.2; }
+    89% { opacity: 0.85; }
+}
+
+.intro-box h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: #4a0000;
+    background: linear-gradient(to right, #4a0000 20%, #ff0000 50%, #4a0000 80%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: flashlightSweep 6s ease-in-out infinite;
+}
+
+@keyframes flashlightSweep {
+    0% { background-position: -100% center; text-shadow: 10px 0px 15px rgba(0, 0, 0, 0.9); }
+    50% { text-shadow: 0px 0px 25px rgba(139, 0, 0, 0.5); }
+    100% { background-position: 100% center; text-shadow: -10px 0px 15px rgba(0, 0, 0, 0.9); }
+}
+
+.arrow:hover span::before {
+    background: rgba(150, 0, 0, 0.8);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(90,0,0,0.25), transparent 40%),
+        radial-gradient(circle at 70% 80%, rgba(50,0,0,0.3), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(20,0,0,0.5), transparent 60%);
+    animation: slowGrimeShift 25s infinite alternate ease-in-out;
+}
+
+@keyframes slowGrimeShift {
+    0% { transform: scale(1) translate(0,0); opacity: 0.4; }
+    50% { transform: scale(1.05) translate(-1%, 1%); opacity: 0.55; }
+    100% { transform: scale(1.02) translate(1%, -1%); opacity: 0.45; }
+}
+
+#intro-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 9999; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeOutOverlay 1s ease-in forwards 2.5s; 
+    pointer-events: none;
+}
+
+.intro-text-container {
+    text-align: center;
+}
+
+.trailer-text {
+    font-family: "Stellar", Arial, sans-serif;
+    color: #8b0000;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 12px;
+    margin: 0;
+    opacity: 0;
+    filter: blur(10px);
+    
+    animation: 
+        fnafTextIn 2.5s ease-out 0.3s forwards, 
+        nightmareFlicker 0.2s infinite 0.3s;
+    
+    transform: scale(0.9);
+}
+
+@keyframes fnafTextIn {
+    0% {
+        opacity: 0;
+        filter: blur(15px);
+        transform: scale(0.9);
+        letter-spacing: 20px;
+    }
+    40% {
+        opacity: 0.8;
+        filter: blur(2px);
+    }
+  70% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: scale(1.1);
+    }
+    88% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: scale(1.2);
+    }
+}
+
+@keyframes fadeOutOverlay {
+    to { opacity: 0; visibility: hidden; }
+}
+.fnaf4-content { position: relative; }
+.characters-section { position: relative; }
+.play-section { position: relative; }

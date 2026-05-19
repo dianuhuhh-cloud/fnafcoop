@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Puppet's Revenge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="puppetsrevenge.css">
+<style>
+#pr-overlay {
+    position: fixed; inset: 0; background: #000;
+    z-index: 9000; pointer-events: none;
+    transition: opacity 1.3s ease;
+}
+.pr-nav {
+    position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 90%; padding: 12px 28px; z-index: 9003;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(5,5,5,0.72);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 0 28px rgba(255,255,255,0.04), inset 0 0 20px rgba(255,255,255,0.02);
+    opacity: 0; transition: opacity 1s ease;
+}.pr-nav-left { display: flex; align-items: center; gap: 20px; }
+.pr-nav-right { display: flex; align-items: center; gap: 28px; }
+.pr-nav a, .pr-nav span {
+    font-family: Georgia, serif;
+    text-decoration: none;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 3px; font-size: 0.78rem;
+    text-transform: uppercase; transition: 0.3s ease; cursor: pointer;
+    font-style: italic;
+}
+.pr-nav a:hover {
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+.pr-dropdown { position: relative; }
+.pr-dropdown-menu {
+    display: none; position: absolute; top: 100%; padding-top: 14px;
+    right: 0; min-width: 210px;
+    background: rgba(5,5,5,0.97);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 0 28px rgba(255,255,255,0.06);
+    overflow: hidden; z-index: 9010;
+}
+.pr-dropdown:hover .pr-dropdown-menu { display: block; }
+.pr-dropdown-menu a {
+    display: block; padding: 11px 20px; font-size: 0.75rem;
+    letter-spacing: 2px; color: rgba(255,255,255,0.4) !important;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.2s ease, padding-left 0.2s ease;
+    text-transform: uppercase; font-style: italic;
+}
+.pr-dropdown-menu a:last-child { border-bottom: none; }
+.pr-dropdown-menu a:hover {
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.9) !important;
+    text-shadow: 0 0 8px rgba(255,255,255,0.3);
+    padding-left: 26px;
+}
+.pr-discord {
+    display: flex; align-items: center; transition: 0.3s ease;
+    color: rgba(255,255,255,0.4) !important;
+}
+.pr-discord:hover {
+    color: rgba(255,255,255,0.9) !important;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3) !important;
+}
+</style>
+</head>
+<body>
+
+<header class="pr-header">
+    <nav class="pr-nav" id="pr-nav">
+        <div class="pr-nav-left">
+            <a href="../index.html">&#8592; Home</a>
+        </div>
+        <div class="pr-nav-right">
+            <div class="pr-dropdown">
+                <a>Gamemodes</a>
+                <div class="pr-dropdown-menu">
+                    <a href="../fnaf1/fnaf1.html">FNAF 1</a>
+                    <a href="../fnaf2/fnaf2.html">FNAF 2</a>
+                    <a href="../fnaf3/fnaf3.html">FNAF 3</a>
+                    <a href="../fnaf4/fnaf4.html">FNAF 4</a>
+                    <a href="../fnafsl/fnafsl.html">Sister Location</a>
+                    <a href="../fnaf6/fnaf6.html">FNAF 6</a>
+                    <a href="../puppetsrevenge/puppetsrevenge.html">Puppet's Revenge</a>
+                    <a href="../basementhunt/basementhunt.html">Basement Hunt</a>
+                </div>
+            </div>
+            <a href="https://www.roblox.com/games/12497456055/FNAF-Co-op-Puppets-Revenge" target="_blank">Play</a>
+            <a href="https://discord.com/invite/fnafroblox" target="_blank" class="pr-discord">
+                <svg width="22" height="22" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor" d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.8 97.68 97.68 0 0 0-29.1 0A72.37 72.37 0 0 0 45.65 0 105.89 105.89 0 0 0 19.42 8.08C2.7 33.24-1.69 57.79.53 82a105.73 105.73 0 0 0 32.17 16.3 77.7 77.7 0 0 0 6.94-11.3 68.42 68.42 0 0 1-10.92-5.18c.92-.67 1.82-1.37 2.69-2.1 20.92 9.53 43.66 9.53 64.37 0 .88.73 1.78 1.43 2.7 2.1a68.68 68.68 0 0 1-10.92 5.18 77.73 77.73 0 0 0 6.94 11.3A105.25 105.25 0 0 0 126.6 82c2.6-28.75-4.42-53.07-18.9-73.93zM42.45 65.69c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8zm42.24 0c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8z"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
+    <div class="header-content">
+        <div class="title-container">
+            <div class="puppet-ghost-wrap">
+                <img src="../images/puppet.webp" alt="" class="puppet-ghost" aria-hidden="true">
+                <img src="../images/puppet.webp" alt="" class="puppet-ghost red" aria-hidden="true">
+                <img src="../images/puppet.webp" alt="" class="puppet-ghost blue" aria-hidden="true">
+            </div>
+            <div class="text-stack">
+                <p class="game-label">Five Nights at Freddy's Co-op</p>
+                <h1 class="glitch-title">Puppet's Revenge</h1>
+                <p class="subtitle">THE STRINGS WERE NEVER YOURS</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="pr-content">
+    <div class="intro-box">
+        <div class="intro-string-row">
+            <svg class="intro-side-svg" id="intro-str-left" viewBox="0 0 1 30" preserveAspectRatio="none" aria-hidden="true">
+                <path class="play-string-path" d="M0,15 C0.17,3 0.33,27 0.5,15 C0.67,3 0.83,27 1,15"/>
+            </svg>
+            <h2 id="intro-h2">THE MUSIC BOX HAS STOPPED</h2>
+            <svg class="intro-side-svg" id="intro-str-right" viewBox="0 0 1 30" preserveAspectRatio="none" aria-hidden="true">
+                <path class="play-string-path" d="M0,15 C0.17,27 0.33,3 0.5,15 C0.67,27 0.83,3 1,15"/>
+            </svg>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="description">
+            <p>
+                You are trapped inside a labyrinthine Freddy Fazbear's Pizza — and the Puppet is already hunting.
+                Find batteries scattered across the maze, activate all ten generators, and reach the basement before she finds you.
+                The moment she locks eyes on you, she accelerates. You have three flashbangs.
+                Use them wisely. There are no second chances.
+            </p>
+        </div>
+        <div class="video-preview">
+            <video autoplay muted loop playsinline>
+                <source src="../videos/puppetsrevengefootage.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</section>
+
+<section class="play-section" id="play-section">
+    <div class="play-string-row" id="play-string-row">
+        <svg class="play-string-svg" id="play-str-left" viewBox="0 0 1 30" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+                <linearGradient id="fade-left" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%"   stop-color="white" stop-opacity="0"/>
+                    <stop offset="15%"  stop-color="white" stop-opacity="1"/>
+                    <stop offset="100%" stop-color="white" stop-opacity="1"/>
+                </linearGradient>
+                <mask id="mask-left">
+                    <rect x="0" y="0" width="1" height="30" fill="url(#fade-left)"/>
+                </mask>
+            </defs>
+            <path class="play-string-path" id="play-path-left" d="M0,15 L1,15" mask="url(#mask-left)"/>
+        </svg>
+        <a href="https://www.roblox.com/games/12497456055/FNAF-Co-op-Puppets-Revenge"
+           target="_blank"
+           class="play-btn" id="play-btn">
+            &#9654; PLAY
+        </a>
+        <svg class="play-string-svg" id="play-str-right" viewBox="0 0 1 30" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+                <linearGradient id="fade-right" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%"   stop-color="white" stop-opacity="1"/>
+                    <stop offset="85%"  stop-color="white" stop-opacity="1"/>
+                    <stop offset="100%" stop-color="white" stop-opacity="0"/>
+                </linearGradient>
+                <mask id="mask-right">
+                    <rect x="0" y="0" width="1" height="30" fill="url(#fade-right)"/>
+                </mask>
+            </defs>
+            <path class="play-string-path" id="play-path-right" d="M0,15 L1,15" mask="url(#mask-right)"/>
+        </svg>
+    </div>
+</section>
+
+<script>
+function puppetize(el, stringHeight, originDist, fallStaggerBase, fallStaggerStep) {
+    fallStaggerBase  = fallStaggerBase  || 200;
+    fallStaggerStep  = fallStaggerStep  || 60;
+
+    const FALL_DUR   = 2100;
+    const MAX_SWING  = 11;
+    const SWING_FREQ = 2.6;
+
+    const text = el.textContent;
+    el.textContent = '';
+
+    Array.from(text).forEach((char, i) => {
+        const span    = document.createElement('span');
+        const isSpace = char === ' ';
+        span.textContent = isSpace ? '\u00A0' : char;
+        span.classList.add('puppet-letter');
+        if (isSpace) span.classList.add('puppet-space');
+
+        const swayDur   = (3.2 + Math.random() * 3.6).toFixed(2);
+        const swayAmp   = ((Math.random() * 3.4) - 1.7).toFixed(2);
+        const swayDelay = (-(Math.random() * 6)).toFixed(2);
+
+        span.style.setProperty('--str-h',      stringHeight + 'px');
+        span.style.setProperty('--origin-y',   '-' + originDist + 'px');
+        span.style.setProperty('--sway-dur',   swayDur + 's');
+        span.style.setProperty('--sway-amp',   swayAmp);
+        span.style.setProperty('--sway-delay', swayDelay + 's');
+        span.style.opacity   = '0';
+        span.style.animation = 'none';
+
+        const delayMs = fallStaggerBase + i * fallStaggerStep;
+
+        if (!isSpace) {
+            setTimeout(() => {
+                const startY = -(window.innerHeight * 0.94);
+                let t0 = null;
+                span.style.opacity         = '1';
+                span.style.transformOrigin = '50% 50%';
+
+                function tick(now) {
+                    if (!t0) t0 = now;
+                    const p  = Math.min((now - t0) / FALL_DUR, 1);
+                    const ep = 1 - Math.pow(1 - p, 3);
+                    const ty = startY * (1 - ep);
+                    const amp = MAX_SWING * Math.pow(1 - p, 1.5);
+                    const rot = amp * Math.sin(i * 0.7 + p * Math.PI * 2 * SWING_FREQ);
+                    span.style.transform = `translateY(${ty.toFixed(1)}px) rotate(${rot.toFixed(3)}deg)`;
+
+                    if (p < 1) {
+                        requestAnimationFrame(tick);
+                    } else {
+                        span.style.transform       = '';
+                        span.style.transformOrigin = '50% -' + originDist + 'px';
+                        span.style.animation =
+                            `letterSway ${swayDur}s ease-in-out ${swayDelay}s infinite alternate`;
+                    }
+                }
+                requestAnimationFrame(tick);
+            }, delayMs);
+        } else {
+            span.style.opacity = '1';
+        }
+
+        el.appendChild(span);
+    });
+}
+
+const WAVE_N = 40;
+
+function wavyLeft(t) {
+    const pts = [];
+    for (let i = 0; i < WAVE_N; i++) {
+        const x = i / (WAVE_N - 1);
+        pts.push(
+            15 + Math.sin(t * 0.50 + x * 6.28)       * 7.5
+               + Math.sin(t * 0.33 + x * 13.0 + 0.9) * 3.5
+               + Math.sin(t * 0.71 + x * 3.5 + 2.1) * 2.2
+        );
+    }
+    return pts;
+}
+
+function wavyRight(t) {
+    const pts = [];
+    for (let i = 0; i < WAVE_N; i++) {
+        const x = i / (WAVE_N - 1);
+        pts.push(
+            15 + Math.sin(t * 0.48 + x * 6.28 + 1.5)  * 7.5
+               + Math.sin(t * 0.31 + x * 13.0 + 2.3)  * 3.5
+               + Math.sin(t * 0.67 + x * 3.5 + 0.4)  * 2.2
+        );
+    }
+    return pts;
+}
+
+function makeStringAnimator(pathEl, wavyFn, straightY, phase, speed) {
+    let t         = phase;
+    let amp       = 1;
+    let ampTarget = 1;
+
+    function buildPath(time, ampScale) {
+        const pts = wavyFn(time);
+        const n   = pts.length;
+        let d = `M0,${(straightY + (pts[0] - straightY) * ampScale).toFixed(3)}`;
+        for (let i = 1; i < n; i++) {
+            const x = (i / (n - 1)).toFixed(5);
+            const y = (straightY + (pts[i] - straightY) * ampScale).toFixed(3);
+            d += ` L${x},${y}`;
+        }
+        return d;
+    }
+
+    function tick() {
+        t += speed;
+        amp += (ampTarget - amp) * (ampTarget < amp ? 0.05 : 0.012);
+        pathEl.setAttribute('d', buildPath(t, amp));
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    return {
+        calm    : () => { ampTarget = 0.12; },
+        release : () => { ampTarget = 1; }
+    };
+}
+
+function animatePlayBtn() {
+    const el  = document.getElementById('play-btn');
+    const row = document.getElementById('play-string-row');
+    if (!el || !row) return;
+
+    let t         = Math.random() * 10;
+    let hovering  = false;
+    let scale     = 1;
+    let shakeKick = 0;
+    let glowAmt   = 0;
+
+    row.addEventListener('mouseenter', () => {
+        hovering  = true;
+        shakeKick = 1;
+        el.querySelectorAll('.puppet-letter').forEach(l => {
+            l.style.animationPlayState = 'paused';
+            l.style.transform = 'rotate(0deg)';
+        });
+    });
+    row.addEventListener('mouseleave', () => {
+        hovering = false;
+        el.querySelectorAll('.puppet-letter').forEach(l => {
+            l.style.animationPlayState = '';
+            l.style.transform = '';
+        });
+    });
+
+    function tick() {
+        t += 0.013;
+
+        const targetScale = hovering ? 1.07 : 1;
+        scale += (targetScale - scale) * 0.08;
+
+        const targetGlow = hovering ? 1 : 0;
+        glowAmt += (targetGlow - glowAmt) * 0.06;
+
+        const bobY = hovering ? 0 : (Math.sin(t * 0.58) * 3).toFixed(2);
+
+        shakeKick *= 0.93;
+        const shakeX = hovering ? (Math.sin(t * 50) * 22 * shakeKick).toFixed(2) : '0';
+
+        el.style.transform = `translate(${shakeX}px, ${bobY}px) scale(${scale.toFixed(4)})`;
+
+        const g = glowAmt;
+        el.style.color = `rgba(255,255,255,${(0.55 + g * 0.45).toFixed(2)})`;
+        el.style.textShadow = g > 0.01
+            ? `0 0 ${(20*g).toFixed(1)}px rgba(255,255,255,${(0.4*g).toFixed(2)}), 0 0 ${(55*g).toFixed(1)}px rgba(255,255,255,${(0.12*g).toFixed(2)})`
+            : '';
+
+        const strokeAlpha = (0.22 + g * 0.55).toFixed(2);
+        const glowFilter  = g > 0.01 ? `drop-shadow(0 0 ${(5*g).toFixed(1)}px rgba(255,255,255,${(0.5*g).toFixed(2)}))` : '';
+        const svgL = document.getElementById('play-str-left');
+        const svgR = document.getElementById('play-str-right');
+        if (svgL) svgL.style.filter = glowFilter;
+        if (svgR) svgR.style.filter = glowFilter;
+        document.querySelectorAll('#play-path-left, #play-path-right').forEach(p => {
+            p.style.stroke = `rgba(255,255,255,${strokeAlpha})`;
+        });
+
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    puppetize(document.querySelector('.glitch-title'), 480, 460, 80,   55);
+    puppetize(document.querySelector('.game-label'),   270, 250, 60,   22);
+    puppetize(document.querySelector('.subtitle'),     190, 170, 1100, 18);
+
+    const subtitleText = document.querySelector('.subtitle').textContent;
+    const lastLands = 1100 + (subtitleText.length - 1) * 18 + 2100;
+
+    setTimeout(() => {
+        const ghostWrap = document.querySelector('.puppet-ghost-wrap');
+        if (ghostWrap) ghostWrap.classList.add('revealed');
+        document.getElementById('pr-nav').style.opacity = '1';
+
+        setTimeout(() => {
+            const content = document.querySelector('.pr-content');
+            const play    = document.querySelector('.play-section');
+            if (content) content.classList.add('revealed');
+            if (play)    play.classList.add('revealed');
+
+        }, 700);
+    }, lastLands + 200);
+
+    const introLeftPath  = document.querySelector('#intro-str-left path');
+    const introRightPath = document.querySelector('#intro-str-right path');
+    if (introLeftPath)  makeStringAnimator(introLeftPath,  wavyLeft,  15, 0,    0.009);
+    if (introRightPath) makeStringAnimator(introRightPath, wavyRight, 15, 1.57, 0.008);
+
+    const playBtnEl = document.getElementById('play-btn');
+    if (playBtnEl) {
+        puppetize(playBtnEl, 200, 180, 0, 38);
+    }
+
+    const leftPath  = document.querySelector('#play-str-left path');
+    const rightPath = document.querySelector('#play-str-right path');
+    const leftAnim  = leftPath  ? makeStringAnimator(leftPath,  wavyLeft,  15, 0,    0.010) : null;
+    const rightAnim = rightPath ? makeStringAnimator(rightPath, wavyRight, 15, 1.57, 0.009) : null;
+
+    function sizePlayStrings() {
+        const section = document.getElementById('play-section');
+        const btn     = document.getElementById('play-btn');
+        const svgL    = document.getElementById('play-str-left');
+        const svgR    = document.getElementById('play-str-right');
+        if (!section || !btn || !svgL || !svgR) return;
+        const secRect = section.getBoundingClientRect();
+        const btnRect = btn.getBoundingClientRect();
+        svgL.style.width = (btnRect.left  - secRect.left)  + 'px';
+        svgR.style.width = (secRect.right - btnRect.right) + 'px';
+    }
+    setTimeout(sizePlayStrings, 200);
+    window.addEventListener('resize', sizePlayStrings);
+
+    const playRow = document.getElementById('play-string-row');
+    if (playRow) {
+        playRow.addEventListener('mouseenter', () => {
+            if (leftAnim)  leftAnim.calm();
+            if (rightAnim) rightAnim.calm();
+        });
+        playRow.addEventListener('mouseleave', () => {
+            if (leftAnim)  leftAnim.release();
+            if (rightAnim) rightAnim.release();
+        });
+    }
+
+    animatePlayBtn();
+
+    const h2El = document.getElementById('intro-h2');
+    if (h2El) {
+        puppetize(h2El, 200, 180, 0, 38);
+        let t2 = Math.random() * 10;
+        function h2Tick() {
+            t2 += 0.007;
+            h2El.style.transform = `translateY(${(Math.sin(t2 * 0.60) * 3).toFixed(2)}px)`;
+            requestAnimationFrame(h2Tick);
+        }
+        requestAnimationFrame(h2Tick);
+    }
+});
+</script>
+
+</body>
+</html>

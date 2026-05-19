@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Five Nights at Freddy's 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="fnaf2.css">
+<style>
+.fnaf2-nav {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    padding: 12px 28px;
+    border-radius: 16px;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(30, 5, 5, 0.72);
+    border: 1px solid rgba(255,17,0,0.5);
+    backdrop-filter: blur(16px);
+    box-shadow:
+        0 0 28px rgba(255,17,0,0.3),
+        inset 0 0 20px rgba(255,17,0,0.06);
+}
+.fnaf2-nav-left { display: flex; align-items: center; gap: 20px; }
+.fnaf2-nav-right { display: flex; align-items: center; gap: 28px; }
+.fnaf2-nav a, .fnaf2-nav span {
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    text-decoration: none;
+    color: #FF8A65;
+    letter-spacing: 2px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.fnaf2-nav a:hover {
+    color: #fff;
+    text-shadow: 0 0 6px #FF1100, 0 0 16px #FF1100;
+}
+.fnaf2-nav-home { font-size: 0.82rem; letter-spacing: 3px; }
+.fnaf2-nav-play {
+    padding: 7px 18px;
+    border: 1px solid rgba(255,17,0,0.6);
+    background: rgba(255,17,0,0.08);
+    letter-spacing: 3px;
+    transition: 0.3s ease;
+}
+.fnaf2-nav-play:hover {
+    background: rgba(255,17,0,0.18) !important;
+    box-shadow: 0 0 14px rgba(255,17,0,0.4);
+}
+.fnaf2-dropdown { position: relative; }
+.fnaf2-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    padding-top: 14px;
+    right: 0;
+    min-width: 210px;
+    background: rgba(30, 5, 5, 0.97);
+    border: 1px solid rgba(255,17,0,0.45);
+    border-radius: 10px;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 0 28px rgba(255,17,0,0.35);
+    overflow: hidden;
+    z-index: 500;
+}
+.fnaf2-dropdown:hover .fnaf2-dropdown-menu { display: block; }
+.fnaf2-dropdown-menu a {
+    display: block;
+    padding: 11px 20px;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    color: #FF8A65 !important;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,17,0,0.12);
+    transition: background 0.2s ease, padding-left 0.2s ease;
+    text-transform: uppercase;
+}
+.fnaf2-dropdown-menu a:last-child { border-bottom: none; }
+.fnaf2-dropdown-menu a:hover {
+    background: rgba(255,17,0,0.12);
+    color: #fff !important;
+    text-shadow: 0 0 8px #FF1100;
+    padding-left: 26px;
+}
+.fnaf2-discord {
+    color: #ff7a55;
+    display: flex;
+    align-items: center;
+    transition: 0.3s ease;
+}
+.fnaf2-discord:hover {
+    color: #fff;
+    text-shadow: 0 0 14px #FF1100 !important;
+}
+
+#fnaf-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 9000;
+    pointer-events: none;
+    transition: opacity 1.3s ease;
+}
+
+#h1-wrap {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#sub-wrap {
+    opacity: 0;
+}
+
+@keyframes flickerFadeIn {
+    0%   { opacity: 0; }
+    35%  { opacity: 0.6; }
+    37%  { opacity: 0.05; }
+    50%  { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+#sub-wrap.go {
+    opacity: 1;
+    animation: flickerFadeIn 0.9s linear, fnafFlicker 4s infinite 0.9s;
+}
+</style>
+</head>
+<body>
+    <div id="fnaf-overlay"></div>
+    <div class="tv-noise" style="z-index:9001;"></div>
+    <header class="fnaf2-header">
+        <nav class="fnaf2-nav" id="fnaf2-nav" style="opacity:0; z-index:9003;">
+            <div class="fnaf2-nav-left">
+                <a href="../index.html" class="fnaf2-nav-home">&#8592; Home</a>
+            </div>
+            <div class="fnaf2-nav-right">
+                <div class="fnaf2-dropdown">
+                    <a>Gamemodes</a>
+                    <div class="fnaf2-dropdown-menu">
+                        <a href="../fnaf1/fnaf1.html">FNAF 1</a>
+                        <a href="../fnaf2/fnaf2.html">FNAF 2</a>
+                        <a href="../fnaf3/fnaf3.html">FNAF 3</a>
+                        <a href="../fnaf4/fnaf4.html">FNAF 4</a>
+                        <a href="../fnafsl/fnafsl.html">Sister Location</a>
+                        <a href="../fnaf6/fnaf6.html">FNAF 6</a>
+                        <a href="../puppetsrevenge/puppetsrevenge.html">Puppet's Revenge</a>
+                        <a href="../basementhunt/basementhunt.html">Basement Hunt</a>
+                    </div>
+                </div>
+                <a href="https://www.roblox.com/games/12495498157/FNAF-Co-op" target="_blank" class="fnaf2-nav-play">Play</a>
+                <a href="https://discord.com/invite/fnafroblox" target="_blank" class="fnaf2-discord">
+                    <svg width="22" height="22" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="currentColor" d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.8 97.68 97.68 0 0 0-29.1 0A72.37 72.37 0 0 0 45.65 0 105.89 105.89 0 0 0 19.42 8.08C2.7 33.24-1.69 57.79.53 82a105.73 105.73 0 0 0 32.17 16.3 77.7 77.7 0 0 0 6.94-11.3 68.42 68.42 0 0 1-10.92-5.18c.92-.67 1.82-1.37 2.69-2.1 20.92 9.53 43.66 9.53 64.37 0 .88.73 1.78 1.43 2.7 2.1a68.68 68.68 0 0 1-10.92 5.18 77.73 77.73 0 0 0 6.94 11.3A105.25 105.25 0 0 0 126.6 82c2.6-28.75-4.42-53.07-18.9-73.93zM42.45 65.69c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8zm42.24 0c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+        <div class="header-content" style="position:relative; z-index:9002;">
+            <div id="h1-wrap"><h1>Five Nights at Freddy's 2</h1></div>
+            <div id="sub-wrap"><p class="subtitle">FREDDY FAZBEAR'S PIZZA GRAND REOPENING</p></div>
+        </div>
+    </header>
+
+    <section class="fnaf2-content">
+        <div class="intro-box">
+            <h2>WELCOME TO THE NEW AND IMPROVED FREDDY FAZBEAR'S PIZZA</h2>
+        </div>
+        <div class="grid">
+            <div class="description">
+                <h3>ABOUT THE GAME</h3>
+                <p>Welcome to the new and improved Freddy Fazbear's Pizza! You're the new security guard working the night shift. There are no doors this time to protect you... just an empty Freddy Fazbear head to fool the animatronics, and a Music Box you must keep wound up. Survive five nights as the new cast joins the old, withered ones.</p>
+            </div>
+            <div class="video-preview">
+                <video autoplay muted loop playsinline>
+                    <source src="../videos/fnaf2footage.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="characters-section">
+        <div class="section-title">
+            <span class="line"></span>
+            <h2>CHARACTERS</h2>
+            <span class="line"></span>
+        </div>
+        <div class="character-carousel">
+            <button class="arrow left">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="11,3 5,9 11,15" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" fill="none"/>
+                </svg>
+            </button>
+            <div class="character-card">
+                <h3 id="char-name">TOY FREDDY</h3>
+                <img id="char-image" src="../characters/toyfreddy.webp" alt="Toy Freddy">
+                <div class="character-info">
+                    <p id="char-desc">The new and improved face of Freddy Fazbear's Pizza. Approaches through the main hallway. Put on the Freddy mask when he enters the office.</p>
+                    <a id="char-link" href="https://fnaf-coop.fandom.com/wiki/Toy_Freddy" target="_blank" class="discover-btn">DISCOVER</a>
+                </div>
+            </div>
+            <button class="arrow right">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="7,3 13,9 7,15" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" fill="none"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <script>
+    const characters = [
+        { name: "TOY FREDDY", image: "../characters/toyfreddy.webp", desc: "The new and improved face of Freddy Fazbear's Pizza. Approaches through the main hallway. Put on the Freddy mask when he enters the office.", link: "https://fnaf-coop.fandom.com/wiki/Toy_Freddy" },
+        { name: "TOY BONNIE", image: "../characters/toybonnie.webp", desc: "Moves quickly through the right air vent. When you see him in the vent blind spot, put on the Freddy mask until he leaves.", link: "https://fnaf-coop.fandom.com/wiki/Toy_Bonnie" },
+        { name: "TOY CHICA", image: "../characters/toychica.webp", desc: "Removes her beak when hunting. Approaches through the main hall and the left air vent. Use the Freddy mask to ward her off.", link: "https://fnaf-coop.fandom.com/wiki/Toy_Chica" },
+        { name: "MANGLE", image: "../characters/mangle.webp", desc: "A dismantled toy left as a take-apart attraction. Travels along the ceiling and attacks from above. Wear the mask when it's in the vent.", link: "https://fnaf-coop.fandom.com/wiki/Mangle" },
+        { name: "THE MARIONETTE", image: "../characters/marionette.webp", desc: "Requires the Music Box in the Prize Corner to be constantly wound up. If the music stops, it will attack, and nothing can stop it.", link: "https://fnaf-coop.fandom.com/wiki/The_Puppet" },
+        { name: "WITHERED FREDDY", image: "../characters/witheredfreddy.webp", desc: "The original mascot, now broken down. Approaches through the main hall. Quickly equip the empty Freddy head as soon as he enters the office.", link: "https://fnaf-coop.fandom.com/wiki/Withered_Freddy" },
+        { name: "WITHERED BONNIE", image: "../characters/witheredbonnie.webp", desc: "Missing his face and left arm. Approaches through the main hall or left vent. Put on the Freddy mask immediately when he appears.", link: "https://fnaf-coop.fandom.com/wiki/Withered_Bonnie" },
+        { name: "WITHERED CHICA", image: "../characters/witheredchica.webp", desc: "Her jaw is broken and hands are missing. Enters through the right air vent. Equip the mask the second she stands in your office.", link: "https://fnaf-coop.fandom.com/wiki/Withered_Chica" },
+        { name: "WITHERED FOXY", image: "../characters/witheredfoxy.webp", desc: "Immune to the Freddy mask. Stands at the end of the main hallway. Flash your light repeatedly at him to reset his system.", link: "https://fnaf-coop.fandom.com/wiki/Withered_Foxy" },
+        { name: "GOLDEN FREDDY", image: "../characters/goldenfreddy.webp", desc: "An empty, golden apparition of the original bear. Appears randomly in the office or hallway. Put on the Freddy mask immediately to survive.", link: "https://fnaf-coop.fandom.com/wiki/Golden_Freddy" }
+    ];
+    let current = 0;
+    const nameEl = document.getElementById("char-name");
+    const imgEl = document.getElementById("char-image");
+    const descEl = document.getElementById("char-desc");
+    const linkEl = document.getElementById("char-link");
+    document.querySelector(".arrow.right").addEventListener("click", () => {
+        current = (current + 1) % characters.length;
+        updateCharacter();
+    });
+    document.querySelector(".arrow.left").addEventListener("click", () => {
+        current = (current - 1 + characters.length) % characters.length;
+        updateCharacter();
+    });
+    function updateCharacter() {
+        imgEl.style.opacity = "0";
+        setTimeout(() => {
+            nameEl.textContent = characters[current].name;
+            imgEl.src = characters[current].image;
+            descEl.textContent = characters[current].desc;
+            linkEl.href = characters[current].link;
+            imgEl.style.opacity = "1";
+        }, 150);
+    }
+
+    const overlay = document.getElementById('fnaf-overlay');
+    const h1wrap  = document.getElementById('h1-wrap');
+    const subwrap = document.getElementById('sub-wrap');
+
+    setTimeout(() => { h1wrap.style.opacity = '1'; }, 600);
+    setTimeout(() => { subwrap.classList.add('go'); }, 1800);
+    setTimeout(() => {
+        overlay.style.opacity = '0';
+        const nav = document.getElementById('fnaf2-nav');
+        nav.style.transition = 'opacity 0.8s ease';
+        nav.style.opacity = '1';
+        setTimeout(() => overlay.remove(), 1400);
+    }, 3100);
+    </script>
+
+    <section class="roles-section">
+        <div class="section-title">
+            <span class="line"></span>
+            <h2>ROLES</h2>
+            <span class="line"></span>
+        </div>
+        <div class="role-block">
+            <div class="role-text">
+                <div class="role-header">
+                    <img src="../images/nightguard.webp" class="role-icon">
+                    <h3>NIGHTGUARD</h3>
+                </div>
+                <div class="role-desc">
+                    <p>Watch the cameras, keep the music box wound, use your flashlight, and put on the Freddy head when they get too close. No doors this time. Just you and the dark until 6 AM.</p>
+                </div>
+            </div>
+            <div class="role-video">
+                <video autoplay muted loop playsinline>
+                    <source src="../videos/fnaf2Nightguard.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="role-block reverse">
+            <div class="role-text">
+                <div class="role-header">
+                    <img src="../images/janitor.webp" class="role-icon">
+                    <h3>JANITOR</h3>
+                </div>
+                <div class="role-desc">
+                    <p>Clean up the party rooms after the crowds go home. The kids leave a mess, the building makes noise, and something in Parts & Service doesn't sound right tonight.</p>
+                </div>
+            </div>
+            <div class="role-video">
+                <video autoplay muted loop playsinline>
+                    <source src="../videos/fnaf2Janitor.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="role-block">
+            <div class="role-text">
+                <div class="role-header">
+                    <img src="../images/engineer.webp" class="role-icon">
+                    <h3>ENGINEER</h3>
+                </div>
+                <div class="role-desc">
+                    <p>Keep the new facial recognition systems from going offline and fix what breaks before it becomes a problem. Stay sharp. The Mangle has a habit of showing up where it shouldn't.</p>
+                </div>
+            </div>
+            <div class="role-video">
+                <video autoplay muted loop playsinline>
+                    <source src="../videos/fnaf2Engineer.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="role-block reverse">
+            <div class="role-text">
+                <div class="role-header">
+                    <img src="../images/policeman.webp" class="role-icon">
+                    <h3>POLICEMAN</h3>
+                </div>
+                <div class="role-desc">
+                    <p>Brought in to look into the rumors surrounding the grand reopening. Help the night guard keep things under control while you figure out what's really going on inside these walls.</p>
+                </div>
+            </div>
+            <div class="role-video">
+                <video autoplay muted loop playsinline>
+                    <source src="../videos/fnaf2Policeman.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="play-section">
+        <div class="section-title play-title">
+            <span class="line"></span>
+            <a href="https://www.roblox.com/games/12495498157/FNAF-Co-op" target="_blank" class="play-btn">&#9654; PLAY</a>
+            <span class="line"></span>
+        </div>
+    </section>
+</body>
+</html>

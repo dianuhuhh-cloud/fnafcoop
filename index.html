@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FNAF: COOP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown > a {
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            padding-top: 14px;
+            right: 0;
+            min-width: 210px;
+            background: rgba(30, 10, 60, 0.95);
+            border: 1px solid rgba(200,140,255,0.5);
+            border-radius: 12px;
+            backdrop-filter: blur(18px);
+            box-shadow: 0 0 30px rgba(170,120,255,0.4);
+            overflow: hidden;
+            z-index: 2000;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 11px 20px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #ddd !important;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(180,120,255,0.15);
+            transition: background 0.2s ease, padding-left 0.2s ease, color 0.2s ease;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(160,90,255,0.18);
+            color: #d7b8ff !important;
+            text-shadow: 0 0 10px rgba(180,120,255,0.8);
+            padding-left: 26px;
+        }
+
+        .credits-section {
+            padding: 0px 8% 40px 8%;
+            text-align: center;
+            margin-top: -60px;
+        }
+
+        .credits-grid {
+            display: flex;
+            justify-content: center;
+            gap: 70px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .credit-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .credit-role {
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            color: #d7b8ff;
+            text-shadow: 0 0 10px rgba(170,120,255,0.6);
+            text-transform: uppercase;
+        }
+
+        .credit-name {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            color: #fff;
+            text-decoration: none;
+            text-shadow: 0 0 15px rgba(170,120,255,0.7);
+            border-bottom: 1px solid rgba(180,120,255,0.4);
+            padding-bottom: 4px;
+            transition: 0.3s ease;
+        }
+
+        .credit-name:hover {
+            color: #d7b8ff;
+            text-shadow: 0 0 20px rgba(200,140,255,1), 0 0 40px rgba(160,90,255,0.7);
+        }
+
+        .credit-desc {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: rgba(200,200,230,0.55);
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="nav-left">
+        <img src="images/zoktar.png" alt="Zoktar Logo" class="nav-logo">
+
+        <a href="https://www.roblox.com/games/12495498157/FNAF-Co-op"
+           target="_blank"
+           class="nav-play">
+            Play
+        </a>
+    </div>
+
+    <div class="nav-right">
+        <div class="nav-dropdown">
+            <a id="nav-modes">Gamemodes</a>
+            <div class="dropdown-menu">
+                <a href="fnaf1/fnaf1.html">FNAF 1</a>
+                <a href="fnaf2/fnaf2.html">FNAF 2</a>
+                <a href="fnaf3/fnaf3.html">FNAF 3</a>
+                <a href="fnaf4/fnaf4.html">FNAF 4</a>
+                <a href="fnafsl/fnafsl.html">Sister Location</a>
+                <a href="fnaf6/fnaf6.html">FNAF 6</a>
+                <a href="puppetsrevenge/puppetsrevenge.html">Puppet's Revenge</a>
+                <a href="basementhunt/basementhunt.html">Basement Hunt</a>
+            </div>
+        </div>
+
+        <a href="#about" id="nav-about">About</a>
+
+        <a href="https://discord.com/invite/fnafroblox"
+           target="_blank"
+           class="discord-link">
+
+            <svg width="24" height="24" viewBox="0 0 127.14 96.36"
+                 xmlns="http://www.w3.org/2000/svg">
+
+                <path fill="currentColor"
+                      d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.8 97.68 97.68 0 0 0-29.1 0A72.37 72.37 0 0 0 45.65 0 105.89 105.89 0 0 0 19.42 8.08C2.7 33.24-1.69 57.79.53 82a105.73 105.73 0 0 0 32.17 16.3 77.7 77.7 0 0 0 6.94-11.3 68.42 68.42 0 0 1-10.92-5.18c.92-.67 1.82-1.37 2.69-2.1 20.92 9.53 43.66 9.53 64.37 0 .88.73 1.78 1.43 2.7 2.1a68.68 68.68 0 0 1-10.92 5.18 77.73 77.73 0 0 0 6.94 11.3A105.25 105.25 0 0 0 126.6 82c2.6-28.75-4.42-53.07-18.9-73.93zM42.45 65.69c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8zm42.24 0c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8z"/>
+            </svg>
+        </a>
+    </div>
+</nav>
+
+<header class="hero" id="about">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-center">
+        <h1>FNAF: COOP</h1>
+
+        <div class="hero-tags">
+            <span>ROBLOX</span>
+            <span>SURVIVAL HORROR</span>
+            <span>MULTIPLAYER</span>
+            <span>FREE TO PLAY</span>
+        </div>
+
+        <p class="hero-desc" id="about-text">
+            <strong>FNAF: COOP</strong> is a multiplayer survival horror roblox game
+            developed by
+            <a href="https://www.roblox.com/users/2582837776/profile"
+               target="_blank"
+               class="dev-link">Z0KTAR</a>
+            and
+            <a href="https://www.roblox.com/users/1510158574/profile"
+               target="_blank"
+               class="dev-link">MELTEER</a>,
+            based off of the original <em>Five Nights at Freddy's</em>
+            franchise created by Scott Cawthon.
+        </p>
+
+        <a href="https://www.roblox.com/games/12495498157/FNAF-Co-op"
+           target="_blank"
+           class="btn-primary">
+            PLAY ON ROBLOX
+        </a>
+    </div>
+</header>
+
+<section class="modes" id="modes">
+
+    <div class="section-title">
+        <span class="line"></span>
+        <h2>GAME MODES</h2>
+        <span class="line"></span>
+    </div>
+
+    <div class="modes-wrapper">
+        <div class="modes-track">
+
+            <a class="mode-card" data-glow="images/fnaf1glow.webp">
+                <img src="images/fnaf1.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/fnaf2glow.webp">
+                <img src="images/fnaf2.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/fnaf3glow.webp">
+                <img src="images/fnaf3.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/fnaf4glow.webp">
+                <img src="images/fnaf4.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/fnafslglow.webp">
+                <img src="images/fnafsl.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/fnaf6glow.webp">
+                <img src="images/fnaf6.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/puppetsrevengeglow.webp">
+                <img src="images/puppetsrevenge.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/basementhuntglow.webp">
+                <img src="images/basementhunt.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/fnaf1glow.webp">
+                <img src="images/fnaf1.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/fnaf2glow.webp">
+                <img src="images/fnaf2.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/fnaf3glow.webp">
+                <img src="images/fnaf3.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/fnaf4glow.webp">
+                <img src="images/fnaf4.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/fnafslglow.webp">
+                <img src="images/fnafsl.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/fnaf6glow.webp">
+                <img src="images/fnaf6.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/puppetsrevengeglow.webp">
+                <img src="images/puppetsrevenge.webp" alt="">
+            </a>
+
+            <a class="mode-card" data-glow="images/basementhuntglow.webp">
+                <img src="images/basementhunt.webp" alt="">
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<section class="game-selection" id="games">
+
+    <div class="section-title">
+        <span class="line"></span>
+        <h2>OUR GAME SELECTION</h2>
+        <span class="line"></span>
+    </div>
+
+    <div class="game-entry" id="fnaf1">
+        <div class="game-thumb">
+            <img src="images/fnaf1.webp"
+                 data-normal="images/fnaf1.webp"
+                 data-glow="images/fnaf1glow.webp">
+        </div>
+        <div class="game-text">
+            <h3>FNAF 1</h3>
+            <p>
+                You're the night guard at Freddy Fazbear's Pizza. The animatronics move dangerously at night. 
+                Use cameras, doors, and lights with limited power to survive five nights. Each night gets harder. 
+                Stay alert and plan carefully.
+            </p>
+           <div class="game-buttons">
+                <a href="fnaf1/fnaf1.html" class="game-btn explore-btn">
+                    <span>Explore</span>
+                </a>
+                <a href="https://fnaf-coop.fandom.com/wiki/FNAF_1"
+                   target="_blank"
+                   class="game-btn wiki-btn">
+                    <span>View Wiki</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-entry" id="fnaf2">
+        <div class="game-thumb">
+            <img src="images/fnaf2.webp"
+                 data-normal="images/fnaf2.webp"
+                 data-glow="images/fnaf2glow.webp">
+        </div>
+        <div class="game-text">
+            <h3>FNAF 2</h3>
+            <p>
+                The pizza place is remade with new and old animatronics in a new location. 
+                There are no doors to close! Use a mask to hide, a music box to keep one animatronic away,
+                 and a flashlight to stop others. Watch through cameras and survive the night with more animatronics and challenges.
+            </p>
+            <div class="game-buttons">
+                <a href="fnaf2/fnaf2.html" class="game-btn explore-btn">
+                    <span>Explore</span>
+                </a>
+                <a href="https://fnaf-coop.fandom.com/wiki/FNAF_2"
+                   target="_blank"
+                   class="game-btn wiki-btn">
+                    <span>View Wiki</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-entry" id="fnaf3">
+        <div class="game-thumb">
+            <img src="images/fnaf3.webp"
+                 data-normal="images/fnaf3.webp"
+                 data-glow="images/fnaf3glow.webp">
+        </div>
+        <div class="game-text">
+            <h3>FNAF 3</h3>
+            <p>
+                You're a guard at Fazbear's Fright, a horror attraction with one real animatronic, 
+                Springtrap, and haunting spirits. Use cameras, audio, and ventilation systems to stay safe.
+                 Each night, face closer encounters with Springtrap and the phantoms, revealing dark stories from the past.
+            </p>
+            <div class="game-buttons">
+                <a href="fnaf3/fnaf3.html" class="game-btn explore-btn">
+                    <span>Explore</span>
+                </a>
+                <a href="https://fnaf-coop.fandom.com/wiki/FNAF_3"
+                   target="_blank"
+                   class="game-btn wiki-btn">
+                    <span>View Wiki</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-entry" id="fnaf4">
+        <div class="game-thumb">
+            <img src="images/fnaf4.webp"
+                 data-normal="images/fnaf4.webp"
+                 data-glow="images/fnaf4glow.webp">
+        </div>
+        <div class="game-text">
+            <h3>FNAF 4</h3>
+            <p>
+                You're in a child's bedroom, where nightmares become real. Nightmarish Freddy, Bonnie, Chica, and Foxy are scarier
+                 and more aggressive. Listen for sounds to know when they're near, and use your flashlight wisely.
+                 With no cameras or heavy doors, rely on your bravery and quick thinking to survive
+            </p>
+            <div class="game-buttons">
+                <a href="fnaf4/fnaf4.html" class="game-btn explore-btn">
+                    <span>Explore</span>
+                </a>
+                <a href="https://fnaf-coop.fandom.com/wiki/FNAF_4"
+                   target="_blank"
+                   class="game-btn wiki-btn">
+                    <span>View Wiki</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-entry" id="fnafsl">
+        <div class="game-thumb">
+            <img src="images/fnafsl.webp"
+                 data-normal="images/fnafsl.webp"
+                 data-glow="images/fnafslglow.webp">
+        </div>
+        <div class="game-text">
+            <h3>Sister Location</h3>
+            <p>
+                You're a technician in an underground facility with advanced animatronics. Each night brings different tasks, 
+                from fixing machines to sneaking through dark corridors. Scary encounters mix with story-rich tasks,
+                 revealing the facility's hidden secrets. Expect surprises, uncover the backstory, and face new challenges
+            </p>
+            <div class="game-buttons">
+                <a href="fnafsl/fnafsl.html" class="game-btn explore-btn">
+                    <span>Explore</span>
+                </a>
+                <a href="https://fnaf-coop.fandom.com/wiki/FNAF:_Sister_Location"
+                   target="_blank"
+                   class="game-btn wiki-btn">
+                    <span>View Wiki</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-entry" id="fnaf6">
+        <div class="game-thumb">
+            <img src="images/fnaf6.webp"
+                 data-normal="images/fnaf6.webp"
+                 data-glow="images/fnaf6glow.webp">
+        </div>
+        <div class="game-text">
+            <h3>Freddy Fazbear's Pizzeria Simulator</h3>
+            <p>
+                You're running your own pizzeria, but the fun ends when the lights go out. 
+                Manage your business by day, salvage deadly animatronics by night, 
+                and uncover the dark secrets buried beneath your restaurant.
+            </p>
+            <div class="game-buttons">
+                <a href="fnaf6/fnaf6.html" class="game-btn explore-btn">
+                    <span>Explore</span>
+                </a>
+                <a href="https://fnaf-coop.fandom.com/wiki/Freddy_Fazbear%27s_Pizzeria_Simulator"
+                   target="_blank"
+                   class="game-btn wiki-btn">
+                    <span>View Wiki</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-entry" id="puppetsrevenge">
+        <div class="game-thumb">
+            <img src="images/puppetsrevenge.webp"
+                 data-normal="images/puppetsrevenge.webp"
+                 data-glow="images/puppetsrevengeglow.webp">
+        </div>
+        <div class="game-text">
+            <h3>Puppet's Revenge</h3>
+            <p>
+                Activate generators to unlock the basement for escape. Navigate a dark, 
+                maze-like building while avoiding the Puppet. Use a flashbang on your flashlight to temporarily stun it. 
+                Power up the generators and find the exit quickly once it opens. Will you escape or fall victim to the Puppet's revenge?
+            </p>
+            <div class="game-buttons">
+                <a href="puppetsrevenge/puppetsrevenge.html" class="game-btn explore-btn">
+                    <span>Explore</span>
+                </a>
+                <a href="https://fnaf-coop.fandom.com/wiki/Puppet%27s_Revenge"
+                   target="_blank"
+                   class="game-btn wiki-btn">
+                    <span>View Wiki</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-entry" id="basementhunt">
+        <div class="game-thumb">
+            <img src="images/basementhunt.webp"
+                 data-normal="images/basementhunt.webp"
+                 data-glow="images/basementhuntglow.webp">
+        </div>
+        <div class="game-text">
+            <h3>Basement Hunt</h3>
+            <p>
+                You're in a vast, shadowy basement with one task: keep the lights on. 
+                A fast, menacing creature lurks in the dark, hunting if the lights go out. 
+                When the exit briefly opens, navigate the darkness to reach it. Use stealth, speed and strategy to escape. 
+                Will you make it to safety, or will the shadows be your end?
+            </p>
+            <div class="game-buttons">
+                <a href="basementhunt/basementhunt.html" class="game-btn explore-btn">
+                    <span>Explore</span>
+                </a>
+                <a href="https://fnaf-coop.fandom.com/wiki/Basement_Hunt"
+                   target="_blank"
+                   class="game-btn wiki-btn">
+                    <span>View Wiki</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="credits-section" id="credits">
+
+    <div class="section-title">
+        <span class="line"></span>
+        <h2>CREDITS</h2>
+        <span class="line"></span>
+    </div>
+
+    <div class="credits-grid">
+
+        <div class="credit-item">
+            <span class="credit-role">Game Developer</span>
+            <a href="https://www.roblox.com/users/2582837776/profile"
+               target="_blank"
+               class="credit-name">Z0KTAR</a>
+            <span class="credit-desc">Creator &amp; Lead Developer</span>
+        </div>
+
+        <div class="credit-item">
+            <span class="credit-role">Game Developer</span>
+            <a href="https://www.roblox.com/users/1510158574/profile"
+               target="_blank"
+               class="credit-name">MELTEER</a>
+            <span class="credit-desc">Co-Developer</span>
+        </div>
+
+        <div class="credit-item">
+            <span class="credit-role">Website Designer</span>
+            <a href="https://www.roblox.com/search/users?keyword=dianuhuhh"
+               target="_blank"
+               class="credit-name">DIANUHUHH</a>
+            <span class="credit-desc">Web Design &amp; Development</span>
+        </div>
+
+    </div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>

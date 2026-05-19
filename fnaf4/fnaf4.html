@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Five Nights at Freddy's 4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="fnaf4.css">
+<style>
+.fnaf4-nav {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    padding: 12px 28px;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5, 0, 0, 0.75);
+    border: 1px solid rgba(139,0,0,0.45);
+    backdrop-filter: blur(16px);
+    box-shadow:
+        0 0 28px rgba(100,0,0,0.2),
+        inset 0 0 20px rgba(80,0,0,0.05);
+    opacity: 0;
+    transition: opacity 1s ease 2.5s;
+}
+.play-btn:hover { border: none !important; }
+.fnaf4-nav-left { display: flex; align-items: center; gap: 20px; }
+.fnaf4-nav-right { display: flex; align-items: center; gap: 28px; }
+.fnaf4-nav a, .fnaf4-nav span {
+    font-family: 'Stellar', Arial, sans-serif;
+    text-decoration: none;
+    color: #8b0000;
+    letter-spacing: 3px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.fnaf4-nav a:hover {
+    color: #ff0000;
+    text-shadow: 0 0 8px #8b0000, 0 0 20px #5a0000;
+}
+.fnaf4-nav-home { font-size: 0.82rem; letter-spacing: 3px; }
+.fnaf4-nav-play {
+    letter-spacing: 3px;
+    transition: 0.3s ease;
+}
+.fnaf4-nav-play:hover {
+    text-shadow: 0 0 8px #8b0000, 0 0 20px #5a0000;
+}
+.fnaf4-dropdown { position: relative; }
+.fnaf4-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    padding-top: 14px;
+    right: 0;
+    min-width: 210px;
+    background: rgba(5, 0, 0, 0.97);
+    border: 1px solid rgba(139,0,0,0.4);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 0 28px rgba(100,0,0,0.25);
+    overflow: hidden;
+    z-index: 500;
+}
+.fnaf4-dropdown:hover .fnaf4-dropdown-menu { display: block; }
+.fnaf4-dropdown-menu a {
+    display: block;
+    padding: 11px 20px;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    color: #8b0000 !important;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(139,0,0,0.12);
+    transition: background 0.2s ease, padding-left 0.2s ease;
+    text-transform: uppercase;
+}
+.fnaf4-dropdown-menu a:last-child { border-bottom: none; }
+.fnaf4-dropdown-menu a:hover {
+    background: rgba(139,0,0,0.12);
+    color: #ff0000 !important;
+    text-shadow: 0 0 8px #8b0000;
+    padding-left: 26px;
+}
+.fnaf4-discord {
+    color: #8b0000;
+    display: flex;
+    align-items: center;
+    transition: 0.3s ease;
+}
+.fnaf4-discord:hover {
+    color: #ff0000;
+    text-shadow: 0 0 14px #8b0000 !important;
+}
+</style>
+</head>
+<body>
+
+<div id="intro-overlay">
+    <div class="intro-text-container">
+        <h1 class="trailer-text">
+    What is it that you<br>
+    Think you see?
+</h1>
+    </div>
+</div>
+    
+<header class="fnaf4-header">
+    <nav class="fnaf4-nav" id="fnaf4-nav">
+        <div class="fnaf4-nav-left">
+            <a href="../index.html" class="fnaf4-nav-home">&#8592; Home</a>
+        </div>
+        <div class="fnaf4-nav-right">
+            <div class="fnaf4-dropdown">
+                <a>Gamemodes</a>
+                <div class="fnaf4-dropdown-menu">
+                    <a href="../fnaf1/fnaf1.html">FNAF 1</a>
+                    <a href="../fnaf2/fnaf2.html">FNAF 2</a>
+                    <a href="../fnaf3/fnaf3.html">FNAF 3</a>
+                    <a href="../fnaf4/fnaf4.html">FNAF 4</a>
+                    <a href="../fnafsl/fnafsl.html">Sister Location</a>
+                    <a href="../fnaf6/fnaf6.html">FNAF 6</a>
+                    <a href="../puppetsrevenge/puppetsrevenge.html">Puppet's Revenge</a>
+                    <a href="../basementhunt/basementhunt.html">Basement Hunt</a>
+                </div>
+            </div>
+            <a href="https://www.roblox.com/games/12495498157/FNAF-Co-op" target="_blank" class="fnaf4-nav-play">Play</a>
+            <a href="https://discord.com/invite/fnafroblox" target="_blank" class="fnaf4-discord">
+                <svg width="22" height="22" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor" d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.8 97.68 97.68 0 0 0-29.1 0A72.37 72.37 0 0 0 45.65 0 105.89 105.89 0 0 0 19.42 8.08C2.7 33.24-1.69 57.79.53 82a105.73 105.73 0 0 0 32.17 16.3 77.7 77.7 0 0 0 6.94-11.3 68.42 68.42 0 0 1-10.92-5.18c.92-.67 1.82-1.37 2.69-2.1 20.92 9.53 43.66 9.53 64.37 0 .88.73 1.78 1.43 2.7 2.1a68.68 68.68 0 0 1-10.92 5.18 77.73 77.73 0 0 0 6.94 11.3A105.25 105.25 0 0 0 126.6 82c2.6-28.75-4.42-53.07-18.9-73.93zM42.45 65.69c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8zm42.24 0c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8z"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
+    <div class="header-content">
+        <div class="title-container">
+            <span class="big-4">4</span>
+            
+            <div class="text-stack">
+                <h1 class="glitch-title">Five Nights <span class="at">at</span> Freddy’s</h1>
+                <p class="subtitle">THE FINAL CHAPTER</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="fnaf4-content">
+    <div class="intro-box">
+        <h2>WHAT HAVE YOU BROUGHT HOME?</h2>
+    </div>
+
+    <div class="grid">
+        <div class="description">
+            <h3>ABOUT THE GAME</h3>
+            <p>
+                This time, the terror has followed you home. 
+                In this final chapter of the Five Nights at Freddy's original story, you must once again defend yourself against Freddy Fazbear, Bonnie, Chica, Foxy, and even worse things that lurk in the shadows. 
+                Watching only your flashlight and your hearing, you must survive until 6 AM by watching the doors, as well as warding off unwanted creatures that may venture into your closet or onto the bed behind you.
+            </p>
+        </div>
+
+        <div class="video-preview">
+            <video autoplay muted loop playsinline>
+                <source src="../videos/fnaf4footage.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</section>
+
+<section class="characters-section">
+
+    <div class="animatronics-title-wrapper">
+        <h2 class="animatronics-title">ANIMATRONICS</h2>
+
+      <div class="animatronics-lines">
+    <div class="glitch-line"></div>
+    <div class="glitch-line"></div>
+    <div class="glitch-line"></div>
+    <div class="glitch-line"></div>
+    <div class="glitch-line"></div>
+</div>
+    </div>
+
+
+    <div class="character-carousel">
+        <button class="arrow left"><span></span></button>
+        <div class="character-card">
+            <h3 id="char-name">NIGHTMARE FREDDY</h3>
+            <img id="char-image" src="../characters/nightmarefreddy.webp" alt="Nightmare Freddy">
+            <div class="character-info">
+                <p id="char-desc">
+                    Check the bed behind you frequently. Use your flashlight to scare away the 'Freddles' before they summon the Freddy.
+                </p>
+                <a id="char-link" href="https://fnaf-fandom.com/wiki/Nightmare_Freddy" target="_blank" class="discover-btn">
+                    DISCOVER
+                </a>
+            </div>
+        </div>
+        <button class="arrow right"><span></span></button>
+    </div>
+</section>
+
+<section class="play-section">
+
+    <div class="play-wrapper">
+
+        <div class="play-lines">
+            <div class="glitch-line"></div>
+            <div class="glitch-line"></div>
+            <div class="glitch-line"></div>
+            <div class="glitch-line"></div>
+        </div>
+
+        <a href="https://www.roblox.com/games/12495498157/FNAF-Co-op"
+           target="_blank"
+           class="play-btn">
+           ▶ PLAY
+        </a>
+
+    </div>
+
+</section>
+
+<script>
+const characters = [
+    {
+        name: "NIGHTMARE FREDDY",
+        image: "../characters/nightmarefreddy.webp",
+        desc: "Check the bed behind you frequently. Use your flashlight to scare away the 'Freddles' before they summon the Freddy.",
+        link: "https://fnaf-fandom.com/wiki/Nightmare_Freddy"
+    },
+    {
+        name: "NIGHTMARE BONNIE",
+        image: "../characters/nightmarebonnie.webp",
+        desc: "Patrols the left hall. Listen for breathing at the door before using your flashlight to ward him off.",
+        link: "https://fnaf-fandom.com/wiki/Nightmare_Bonnie"
+    },
+    {
+        name: "NIGHTMARE CHICA",
+        image: "../characters/nightmarechica.webp",
+        desc: "Patrols the right hall. If you hear breathing, close the door immediately. Watch out for the Cupcake.",
+        link: "https://fnaf-fandom.com/wiki/Nightmare_Chica"
+    },
+    {
+        name: "NIGHTMARE FOXY",
+        image: "../characters/nightmarefoxy.webp",
+        desc: "Will attempt to enter the closet. Monitor the closet and close it if you see him peeking out until he is gone.",
+        link: "https://fnaf-fandom.com/wiki/Nightmare_Foxy"
+    },
+    {
+        name: "NIGHTMARE FREDBEAR",
+        image: "../characters/nightmarefredbear.webp",
+        desc: "He wanders both halls and can appear on the bed or in the closet. Listen for his heavy footsteps and his laugh.",
+        link: "https://fnaf-fandom.com/wiki/Nightmare_Fredbear"
+    },
+    {
+        name: "NIGHTMARE",
+        image: "../characters/nightmare.webp",
+        desc: "The shadow version of Fredbear. He is much more aggressive and can end your night instantly if you don't react fast enough.",
+        link: "https://fnaf-fandom.com/wiki/Nightmare_(animatronic)"
+    }
+];
+
+let current = 0;
+const nameEl = document.getElementById("char-name");
+const imgEl = document.getElementById("char-image");
+const descEl = document.getElementById("char-desc");
+const linkEl = document.getElementById("char-link");
+
+document.querySelector(".arrow.right").addEventListener("click", () => {
+    current = (current + 1) % characters.length;
+    updateCharacter();
+});
+
+document.querySelector(".arrow.left").addEventListener("click", () => {
+    current = (current - 1 + characters.length) % characters.length;
+    updateCharacter();
+});
+
+function updateCharacter() {
+    nameEl.textContent = characters[current].name;
+    imgEl.src = characters[current].image;
+    descEl.textContent = characters[current].desc;
+    linkEl.href = characters[current].link;
+}
+
+window.addEventListener("load", () => {
+    document.getElementById("fnaf4-nav").style.opacity = "1";
+});</script>
+
+</body>
+</html>
