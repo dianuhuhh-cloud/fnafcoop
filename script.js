@@ -111,3 +111,50 @@ if (navDropdownLink) {
         }
     });
 }
+
+// Mobile drag-to-scroll for game modes carousel
+(function () {
+    const wrapper = document.querySelector(".modes-wrapper");
+    const track = document.querySelector(".modes-track");
+    if (!wrapper || !track) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let dragDistance = 0;
+    let animPaused = false;
+
+    function pauseAnim() {
+        if (!animPaused) {
+            const computed = getComputedStyle(track).getPropertyValue("transform");
+            track.style.animationPlayState = "paused";
+            animPaused = true;
+        }
+    }
+
+    function resumeAnim() {
+        track.style.animationPlayState = "running";
+        animPaused = false;
+    }
+
+    wrapper.addEventListener("touchstart", (e) => {
+        isDragging = true;
+        dragDistance = 0;
+        startX = e.touches[0].clientX;
+        scrollLeft = wrapper.scrollLeft;
+        pauseAnim();
+    }, { passive: true });
+
+    wrapper.addEventListener("touchmove", (e) => {
+        if (!isDragging) return;
+        const dx = startX - e.touches[0].clientX;
+        dragDistance += Math.abs(dx);
+        wrapper.scrollLeft = scrollLeft + dx;
+    }, { passive: true });
+
+    wrapper.addEventListener("touchend", () => {
+        isDragging = false;
+        // resume auto-scroll after 3 seconds of no interaction
+        setTimeout(resumeAnim, 3000);
+    });
+})();
