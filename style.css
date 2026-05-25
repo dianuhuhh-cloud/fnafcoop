@@ -577,14 +577,13 @@ box-shadow:
     text-align: center;
 }
 
-
 .hero-overlay {
     position: absolute;
     inset: 0;
     background:
         linear-gradient(to right, rgba(0,0,0,0.75), rgba(0,0,0,0.25)),
         linear-gradient(to left, rgba(0,0,0,0.75), rgba(0,0,0,0.25)),
-        linear-gradient(to top, rgba(0,0,0,0.85), transparent 55%),
+        linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 30%, transparent 60%),
         linear-gradient(to bottom, rgba(0,0,0,0.85), transparent 55%);
 }
 
@@ -886,4 +885,267 @@ html {
     padding: 14px 32px;
     font-size: 0.95rem;
     letter-spacing: 3px;
+}
+
+.nav-hamburger {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    /* --- NAVBAR --- */
+    .navbar {
+        top: 10px;
+        width: 92%;
+        padding: 9px 14px;
+        border-radius: 14px;
+        position: fixed;
+        gap: 0;
+    }
+
+    .nav-left {
+        gap: 10px;
+    }
+
+    .nav-logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    .nav-play {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    .nav-hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        background: rgba(160,90,255,0.12);
+        border: 1px solid rgba(190,140,255,0.45);
+        border-radius: 8px;
+        cursor: pointer;
+        padding: 7px 9px;
+        z-index: 10;
+        box-shadow: 0 0 10px rgba(150,80,255,0.25);
+    }
+
+    .nav-hamburger span {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background: #d7b8ff;
+        border-radius: 2px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        box-shadow: 0 0 5px rgba(180,120,255,0.8);
+    }
+
+    .nav-hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .nav-hamburger.open span:nth-child(2) {
+        opacity: 0;
+    }
+    .nav-hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav-right {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        left: 0;
+        background: rgba(20, 6, 50, 0.97);
+        border: 1px solid rgba(200,140,255,0.4);
+        border-radius: 14px;
+        padding: 16px 20px;
+        flex-direction: column;
+        gap: 4px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 8px 40px rgba(120,60,255,0.35);
+    }
+
+    .nav-right.open {
+        display: flex;
+    }
+
+    .nav-right a {
+        padding: 10px 4px;
+        font-size: 0.85rem;
+        border-bottom: 1px solid rgba(180,120,255,0.1);
+    }
+
+    .nav-right a:last-child {
+        border-bottom: none;
+    }
+
+    .nav-dropdown > a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-dropdown > a::after {
+        content: "›";
+        font-size: 1.1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .nav-dropdown.open > a::after {
+        transform: rotate(90deg);
+    }
+
+    .nav-dropdown .dropdown-menu {
+        position: static;
+        display: none;
+        box-shadow: none;
+        border: none;
+        border-top: 1px solid rgba(180,120,255,0.15);
+        background: transparent;
+        padding-top: 0;
+        backdrop-filter: none;
+        border-radius: 0;
+        min-width: unset;
+    }
+
+    .nav-dropdown.open .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu a {
+        font-size: 0.75rem;
+        padding: 9px 14px;
+        letter-spacing: 1.5px;
+    }
+
+    .discord-link {
+        padding-top: 6px;
+    }
+
+    .hero {
+        min-height: unset;
+        height: auto;
+        padding: 100px 20px 50px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-center {
+        padding: 0 8px;
+    }
+
+    .hero-center h1,
+    .hero h1,
+    .hero-content h1 {
+        font-size: 2.2rem !important;
+        letter-spacing: 4px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .hero-tags {
+        gap: 10px !important;
+        margin-bottom: 18px !important;
+        justify-content: center;
+    }
+
+    .hero-tags span {
+        font-size: 0.6rem !important;
+        letter-spacing: 2px !important;
+    }
+
+    .hero-desc {
+        font-size: 0.9rem !important;
+        line-height: 1.7 !important;
+        margin-bottom: 24px !important;
+    }
+
+    .btn-primary {
+        padding: 12px 22px;
+        font-size: 0.78rem;
+        letter-spacing: 1.5px;
+    }
+
+    .modes {
+        padding: 50px 0 30px 0;
+    }
+
+    .modes .section-title {
+        padding: 0 5%;
+        margin-bottom: 40px;
+    }
+
+    .mode-card {
+        width: 150px;
+    }
+
+    .section-title {
+        gap: 14px !important;
+        margin-bottom: 30px;
+        padding: 0 4%;
+    }
+
+    .section-title h2 {
+        font-size: 1.1rem !important;
+        letter-spacing: 3px !important;
+        white-space: nowrap;
+    }
+
+    .game-selection {
+        padding: 0 4% 50px 4%;
+    }
+
+    .game-entry {
+        flex-direction: row !important;
+        gap: 16px !important;
+        padding: 22px 0 !important;
+        align-items: flex-start;
+    }
+
+    .game-entry.active-glow {
+        padding-left: 8px !important;
+    }
+
+    .game-thumb {
+        width: 105px !important;
+        min-width: 105px !important;
+        height: 145px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .game-text h3 {
+        font-size: 1.05rem !important;
+        letter-spacing: 1.5px !important;
+        margin-bottom: 7px !important;
+    }
+
+    .game-text p {
+        font-size: 0.78rem !important;
+        line-height: 1.55 !important;
+        max-width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+
+    .game-buttons {
+        flex-wrap: wrap;
+        gap: 8px !important;
+        margin-top: 10px !important;
+    }
+
+    .game-btn,
+    .explore-btn {
+        padding: 7px 13px !important;
+        font-size: 0.65rem !important;
+        letter-spacing: 1.5px !important;
+    }
+
+    .credits-section {
+        padding: 0 6% 40px 6%;
+        margin-top: -10px;
+    }
+
+    .credits-grid {
+        gap: 32px !important;
+    }
 }
