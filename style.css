@@ -101,8 +101,9 @@ body {
 .modes-wrapper {
     -webkit-mask-image: linear-gradient(to right, transparent 0px, black 1px, black calc(100% - 1px), transparent 100%);
     mask-image: linear-gradient(to right, transparent 0px, black 1px, black calc(100% - 1px), transparent 100%);
-    padding: 50px 0;
-    margin: -50px 0;
+    padding: 60px 0;
+    margin: -60px 0;
+    overflow: visible;
 }
 
 .modes-track {
@@ -760,8 +761,6 @@ html {
     display: block;
     filter: brightness(0.7);
     transition: 0.4s ease;
-    object-fit: contain;
-    background: #111;
 }
 
 .game-text h3 {
@@ -899,7 +898,17 @@ html {
 }
 
 @media (max-width: 768px) {
+    .modes-wrapper {
+        overflow-x: auto;
+        overflow-y: visible;   /* already there — make sure it's not overridden */
+        padding: 30px 0;
+        margin: -30px 0;
+    }
 
+    .mode-card:hover {
+        transform: none;       /* disable scale on touch — it causes layout issues */
+    }
+}
     
     .navbar {
         top: 10px;
