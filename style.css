@@ -106,10 +106,12 @@ body {
 }
 
 .modes-wrapper {
-    overflow: hidden;
     width: 100%;
-    padding: 20px 0;
-    margin: -20px 0;
+    overflow: hidden;
+    padding: 30px 0;
+    margin: -30px 0;
+    /* clip only left/right, allow top/bottom for hover scale */
+    clip-path: inset(30px 0px);
 }
 
 .modes-track {
@@ -1108,8 +1110,9 @@ html {
         overflow-y: visible;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        margin: -20px 0;
         padding: 20px 5%;
+        margin: -20px 0;
+        clip-path: inset(20px 0px);
         cursor: grab;
     }
 
@@ -1118,7 +1121,7 @@ html {
     }
 
     .modes-track {
-        animation: none;
+        animation: scrollModes 16s linear infinite;
         width: max-content;
     }
 
