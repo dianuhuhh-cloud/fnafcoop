@@ -33,8 +33,10 @@
             z-index: 2000;
         }
 
-        .nav-dropdown:hover .dropdown-menu {
-            display: block;
+        @media (min-width: 769px) {
+            .nav-dropdown:hover .dropdown-menu {
+                display: block;
+            }
         }
 
         .dropdown-menu a {
