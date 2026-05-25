@@ -3,6 +3,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Cinzel', serif;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 
 html {
@@ -96,12 +98,18 @@ body {
 }
 
 .modes {
-    padding: 70px 6% 40px 6%;
+    padding: 70px 0 60px 0;
+}
+
+.modes .section-title {
+    padding: 0 6%;
 }
 
 .modes-wrapper {
     overflow: hidden;
     width: 100%;
+    padding: 20px 0;
+    margin: -20px 0;
 }
 
 .modes-track {
@@ -866,6 +874,7 @@ html {
  
 .modes .section-title {
     margin-bottom: 70px;
+    padding: 0 6%;
 }
 
 .game-selection .section-title {
@@ -1092,6 +1101,25 @@ html {
     .modes .section-title {
         padding: 0 5%;
         margin-bottom: 40px;
+    }
+
+    .modes-wrapper {
+        overflow-x: scroll;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        margin: -20px 0;
+        padding: 20px 5%;
+        cursor: grab;
+    }
+
+    .modes-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .modes-track {
+        animation: none;
+        width: max-content;
     }
 
     .mode-card {
