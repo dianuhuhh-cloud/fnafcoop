@@ -90,13 +90,18 @@ body {
 }
 
 .modes {
-    padding: 70px 6% 40px 6%;
+    padding: 70px 0 40px 0;
+}
+
+.modes .section-title {
+    padding: 0 6%;
+    margin-bottom: 50px;
 }
 
 .modes-wrapper {
     overflow: hidden;
-    padding: 30px 0;
-    margin: -30px 0;
+    padding: 60px 0;
+    margin: -60px 0;
 }
 
 .modes-track {
@@ -859,10 +864,6 @@ html {
     border-radius: 12px;
 }
  
-.modes .section-title {
-    margin-bottom: 70px;
-}
-
 .game-selection .section-title {
     margin-top: 70px;
     margin-bottom: 20px;
@@ -1081,12 +1082,12 @@ html {
 
     
     .modes {
-        padding: 16px 0 30px 0;
+        padding: 40px 0 30px 0;
     }
 
     .modes .section-title {
         padding: 0 5%;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
     }
 
     .modes-wrapper {
@@ -1094,7 +1095,7 @@ html {
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        padding: 20px 5%;
+        padding: 20px 0;
         margin: -20px 0;
     }
 
