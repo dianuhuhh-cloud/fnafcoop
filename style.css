@@ -888,15 +888,14 @@ html {
 @media (max-width: 768px) {
 
     
-.navbar {
+    .navbar {
         top: 10px;
-        left: 50%;
-        transform: translateX(-50%); /* This snaps it back to the center of the phone screen */
         width: 92%;
         padding: 9px 14px;
         border-radius: 14px;
         position: fixed;
         gap: 0;
+        overflow: visible;
     }
 
     .nav-left {
@@ -1187,6 +1186,5 @@ html {
             linear-gradient(to left, #000 0%, rgba(0,0,0,0.3) 25%),
             linear-gradient(to top, #000 0%, transparent 35%),
             linear-gradient(to bottom, #000 0%, transparent 35%),
-            rgba(0, 0, 0, 0.18); /* cleaner, subtle tint */
+            rgba(0, 0, 0, 0.18); 
     }
-}
