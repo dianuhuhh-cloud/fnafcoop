@@ -80,3 +80,34 @@ modeCards.forEach((card, index) => {
 
     });
 });
+
+const hamburger = document.getElementById("nav-hamburger");
+const navRight = document.getElementById("nav-right");
+const navDropdown = document.querySelector(".nav-dropdown");
+const navDropdownLink = navDropdown ? navDropdown.querySelector(":scope > a") : null;
+
+if (hamburger && navRight) {
+    hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hamburger.classList.toggle("open");
+        navRight.classList.toggle("open");
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!hamburger.contains(e.target) && !navRight.contains(e.target)) {
+            hamburger.classList.remove("open");
+            navRight.classList.remove("open");
+            if (navDropdown) navDropdown.classList.remove("open");
+        }
+    });
+}
+
+if (navDropdownLink) {
+    navDropdownLink.addEventListener("click", (e) => {
+        if (window.innerWidth <= 768) {
+            e.preventDefault();
+            e.stopPropagation();
+            navDropdown.classList.toggle("open");
+        }
+    });
+}
