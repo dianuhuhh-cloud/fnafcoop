@@ -111,7 +111,7 @@ if (navDropdownLink) {
         }
     });
 }
-// Mobile drag for game modes
+// Mobile drag for game modes carousel
 (function () {
     const wrapper = document.querySelector(".modes-wrapper");
     const track = document.querySelector(".modes-track");
