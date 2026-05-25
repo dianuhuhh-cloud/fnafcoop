@@ -5,11 +5,17 @@
     font-family: 'Cinzel', serif;
 }
 
+html {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
 body {
     background: #000;
     color: #ddd;
     overflow-x: hidden;
     max-width: 100%;
+    position: relative;
 }
 
 .hero {
