@@ -99,6 +99,7 @@ body {
 
 .modes {
     padding: 70px 0 60px 0;
+    overflow: hidden;
 }
 
 .modes .section-title {
@@ -107,11 +108,8 @@ body {
 
 .modes-wrapper {
     width: 100%;
-    overflow: hidden;
-    padding: 30px 0;
-    margin: -30px 0;
-    /* clip only left/right, allow top/bottom for hover scale */
-    clip-path: inset(30px 0px);
+    padding: 40px 0;
+    margin: -40px 0;
 }
 
 .modes-track {
@@ -1098,6 +1096,7 @@ html {
     
     .modes {
         padding: 16px 0 30px 0;
+        overflow: hidden;
     }
 
     .modes .section-title {
@@ -1112,8 +1111,8 @@ html {
         scrollbar-width: none;
         padding: 20px 5%;
         margin: -20px 0;
-        clip-path: inset(20px 0px);
         cursor: grab;
+        clip-path: none;
     }
 
     .modes-wrapper::-webkit-scrollbar {
