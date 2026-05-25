@@ -111,35 +111,30 @@ if (navDropdownLink) {
         }
     });
 }
-
-// Mobile drag-to-scroll for game modes carousel
+// Mobile drag for game modes
 (function () {
     const wrapper = document.querySelector(".modes-wrapper");
     const track = document.querySelector(".modes-track");
     if (!wrapper || !track) return;
 
-    let isDragging = false;
-    let startX = 0;
-    let scrollLeft = 0;
-    let resumeTimer = null;
+    let startX = 0, scrollLeft = 0, dragging = false, timer = null;
 
-    wrapper.addEventListener("touchstart", (e) => {
-        isDragging = true;
+    wrapper.addEventListener("touchstart", e => {
+        dragging = true;
         startX = e.touches[0].clientX;
         scrollLeft = wrapper.scrollLeft;
         track.style.animationPlayState = "paused";
-        clearTimeout(resumeTimer);
+        clearTimeout(timer);
     }, { passive: true });
 
-    wrapper.addEventListener("touchmove", (e) => {
-        if (!isDragging) return;
-        const dx = startX - e.touches[0].clientX;
-        wrapper.scrollLeft = scrollLeft + dx;
+    wrapper.addEventListener("touchmove", e => {
+        if (!dragging) return;
+        wrapper.scrollLeft = scrollLeft + (startX - e.touches[0].clientX);
     }, { passive: true });
 
     wrapper.addEventListener("touchend", () => {
-        isDragging = false;
-        resumeTimer = setTimeout(() => {
+        dragging = false;
+        timer = setTimeout(() => {
             track.style.animationPlayState = "running";
         }, 2000);
     });
