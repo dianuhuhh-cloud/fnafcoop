@@ -111,31 +111,3 @@ if (navDropdownLink) {
         }
     });
 }
-// Mobile drag for game modes carousel
-(function () {
-    const wrapper = document.querySelector(".modes-wrapper");
-    const track = document.querySelector(".modes-track");
-    if (!wrapper || !track) return;
-
-    let startX = 0, scrollLeft = 0, dragging = false, timer = null;
-
-    wrapper.addEventListener("touchstart", e => {
-        dragging = true;
-        startX = e.touches[0].clientX;
-        scrollLeft = wrapper.scrollLeft;
-        track.style.animationPlayState = "paused";
-        clearTimeout(timer);
-    }, { passive: true });
-
-    wrapper.addEventListener("touchmove", e => {
-        if (!dragging) return;
-        wrapper.scrollLeft = scrollLeft + (startX - e.touches[0].clientX);
-    }, { passive: true });
-
-    wrapper.addEventListener("touchend", () => {
-        dragging = false;
-        timer = setTimeout(() => {
-            track.style.animationPlayState = "running";
-        }, 2000);
-    });
-})();
