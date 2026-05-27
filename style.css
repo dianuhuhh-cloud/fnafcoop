@@ -885,12 +885,15 @@ html {
     display: none;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
 
     
     .navbar {
         top: 10px;
-        width: 92%;
+        width: auto;
+        left: 16px;
+        right: 16px;
+        transform: none;
         padding: 9px 14px;
         border-radius: 14px;
         position: fixed;
@@ -1179,7 +1182,7 @@ html {
     }
 }
 
-@media (min-width: 901px) {
+@media (min-width: 768px) {
     .hero-overlay {
         background:
             linear-gradient(to right, #000 0%, rgba(0,0,0,0.3) 25%),
@@ -1189,5 +1192,3 @@ html {
             rgba(0, 0, 0, 0.18); 
     }
 }
-
-
