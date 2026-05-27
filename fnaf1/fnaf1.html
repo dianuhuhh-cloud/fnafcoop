@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="fnaf1.css">
 <style>
 .fnaf1-nav {
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -138,7 +138,10 @@
         <nav class="fnaf1-nav" id="fnaf1-nav" style="opacity:0; z-index:9003;">            <div class="fnaf1-nav-left">
                 <a href="../index.html" class="fnaf1-nav-home">&#8592; Home</a>
             </div>
-            <div class="fnaf1-nav-right">
+            <button class="fnaf1-hamburger" id="fnaf1-hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="fnaf1-nav-right" id="fnaf1-nav-right">
                 <div class="fnaf1-dropdown">
                     <a>Gamemodes</a>
                     <div class="fnaf1-dropdown-menu">
@@ -209,32 +212,66 @@
         </div>
     </section>
     <script>
-    const characters = [
-        { name: "FREDDY", image: "../characters/freddyfazbear.webp", desc: "Only moves when not being stared at in the monitor. Attacks from the right door and when the power runs out to 0%.", link: "https://fnaf-coop.fandom.com/wiki/Freddy_Fazbear" },
-        { name: "BONNIE", image: "../characters/bonnie.webp", desc: "Most active animatronic. Attacks from the left door. Can move to any room on the left side instantly.", link: "https://fnaf-coop.fandom.com/wiki/Bonnie" },
-        { name: "CHICA", image: "../characters/chica.webp", desc: "Moves in a set loop on the right side. Spends time in the kitchen (audio-only). Attacks from the right door.", link: "https://fnaf-coop.fandom.com/wiki/Chica" },
-        { name: "FOXY", image: "../characters/foxy.webp", desc: "Aggression builds based on how often he's monitored. Runs down the West Hall and drains your power if he hits the left door.", link: "https://fnaf-coop.fandom.com/wiki/Foxy" }
+const characters = [
+        { 
+            name: "FREDDY", 
+            image: "../characters/freddyfazbear.webp", 
+            desc: "Only moves when not being stared at in the monitor. Attacks from the right door and when the power runs out to 0%.", 
+            link: "https://fnaf-coop.fandom.com/wiki/Freddy_Fazbear",
+            shadow: "rgba(180, 110, 50, 0.8)" 
+        },
+        { 
+            name: "BONNIE", 
+            image: "../characters/bonnie.webp", 
+            desc: "Most active animatronic. Attacks from the left door. Can move to any room on the left side instantly.", 
+            link: "https://fnaf-coop.fandom.com/wiki/Bonnie",
+            shadow: "rgba(140, 60, 255, 0.8)" 
+        },
+        { 
+            name: "CHICA", 
+            image: "../characters/chica.webp", 
+            desc: "Moves in a set loop on the right side. Spends time in the kitchen (audio-only). Attacks from the right door.", 
+            link: "https://fnaf-coop.fandom.com/wiki/Chica",
+            shadow: "rgba(175, 140, 20, 0.85)" 
+        },
+        { 
+            name: "FOXY", 
+            image: "../characters/foxy.webp", 
+            desc: "Aggression builds based on how often he's monitored. Runs down the West Hall and drains your power if he hits the left door.", 
+            link: "https://fnaf-coop.fandom.com/wiki/Foxy",
+            shadow: "rgba(255, 50, 50, 0.8)" 
+        }
     ];
+
     let current = 0;
     const nameEl = document.getElementById("char-name");
     const imgEl = document.getElementById("char-image");
     const descEl = document.getElementById("char-desc");
     const linkEl = document.getElementById("char-link");
+
+    imgEl.style.filter = `drop-shadow(0 0 18px ${characters[current].shadow})`;
+
     document.querySelector(".arrow.right").addEventListener("click", () => {
         current = (current + 1) % characters.length;
         updateCharacter();
     });
+
     document.querySelector(".arrow.left").addEventListener("click", () => {
         current = (current - 1 + characters.length) % characters.length;
         updateCharacter();
     });
+
     function updateCharacter() {
         imgEl.style.opacity = "0";
+        
         setTimeout(() => {
             nameEl.textContent = characters[current].name;
             imgEl.src = characters[current].image;
             descEl.textContent = characters[current].desc;
             linkEl.href = characters[current].link;
+            
+            imgEl.style.filter = `drop-shadow(0 0 18px ${characters[current].shadow})`;
+            
             imgEl.style.opacity = "1";
         }, 150);
     }
@@ -243,15 +280,110 @@
     const h1wrap  = document.getElementById('h1-wrap');
     const subwrap = document.getElementById('sub-wrap');
 
-    setTimeout(() => { h1wrap.style.opacity = '1'; }, 600);
-    setTimeout(() => { subwrap.classList.add('go'); }, 1800);
-    setTimeout(() => {
+    const t1 = setTimeout(() => { h1wrap.style.opacity = '1'; }, 600);
+    const t2 = setTimeout(() => { subwrap.classList.add('go'); }, 1800);
+    const t3 = setTimeout(() => {
         overlay.style.opacity = '0';
         const nav = document.getElementById('fnaf1-nav');
         nav.style.transition = 'opacity 0.8s ease';
         nav.style.opacity = '1';
         setTimeout(() => overlay.remove(), 1400);
     }, 3100);
+
+    function skipIntro() {
+        clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
+        h1wrap.style.transition = 'none';
+        h1wrap.style.opacity = '1';
+        subwrap.classList.add('go');
+        overlay.style.transition = 'opacity 0.4s ease';
+        overlay.style.opacity = '0';
+        const nav = document.getElementById('fnaf1-nav');
+        nav.style.transition = 'opacity 0.4s ease';
+        nav.style.opacity = '1';
+        setTimeout(() => { if (overlay.parentNode) overlay.remove(); }, 500);
+        document.removeEventListener('dblclick', skipIntro);
+        document.removeEventListener('touchend', handleTap);
+    }
+
+    let lastTap = 0;
+    function handleTap() {
+        const now = Date.now();
+        if (now - lastTap < 300) skipIntro();
+        lastTap = now;
+    }
+
+    document.addEventListener('dblclick', skipIntro);
+    document.addEventListener('touchend', handleTap);
+
+// MOBILE NAV
+const fnafHamburger = document.getElementById("fnaf1-hamburger");
+const fnafNavRight = document.getElementById("fnaf1-nav-right");
+const fnafDropdown = document.querySelector(".fnaf1-dropdown");
+
+if (fnafHamburger && fnafNavRight) {
+    fnafHamburger.addEventListener("click", e => {
+        e.stopPropagation();
+        fnafHamburger.classList.toggle("open");
+        fnafNavRight.classList.toggle("open");
+    });
+    document.addEventListener("click", e => {
+        if (!fnafHamburger.contains(e.target) && !fnafNavRight.contains(e.target)) {
+            fnafHamburger.classList.remove("open");
+            fnafNavRight.classList.remove("open");
+            if (fnafDropdown) fnafDropdown.classList.remove("open");
+        }
+    });
+}
+if (fnafDropdown) {
+    fnafDropdown.querySelector(":scope > a").addEventListener("click", e => {
+        if (window.innerWidth <= 768) {
+            e.preventDefault();
+            e.stopPropagation();
+            fnafDropdown.classList.toggle("open");
+        }
+    });
+}
+
+// GOLDEN FREDDY EASTER -
+let keyBuffer = "";
+const trigger1 = "goldenfreddy";
+const trigger2 = "1987";
+const maxBufferLength = Math.max(trigger1.length, trigger2.length);
+
+let jumpscareTriggered = false; 
+
+document.addEventListener("keydown", (e) => {
+    if (jumpscareTriggered) return;
+
+    if (e.key.length === 1) {
+        keyBuffer += e.key.toLowerCase(); 
+       
+        if (keyBuffer.length > maxBufferLength) {
+            keyBuffer = keyBuffer.slice(-maxBufferLength);
+        }
+
+        if (keyBuffer.endsWith(trigger1) || keyBuffer.endsWith(trigger2)) {
+            triggerGoldenFreddy();
+            keyBuffer = ""; 
+        }
+    }
+});
+
+function triggerGoldenFreddy() {
+    jumpscareTriggered = true; 
+
+    const jumpscareScreen = document.getElementById("gf-jumpscare");
+    const jumpscareSound = document.getElementById("gf-sound");
+  
+    jumpscareScreen.style.display = "flex";
+    
+    jumpscareSound.currentTime = 0.5; 
+    jumpscareSound.play().catch(err => console.log("Audio blocked by browser:", err));
+
+    document.body.style.pointerEvents = "none";
+    document.body.style.overflow = "hidden";
+}
+    
     </script>
     <section class="roles-section">
         <div class="section-title">
@@ -331,5 +463,11 @@
             <span class="line"></span>
         </div>
     </section>
+
+<div id="gf-jumpscare" style="display: none; position: fixed; inset: 0; z-index: 9999; background: #000; justify-content: center; align-items: center;">
+    <img src="../images/goldenfreddy.webp" alt="IT'S ME" style="width: 100vw; height: 100vh; object-fit: fill; image-rendering: crisp-edges;">
+</div>
+<audio id="gf-sound" src="../images/goldenfreddy.mp3" preload="auto"></audio>
+
 </body>
 </html>
