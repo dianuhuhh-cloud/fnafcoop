@@ -92,16 +92,20 @@ body {
     padding: 70px 6% 40px 6%;
 }
 
+.modes {
+    padding: 70px 0 40px 0; 
+}
+
+.modes .section-title {
+    padding: 0 6%; 
+    margin-bottom: 70px;
+}
+
 .modes-wrapper {
     overflow: hidden;
     width: 100%;
-}
-
-.modes-track {
-    display: flex;
-    gap: 25px;
-    width: max-content;
-    animation: scrollModes 16s linear infinite;
+    padding: 50px 0; 
+    margin: -50px 0; 
 }
 
 .mode-card {
@@ -737,7 +741,6 @@ html {
     width: 240px;
     height: 330px;
     border-radius: 12px;
-    overflow: hidden;
     border: 1px solid rgba(180,120,255,0.4);
     box-shadow: 0 0 25px rgba(130,70,255,0.25);
     flex-shrink: 0;
