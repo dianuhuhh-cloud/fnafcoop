@@ -95,6 +95,7 @@ body {
 .modes-wrapper {
     overflow: hidden;
     width: 100%;
+    max-width: 100vw;
 }
 
 .modes-track {
