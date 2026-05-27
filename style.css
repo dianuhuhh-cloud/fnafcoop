@@ -1,838 +1,800 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Cinzel', serif;
-}
-
 body {
+    margin: 0;
     background: #000;
-    color: #ddd;
+    color: #C8D7F1;
+    font-family: 'Consolas', monospace;
     overflow-x: hidden;
+    position: relative;
 }
 
+.trailer-text,
+.header-content h1,
+.subtitle,
+.intro-box h2,
+.description h3,
+.section-title h2,
+.characters-title,
+.character-card h3,
+.roles-title,
+.role-header h3,
+.play-btn {
+    font-family: 'Consolas', monospace;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    color: #C8D7F1;
+    text-shadow:
+    0 0 6px #4A86FF,
+    0 0 18px #4A86FF,
+    0 0 35px rgba(74,134,255,0.6);
+}
 
-.section-title {
+.trailer-text,
+.header-content h1,
+.subtitle,
+.intro-box h2,
+.description h3,
+.section-title h2,
+.characters-title,
+.roles-title,
+.character-card h3,
+.role-header h3 {
+    position: relative;
+}
+
+.trailer-text::after,
+.header-content h1::after,
+.subtitle::after,
+.intro-box h2::after,
+.description h3::after,
+.section-title h2::after,
+.characters-title::after,
+.roles-title::after,
+.character-card h3::after,
+.role-header h3::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.35) 0px,
+    rgba(0,0,0,0.35) 1px,
+    transparent 1px,
+    transparent 3px
+);
+opacity: 0.75;
+mix-blend-mode: multiply;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.02) 0px,
+        rgba(255,255,255,0.02) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+}
+
+@keyframes fnafFlicker {
+    0%,18%,22%,25%,53%,57%,100% { opacity:1; }
+    20%,24%,55% { opacity:.4; }
+}
+
+.header-content h1 {
+    animation: fnafFlicker 4s infinite;
+    font-size: 4.3rem;
+    margin: 0;
+}
+
+.fnaf1-header {
+    height: 65vh;
+    background:
+        linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,1)),
+        url("../images/fnaf1header.webp") center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
-    margin-bottom: 50px;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 1.4rem;
+    letter-spacing: 8px;
+    margin-top: 10px;
+}
+
+.fnaf1-content {
+    padding: 25px 10% 0px 10%;
+    text-align: center;
+}
+
+.intro-box {
+    margin-bottom: 30px;
+}
+
+.intro-box h2 {
+    font-size: 2.7rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;         
+    margin-top: 60px;   
+    margin-bottom: 70px;
+    align-items: center;
+    text-align: left;
+}
+
+.description h3 {
+    font-size: 1.6rem;
+    letter-spacing: 7px;
+    margin-bottom: 25px;
+    padding-right: 100px;
+}
+
+.description p {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: #C8D7F1;
+}
+
+.video-preview {
+    border: 1px solid rgba(158,200,255,0.3);
+}
+
+.video-preview video,
+.role-video video {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.role-video {
     box-sizing: border-box;
 }
 
-.section-title h2 {
-    font-size: 1.8rem;
-    letter-spacing: 4px;
-    color: #d7b8ff;
+.characters-title,
+.roles-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    font-size: 2.8rem;
+    letter-spacing: 12px;
+    margin-bottom: 50px;
+}
+
+.characters-section {
+    padding: 0px 10% 20px 10%;
+    text-align: center;
+}
+
+.character-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.arrow {
+    background: none;
+    border: 1px solid rgba(74,134,255,0.25);
+    color: #C8D7F1;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.arrow:hover {
+    border-color: rgba(74,134,255,0.7);
+    box-shadow: 0 0 14px rgba(74,134,255,0.3);
+    color: #fff;
     text-shadow:
-        0 0 10px rgba(170,120,255,0.6),
-        0 0 25px rgba(130,80,255,0.4);
+        0 0 6px #4A86FF,
+        0 0 14px #4A86FF;
+}
+
+.character-card {
+    width: 520px;
+    text-align: center;
+}
+
+.character-card h3 {
+    font-size: 2.1rem;
+    letter-spacing: 8px;
+    margin-bottom: 4px;
+}
+
+.character-card img {
+    width: 100%;
+    max-width: 360px;
+    height: 360px;
+    object-fit: contain;
+    margin-bottom: 4px;
+}
+
+.character-info p {
+    font-size: 1.15rem;
+    line-height: 2;
+}
+
+.discover-btn {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    letter-spacing: 5px;
+    text-decoration: none;
+    color: #C8D7F1;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+.discover-btn::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 1px;
+    background: #4A86FF;
+    box-shadow: 0 0 6px #4A86FF;
+    transition: width 0.3s ease;
+}
+
+.discover-btn:hover {
+    text-shadow:
+        0 0 5px #4A86FF,
+        0 0 12px #4A86FF;
+}
+
+.discover-btn:hover::after {
+    width: 100%;
+}
+
+.roles-section {
+    padding: 15px 10% 0 10%;
+}
+
+.roles-section .section-title {
+    margin-bottom: 50px;
+}
+
+.role-block {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 35px;
+    margin-bottom: 40px;
+    align-items: center;
+}
+
+.role-block.reverse {
+    direction: rtl;
+}
+
+.role-block.reverse > * {
+    direction: ltr;
+}
+
+.role-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.role-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.role-header h3 {
+    font-size: 1.9rem;
+    letter-spacing: 8px;
+}
+
+.role-desc {
+    padding: 30px;
+    background: rgba(158,200,255,0.05);
+    border: 1px solid rgba(158,200,255,0.45);
+}
+
+.role-desc p {
+    font-size: 1.15rem;
+    line-height: 2;
+}
+
+.role-video {
+    border: 1px solid rgba(158,200,255,0.35);
+    background: #000;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.role-icon {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px #4A86FF);
+}
+
+.play-btn {
+    display: inline-block;
+    position: relative; 
+    font-family: 'Consolas', monospace;
+    font-size: 2.6rem;
+    letter-spacing: 12px;
+    text-decoration: none;
+    color: #C8D7F1;
+    padding: 14px 55px;
+    background: rgba(74, 134, 255, 0.03);
+    border: 1px solid rgba(74, 134, 255, 0.6);
+    text-shadow: 0 0 6px #4A86FF, 0 0 18px #4A86FF;
+    transition: all 0.25s ease;
+    overflow: hidden;
+}
+
+.play-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.35) 0px,
+        rgba(0,0,0,0.35) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    opacity: 0.75;
+}
+
+.play-btn:hover {
+    letter-spacing: 18px;
+    background: rgba(74, 134, 255, 0.1);
+    box-shadow: 0 0 15px rgba(74, 134, 255, 0.4);
+    color: #fff;
+}
+
+.tv-noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background: url('../images/noise.gif') repeat;
+    opacity: 0.08;
+}
+
+.section-title {
+    position: relative;
+    z-index: 5;  
+    width: 100vw;         
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 12px 0 10px 0;
+}
+
+.section-title h2 {
+    font-size: 2.8rem;
+    letter-spacing: 12px;
+    margin: 0;
+    font-family: 'Consolas', monospace;
+    text-transform: uppercase;
+    color: #C8D7F1;
+    text-shadow:
+        0 0 6px #4A86FF,
+        0 0 18px #4A86FF,
+        0 0 35px rgba(74,134,255,0.6);
 }
 
 .section-title .line {
     flex: 1;
     height: 1px;
-    background: rgba(200, 150, 255, 0.95);
+    background: #9EC8FF;
     box-shadow:
-        0 0 4px rgba(255, 255, 255, 0.8),
-        0 0 10px rgba(200, 140, 255, 1),
-        0 0 22px rgba(150, 70, 255, 0.7);
-    border-radius: 0;
-}
-
-.modes {
-    padding: 70px 6% 40px 6%;
-}
-
-.modes-track {
-    display: flex;
-    gap: 25px;
-    width: max-content;
-    animation: scrollModes 16s linear infinite;
-}
-
-.mode-card {
-    width: 260px;
-    aspect-ratio: 2 / 3;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 2px solid rgba(170,120,255,0.45);
-    box-shadow:
-        0 0 18px rgba(150,80,255,0.35),
-        inset 0 0 25px rgba(90,40,160,0.35);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.mode-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: brightness(0.65);
-    transition: filter 0.35s ease;
-}
-
-.mode-card:hover {
-    transform: scale(1.08);
-    box-shadow:
-        0 0 30px rgba(190,130,255,0.85),
-        0 0 80px rgba(120,60,220,0.5);
-    z-index: 10;
-}
-
-.mode-card:hover img {
-    filter: brightness(1);
-}
-
-@keyframes scrollModes {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.dev-badge {
-    position: absolute;
-    top: 28px;
-    right: 48px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    opacity: 0.85;
-}
-
-.dev-badge img {
-    width: 44px;
-    height: auto;
-    filter:
-        drop-shadow(0 0 12px rgba(180,120,255,0.8));
-}
-
-.dev-badge span {
-    font-size: 0.75rem;
-    letter-spacing: 3px;
-    color: #d7b8ff;
-    text-shadow:
-        0 0 10px rgba(170,120,255,0.6);
-}
-
-
-.navbar {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 85%;
-    padding: 14px 30px;
-    border-radius: 20px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    backdrop-filter: blur(18px);
-    background: rgba(60, 20, 100, 0.65);
-    border: 1px solid rgba(200,140,255,0.5);
-    box-shadow: 0 0 35px rgba(170,120,255,0.35);
-    z-index: 1000;
-}
-
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.nav-logo {
-    width: 38px;
-    height: 38px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(180,120,255,0.7));
-    transition: 0.4s ease;
-}
-
-.nav-logo:hover {
-    transform: rotate(8deg) scale(1.1);
-    filter: drop-shadow(0 0 22px rgba(200,150,255,1));
-}
-
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-}
-
-.nav-play,
-.nav-right a {
-    text-decoration: none;
-    color: #ddd;
-    letter-spacing: 2px;
-    font-size: 0.85rem;
-    transition: 0.3s ease;
-}
-
-.nav-play:hover,
-.nav-right a:hover {
-    color: #d7b8ff;
-    text-shadow: 0 0 12px rgba(180,120,255,0.8);
-}
-
-.discord-link {
-    color: #b48cff;
-    display: flex;
-    align-items: center;
-    transition: 0.3s ease;
-}
-
-.discord-link:hover {
-    color: #e0c8ff;
-    text-shadow: 0 0 15px rgba(180,120,255,1);
-}
-
-
-
-
-.hero {
+        0 0 6px #9EC8FF,
+        0 0 15px #9EC8FF,
+        0 0 25px rgba(158,200,255,0.8);
     position: relative;
-    height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: url("images/header.png") center 20% / 110% no-repeat;
-    text-align: center;
+    z-index: 5;   
 }
 
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(to right, rgba(0,0,0,0.45), rgba(0,0,0,0.1)),
-        linear-gradient(to left, rgba(0,0,0,0.45), rgba(0,0,0,0.1)),
-        linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 30%, transparent 60%),
-        linear-gradient(to bottom, rgba(0,0,0,0.55), transparent 55%);
+.play-title {
+    margin: 40px auto 70px auto;
 }
 
-.dev-link {
-    color: #caa6ff;
-    text-decoration: none;
-    transition: 0.2s ease;
+#char-image {
+    transition: opacity 0.25s ease, filter 0.3s ease;
+    opacity: 1;
 }
+.fnaf1-hamburger { display: none; }
 
-.dev-link:hover {
-    color: #ffffff;
-    text-shadow: 0 0 12px rgba(170,120,255,0.9), 0 0 25px rgba(140,80,255,0.7);
-}
-
-.hero-center {
-    position: relative;
-    max-width: 750px;
-    padding: 0 20px;
-}
-
-.hero-center h1 {
-    font-size: 3.8rem;
-    letter-spacing: 6px;
-    margin-bottom: 22px;
-    text-shadow:
-        0 0 30px rgba(170,120,255,0.8),
-        0 0 80px rgba(130,80,255,0.6);
-}
-
-.hero-tags {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
-}
-
-.hero-tags span {
-    font-size: 0.75rem;
-    letter-spacing: 3px;
-    border-bottom: 1px solid rgba(180,120,255,0.7);
-    padding-bottom: 4px;
-    color: #d7b8ff;
-}
-
-.hero-desc {
-    line-height: 1.8;
-    margin-bottom: 32px;
-    color: #e0d8ff;
-    transition: 0.6s ease;
-}
-
-.hero-desc.glow {
-    animation: strongGlow 1.5s ease;
-}
-
-@keyframes strongGlow {
-    0% {
-        text-shadow: none;
+/* =============================================
+   NARROW DESKTOP — 769px to 1100px
+   Tightens navbar spacing to prevent crowding.
+   Zero mobile rules touched.
+   ============================================= */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .fnaf1-nav {
+        padding: 10px 18px;
     }
-    30% {
-        text-shadow:
-            0 0 15px #d6b3ff,
-            0 0 35px #b36bff,
-            0 0 70px #8a2eff,
-            0 0 120px #5c00ff;
+    .fnaf1-nav-left { gap: 12px; }
+    .fnaf1-nav-right { gap: 14px; }
+    .fnaf1-nav a,
+    .fnaf1-nav span {
+        font-size: 0.74rem;
+        letter-spacing: 1.5px;
     }
-    100% {
-        text-shadow: none;
-    }
-}
-
-.btn-primary {
-    position: relative;
-    display: inline-block;
-    padding: 14px 28px;
-    background: rgba(160,90,255,0.18);
-    border: 1px solid rgba(190,140,255,1);
-    color: #fff;
-    text-decoration: none;
-    letter-spacing: 2px;
-    overflow: hidden;
-    cursor: pointer;
-
-    box-shadow:
-        0 0 20px rgba(180,120,255,0.7),
-        0 0 45px rgba(120,60,255,0.5);
-
-    transition: transform 0.25s ease;
-}
-
-.btn-primary span {
-    position: relative;
-    z-index: 2;
-}
-
-.btn-primary::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -120%;
-    height: 100%;
-    width: 60%;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.4),
-        transparent
-    );
-    transform: skewX(-20deg);
-    transition: all 0.7s ease;
-}
-
-.btn-primary::before {
-    animation: sweep 3s linear infinite;
-}
-
-@keyframes sweep {
-    0% { left: -120%; }
-    100% { left: 140%; }
-}
-
-.btn-primary:hover {
-    transform: scale(1.05);
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-@keyframes shimmer {
-    0% { left: -120%; }
-    100% { left: 120%; }
-}
-
-@keyframes pulseEnergy {
-    0% { opacity: 0.3; }
-    50% { opacity: 0.55; }
-    100% { opacity: 0.3; }
-}
-
-.game-selection {
-    padding: 0 6% 80px 6%;
-    margin-top: -20px;
-}
-
-.game-entry {
-    display: flex;
-    align-items: center;
-    gap: 70px;
-    padding: 40px 0;
-    border-bottom: 1px solid rgba(170,120,255,0.2);
-    transition: 0.6s ease;
-}
-
-.game-entry:last-child {
-    border-bottom: none;
-}
-
-.game-thumb {
-    width: 240px;
-    height: 330px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(180,120,255,0.4);
-    box-shadow: 0 0 25px rgba(130,70,255,0.25);
-    flex-shrink: 0;
-}
- 
-
-.game-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    display: block;
-    filter: brightness(0.7);
-    transition: 0.4s ease;
-    object-fit: contain;
-    background: #111;
-}
-
-.game-text h3 {
-    font-size: 1.9rem;
-    letter-spacing: 3px;
-    margin-bottom: 14px;
-    color: #fff;
-    text-shadow: 0 0 15px rgba(170,120,255,0.8);
-}
-
-.game-text p {
-    max-width: 900px;
-    line-height: 1.7;
-    margin-bottom: 18px;
-    color: #d9d2ff;
-}
-
-.game-buttons {
-    display: flex;
-    gap: 18px;
-    margin-top: 16px;
-}
-
-.game-btn {
-    position: relative;
-    display: inline-block;
-    padding: 10px 22px;
-    border: 1px solid rgba(190,140,255,0.9);
-    background: rgba(160,90,255,0.12);
-    color: #ffffff;
-    text-decoration: none;
-    letter-spacing: 2px;
-    font-size: 0.8rem;
-    overflow: hidden;
-    transition: transform 0.25s ease, background 0.25s ease;
-}
-
-.game-btn:hover {
-    transform: scale(1.05);
-}
-
-.game-btn span {
-    position: relative;
-    z-index: 2;
-
-}
-
-.explore-btn {
-    position: relative;
-    display: inline-block;
-    padding: 10px 22px;
-    border: 1px solid rgba(190,140,255,0.9);
-    background: rgba(160,90,255,0.12);
-    color: #ffffff;
-    text-decoration: none;
-    letter-spacing: 2px;
-    font-size: 0.8rem;
-    overflow: hidden;
-    transition: transform 0.25s ease, background 0.25s ease;
-    backdrop-filter: blur(4px);
-}
-
-.explore-btn span {
-    position: relative;
-    z-index: 2;
-}
-
-.explore-btn::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(
-        120deg,
-        rgba(255,255,255,0.0) 0%,
-        rgba(255,255,255,0.2) 50%,
-        rgba(255,255,255,0.0) 100%
-    );
-    filter: blur(8px);
-    transform: skewX(-20deg);
-    z-index: 1;
-    animation: glassSweep 3s linear infinite;
-}
-
-@keyframes glassSweep {
-    0% { left: -150%; }
-    100% { left: 150%; }
-}
-
-.explore-btn:hover {
-    transform: scale(1.05);
-}
-
-.game-entry.active-glow {
-    box-shadow:
-        0 0 30px rgba(170,120,255,0.7),
-        0 0 80px rgba(120,60,255,0.5);
-    padding-left: 20px;
-    border-radius: 12px;
-}
- 
-.modes .section-title {
-    margin-bottom: 70px;
-}
-
-.game-selection .section-title {
-    margin-top: 70px;
-    margin-bottom: 20px;
-}
-
-.game-text h3 {
-    font-size: 2.1rem;
-}
-
-.game-text p {
-    font-size: 1.15rem;
-    max-width: 1000px;
-}
-
-.game-buttons {
-    margin-top: 22px;
-    gap: 24px;
-}
-
-.game-btn {
-    padding: 14px 32px;
-    font-size: 0.95rem;
-    letter-spacing: 3px;
-}
-
-.nav-hamburger {
-    display: none;
-}
-
-@media (max-width: 768px) {
-
-    
-    .navbar {
-        top: 10px;
-        width: 92%;
-        padding: 9px 14px;
-        border-radius: 14px;
-        position: fixed;
-        left: 50%;
-        transform: translateX(-50%);
-        gap: 0;
-        overflow: visible;
-    }
-
-    .nav-left {
-        gap: 10px;
-    }
-
-    .nav-logo {
-        width: 30px;
-        height: 30px;
-    }
-
-    .nav-play {
-        font-size: 0.75rem;
+    .fnaf1-nav-home { letter-spacing: 2px; }
+    .fnaf1-nav-play {
+        padding: 6px 12px;
         letter-spacing: 2px;
     }
+}
 
-    .nav-hamburger {
+/* =============================================
+   MOBILE — rebuilt from scratch
+   Only touches screens ≤ 768px.
+   Zero desktop rules were changed.
+   ============================================= */
+@media (max-width: 768px) {
+
+    /* ── NAVBAR ─────────────────────────────── */
+    .fnaf1-nav {
+        top: 10px;
+        width: calc(100% - 28px);
+        left: 14px;
+        right: 14px;
+        transform: none;
+        padding: 10px 14px;
+        border-radius: 14px;
+        box-sizing: border-box;
+    }
+
+    /* show hamburger */
+    .fnaf1-hamburger {
         display: flex;
         flex-direction: column;
         justify-content: center;
         gap: 5px;
-        background: rgba(160,90,255,0.12);
-        border: 1px solid rgba(190,140,255,0.45);
+        background: rgba(74,134,255,0.08);
+        border: 1px solid rgba(74,134,255,0.4);
         border-radius: 8px;
         cursor: pointer;
-        padding: 7px 9px;
+        padding: 8px 9px;
         z-index: 10;
-        box-shadow: 0 0 10px rgba(150,80,255,0.25);
+        flex-shrink: 0;
     }
 
-    .nav-hamburger span {
+    .fnaf1-hamburger span {
         display: block;
-        width: 18px;
+        width: 19px;
         height: 2px;
-        background: #d7b8ff;
+        background: #C8D7F1;
         border-radius: 2px;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        box-shadow: 0 0 5px rgba(180,120,255,0.8);
+        transition: transform 0.28s ease, opacity 0.28s ease;
+        box-shadow: 0 0 4px rgba(74,134,255,0.7);
     }
 
-    .nav-hamburger.open span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-    }
-    .nav-hamburger.open span:nth-child(2) {
-        opacity: 0;
-    }
-    .nav-hamburger.open span:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
-    }
+    .fnaf1-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .fnaf1-hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+    .fnaf1-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    .nav-right {
+    /* dropdown panel — hidden by default */
+    .fnaf1-nav-right {
         display: none;
         position: absolute;
-        top: calc(100% + 10px);
-        right: 0;
+        top: calc(100% + 8px);
         left: 0;
-        background: rgba(20, 6, 50, 0.97);
-        border: 1px solid rgba(200,140,255,0.4);
-        border-radius: 14px;
-        padding: 16px 20px;
+        right: 0;
+        background: rgba(4, 8, 26, 0.98);
+        border: 1px solid rgba(74,134,255,0.38);
+        border-radius: 12px;
+        padding: 8px 0;
         flex-direction: column;
-        gap: 4px;
-        backdrop-filter: blur(20px);
-        box-shadow: 0 8px 40px rgba(120,60,255,0.35);
+        backdrop-filter: blur(22px);
+        box-shadow: 0 6px 36px rgba(74,134,255,0.22);
+        overflow: hidden;
+        z-index: 200;
     }
 
-    .nav-right.open {
+    .fnaf1-nav-right.open {
         display: flex;
     }
 
-    .nav-right a {
-        padding: 10px 4px;
-        font-size: 0.85rem;
-        border-bottom: 1px solid rgba(180,120,255,0.1);
+    /* every top-level link row */
+    .fnaf1-nav-right > a,
+    .fnaf1-nav-right > .fnaf1-dropdown > a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 18px;
+        font-size: 0.78rem;
+        letter-spacing: 3px;
+        border-bottom: 1px solid rgba(74,134,255,0.09);
+        transition: background 0.2s;
     }
 
-    .nav-right a:last-child {
+    .fnaf1-nav-right > a:last-child,
+    .fnaf1-nav-right > .fnaf1-dropdown:last-child > a {
         border-bottom: none;
     }
 
-    
-    .nav-dropdown > a {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    .fnaf1-nav-right > a:hover,
+    .fnaf1-nav-right > .fnaf1-dropdown > a:hover {
+        background: rgba(74,134,255,0.1);
     }
 
-    .nav-dropdown > a::after {
+    /* play button inside mobile menu */
+    .fnaf1-nav-right > a.fnaf1-nav-play {
+        margin: 8px 14px;
+        border-radius: 6px;
+        justify-content: center;
+        border: 1px solid rgba(74,134,255,0.55);
+        background: rgba(74,134,255,0.1);
+    }
+
+    /* discord icon row */
+    .fnaf1-discord {
+        padding: 12px 18px;
+        border-bottom: none !important;
+        justify-content: flex-start !important;
+        gap: 10px;
+    }
+
+    .fnaf1-discord::before {
+        content: "Discord";
+        font-family: 'Consolas', monospace;
+        font-size: 0.78rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #C8D7F1;
+    }
+
+    /* gamemodes dropdown chevron */
+    .fnaf1-dropdown > a::after {
         content: "›";
-        font-size: 1.1rem;
-        transition: transform 0.3s ease;
+        font-size: 1.2rem;
+        line-height: 1;
+        transition: transform 0.25s ease;
+        color: rgba(158,200,255,0.7);
     }
 
-    .nav-dropdown.open > a::after {
+    .fnaf1-dropdown.open > a::after {
         transform: rotate(90deg);
     }
 
-    .nav-dropdown .dropdown-menu {
-        position: static;
-        display: none;
-        box-shadow: none;
-        border: none;
-        border-top: 1px solid rgba(180,120,255,0.15);
-        background: transparent;
-        padding-top: 0;
-        backdrop-filter: none;
-        border-radius: 0;
-        min-width: unset;
+    /* nested dropdown list */
+    .fnaf1-dropdown-menu {
+        position: static !important;
+        display: none !important;
+        padding: 0 0 4px 0 !important;
+        background: rgba(74,134,255,0.04) !important;
+        border: none !important;
+        border-top: 1px solid rgba(74,134,255,0.1) !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        min-width: unset !important;
     }
 
-    .nav-dropdown.open .dropdown-menu {
-        display: block;
+    .fnaf1-dropdown.open .fnaf1-dropdown-menu {
+        display: block !important;
     }
 
-    .dropdown-menu a {
-        font-size: 0.75rem;
-        padding: 9px 14px;
-        letter-spacing: 1.5px;
+    .fnaf1-dropdown-menu a {
+        padding: 10px 28px !important;
+        font-size: 0.74rem !important;
+        letter-spacing: 2.5px !important;
     }
 
-    .discord-link {
-        padding-top: 6px;
+    .fnaf1-dropdown-menu a:last-child {
+        border-bottom: none;
     }
 
-    
-    .hero {
-        min-height: unset;
+    /* ── HEADER ─────────────────────────────── */
+    .fnaf1-header {
         height: auto;
-        padding: 100px 20px 20px;
-        align-items: center;
-        justify-content: center;
+        min-height: 56vh;
+        padding: 110px 22px 52px;
     }
 
-    .hero-center {
-        padding: 0 8px;
-    }
-
-    .hero-center h1,
-    .hero h1,
-    .hero-content h1 {
-        font-size: 2.2rem !important;
+    .header-content h1 {
+        font-size: 1.75rem !important;
         letter-spacing: 4px !important;
-        margin-bottom: 16px !important;
+        line-height: 1.25 !important;
     }
 
-    .hero-tags {
-        gap: 10px !important;
-        margin-bottom: 18px !important;
-        justify-content: center;
+    .subtitle {
+        font-size: 0.8rem !important;
+        letter-spacing: 4px !important;
+        margin-top: 8px !important;
     }
 
-    .hero-tags span {
-        font-size: 0.6rem !important;
-        letter-spacing: 2px !important;
+    /* ── INTRO / ABOUT ──────────────────────── */
+    .fnaf1-content {
+        padding: 24px 5% 0;
     }
 
-    .hero-desc {
-        font-size: 0.9rem !important;
-        line-height: 1.7 !important;
-        margin-bottom: 24px !important;
+    .intro-box {
+        margin-bottom: 18px;
     }
 
-    .btn-primary {
-        padding: 12px 22px;
-        font-size: 0.78rem;
-        letter-spacing: 1.5px;
-    }
-
-    .hero-overlay {
-        background:
-            linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0.1)),
-            linear-gradient(to left, rgba(0,0,0,0.4), rgba(0,0,0,0.1)),
-            linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 30%, transparent 60%),
-            linear-gradient(to bottom, rgba(0,0,0,0.55), transparent 55%) !important;
-    }
-
-    
-    .modes {
-        padding: 16px 0 30px 0;
-    }
-
-    .modes .section-title {
-        padding: 0 5%;
-        margin-bottom: 40px;
-    }
-
-    .mode-card {
-        width: 150px;
-    }
-
-    
-    .section-title {
-        gap: 14px !important;
-        margin-bottom: 30px;
-        padding: 0 4%;
-    }
-
-    .section-title h2 {
-        font-size: 1.1rem !important;
+    .intro-box h2 {
+        font-size: 1.05rem !important;
         letter-spacing: 3px !important;
+        line-height: 1.5 !important;
+    }
+
+    .grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        margin-top: 22px !important;
+        margin-bottom: 32px !important;
+    }
+
+    /* stack video below text */
+    .grid .video-preview {
+        order: 2;
+        width: 100%;
+        min-height: 200px;
+    }
+
+    .grid .description {
+        order: 1;
+    }
+
+    .description h3 {
+        font-size: 1rem !important;
+        letter-spacing: 4px !important;
+        padding-right: 0 !important;
+        margin-bottom: 12px !important;
+    }
+
+    .description p {
+        font-size: 0.87rem !important;
+        line-height: 1.85 !important;
+    }
+
+    /* ── SECTION TITLES ─────────────────────── */
+    .section-title {
+        gap: 10px !important;
+        padding: 0 4% !important;
+        width: 100% !important;
+        left: 0 !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+    }
+
+    .section-title h2,
+    .characters-title,
+    .roles-title {
+        font-size: 1.15rem !important;
+        letter-spacing: 5px !important;
         white-space: nowrap;
     }
 
-    
-    .game-selection {
-        padding: 0 4% 50px 4%;
-        margin-top: 20px;
+    /* ── CHARACTERS ─────────────────────────── */
+    .characters-section {
+        padding: 0 4% 24px;
     }
 
-    .game-selection .section-title {
-        margin-top: 0 !important;
-        margin-bottom: 16px !important;
+    .character-carousel {
+        gap: 8px;
+        align-items: center;
     }
 
-    .game-entry {
-        flex-direction: row !important;
-        gap: 16px !important;
-        padding: 22px 0 !important;
-        align-items: flex-start;
+    .character-card {
+        width: 100% !important;
+        max-width: 260px;
+        flex: 1;
     }
 
-    .game-entry.active-glow {
-        padding-left: 8px !important;
+    .character-card h3 {
+        font-size: 1.2rem !important;
+        letter-spacing: 4px !important;
+        margin-bottom: 6px !important;
     }
 
-    .game-thumb {
-        width: 105px !important;
-        min-width: 105px !important;
-        height: 145px !important;
-        flex-shrink: 0 !important;
+    .character-card img {
+        max-width: 200px !important;
+        height: 200px !important;
+        margin-bottom: 8px !important;
     }
 
-    .game-text h3 {
-        font-size: 1.05rem !important;
-        letter-spacing: 1.5px !important;
-        margin-bottom: 7px !important;
+    .character-info p {
+        font-size: 0.83rem !important;
+        line-height: 1.7 !important;
+        padding: 0 4px;
     }
 
-    .game-text p {
+    .discover-btn {
         font-size: 0.78rem !important;
-        line-height: 1.55 !important;
-        max-width: 100% !important;
-        margin-bottom: 10px !important;
+        letter-spacing: 4px !important;
+        margin-top: 14px !important;
     }
 
-    .game-buttons {
-        flex-wrap: wrap;
-        gap: 8px !important;
-        margin-top: 10px !important;
+    .arrow {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 0.85rem !important;
+        flex-shrink: 0;
     }
 
-    .game-btn,
-    .explore-btn {
-        padding: 7px 13px !important;
-        font-size: 0.65rem !important;
-        letter-spacing: 1.5px !important;
+    /* ── ROLES ──────────────────────────────── */
+    .roles-section {
+        padding: 12px 5% 0;
     }
 
-    .credits-section {
-        padding: 60px 6% 40px 6%;
-        margin-top: -40px !important;
+    .role-block {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        margin-bottom: 36px !important;
+        direction: ltr !important;          /* fix reverse blocks */
     }
 
-    .credits-grid {
-        gap: 24px !important;
+    .role-block.reverse > * {
+        direction: ltr !important;
     }
 
-    .credit-role {
-        font-size: 0.58rem !important;
-        letter-spacing: 3px !important;
+    /* video always below text on mobile */
+    .role-block .role-text  { order: 1; }
+    .role-block .role-video { order: 2; min-height: 190px; }
+
+    .role-header {
+        gap: 12px !important;
+        margin-bottom: 14px !important;
+        align-items: center;
     }
 
-    .credit-name {
-        font-size: 0.82rem !important;
-        letter-spacing: 2px !important;
+    .role-header h3 {
+        font-size: 1.05rem !important;
+        letter-spacing: 4px !important;
     }
 
-    .credit-desc {
-        font-size: 0.62rem !important;
-        letter-spacing: 1.5px !important;
+    .role-icon {
+        width: 42px !important;
+        height: 42px !important;
     }
-}
 
-@media (min-width: 768px) {
-    .hero-overlay {
-        background:
-            linear-gradient(to right, #000 0%, rgba(0,0,0,0.3) 25%),
-            linear-gradient(to left, #000 0%, rgba(0,0,0,0.3) 25%),
-            linear-gradient(to top, #000 0%, transparent 35%),
-            linear-gradient(to bottom, #000 0%, transparent 35%),
-            rgba(0, 0, 0, 0.18); 
+    .role-desc {
+        padding: 16px !important;
+    }
+
+    .role-desc p {
+        font-size: 0.86rem !important;
+        line-height: 1.8 !important;
+    }
+
+    /* ── PLAY BUTTON ────────────────────────── */
+    .play-btn {
+        font-size: 1.2rem !important;
+        letter-spacing: 6px !important;
+        padding: 11px 26px !important;
+    }
+
+    .play-title {
+        margin: 30px auto 50px auto !important;
+        padding: 0 4% !important;
     }
 }
