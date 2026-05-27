@@ -48,7 +48,6 @@ const idMap = [
 
 modeCards.forEach((card, index) => {
     card.addEventListener("click", () => {
-
         const targetId = idMap[index % 8];
         const target = document.getElementById(targetId);
 
@@ -58,9 +57,7 @@ modeCards.forEach((card, index) => {
             entries.forEach(e => e.classList.remove("active-glow"));
 
             setTimeout(() => {
-
                 target.classList.add("active-glow");
-
                 const img = target.querySelector(".game-thumb img");
 
                 if (img) {
@@ -74,10 +71,8 @@ modeCards.forEach((card, index) => {
                 setTimeout(() => {
                     target.classList.remove("active-glow");
                 }, 2000);
-
             }, 600);
         }
-
     });
 });
 
@@ -112,54 +107,51 @@ if (navDropdownLink) {
     });
 }
 
-
 if (window.innerWidth <= 768) {
     const track = document.querySelector('.modes-track');
     const wrapper = document.querySelector('.modes-wrapper');
     
     if (track && wrapper) {
-
-        track.style.animation = 'none';
-        track.style.transform = 'translateX(0px)';
-        
-        let isDragging = false;
         let startX = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
+        let isDragging = false;
         let dragged = false;
+        let trackAnim = null;
+        const animDuration = 15000;
+
+        setTimeout(() => {
+            const anims = track.getAnimations();
+            if (anims.length > 0) {
+                trackAnim = anims[0];
+            }
+        }, 100);
 
         wrapper.addEventListener('touchstart', (e) => {
             isDragging = true;
             dragged = false;
             startX = e.touches[0].clientX;
-
-            const style = window.getComputedStyle(track);
-            const matrix = new WebKitCSSMatrix(style.transform);
-            prevTranslate = matrix.m41; 
+            if (trackAnim) trackAnim.pause();
         }, { passive: true });
 
         wrapper.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
+            if (!isDragging || !trackAnim) return;
             
             const currentX = e.touches[0].clientX;
             const deltaX = currentX - startX;
+            
+            if (Math.abs(deltaX) > 5) dragged = true;
 
-            if (Math.abs(deltaX) > 10) {
-                dragged = true;
-            }
+            let newTime = trackAnim.currentTime - (deltaX * 6);
             
-            currentTranslate = prevTranslate + deltaX;
+            if (newTime < 0) newTime += animDuration;
+            if (newTime > animDuration) newTime -= animDuration;
             
-            // Bound controls: Don't let user slide past the first or last card
-            const maxScroll = -(track.offsetWidth - wrapper.offsetWidth);
-            if (currentTranslate > 0) currentTranslate = 0;
-            if (currentTranslate < maxScroll) currentTranslate = maxScroll;
-            
-            track.style.transform = `translateX(${currentTranslate}px)`;
+            trackAnim.currentTime = newTime;
+            startX = currentX;
         }, { passive: true });
 
         wrapper.addEventListener('touchend', () => {
             isDragging = false;
+            if (trackAnim) trackAnim.play();
         });
 
         track.addEventListener('click', (e) => {
@@ -168,6 +160,6 @@ if (window.innerWidth <= 768) {
                 e.stopPropagation();
                 e.stopImmediatePropagation();
             }
-        }, true); 
+        }, true);
     }
 }
