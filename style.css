@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -487,29 +488,7 @@ box-shadow:
         0 0 25px rgba(140,80,255,0.7);
 }
 
-.navbar {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    padding: 12px 25px;
-    border-radius: 18px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    backdrop-filter: blur(20px);
-background: rgba(40, 15, 70, 0.65);
-
-    border: 1px solid rgba(220,160,255,0.6);
-    
-box-shadow: 
-    0 0 40px rgba(180,120,255,0.45);
-
-    z-index: 10;
-}
 
 .nav-left {
     display: flex;
@@ -890,13 +869,12 @@ html {
     
     .navbar {
         top: 10px;
-        width: auto;
-        left: 16px;
-        right: 16px;
-        transform: none;
+        width: 92%;
         padding: 9px 14px;
         border-radius: 14px;
         position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
         gap: 0;
         overflow: visible;
     }
