@@ -885,7 +885,7 @@ html {
     display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
     
     .navbar {
@@ -947,7 +947,7 @@ html {
     }
 
     .nav-right {
-        display: none !important;
+        display: none;
         position: absolute;
         top: calc(100% + 10px);
         right: 0;
@@ -963,7 +963,7 @@ html {
     }
 
     .nav-right.open {
-        display: flex !important;
+        display: flex;
     }
 
     .nav-right a {
@@ -1179,7 +1179,7 @@ html {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 901px) {
     .hero-overlay {
         background:
             linear-gradient(to right, #000 0%, rgba(0,0,0,0.3) 25%),
