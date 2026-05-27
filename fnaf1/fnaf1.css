@@ -110,7 +110,7 @@ body::before {
 }
 
 .fnaf1-content {
-    padding: 100px 10% 0px 10%;
+    padding: 25px 10% 0px 10%;
     text-align: center;
 }
 
@@ -127,7 +127,7 @@ body::before {
     grid-template-columns: 1.1fr 0.9fr;
     gap: 60px;         
     margin-top: 60px;   
-    margin-bottom: 40px;
+    margin-bottom: 70px;
     align-items: center;
     text-align: left;
 }
@@ -218,7 +218,7 @@ body::before {
 .character-card h3 {
     font-size: 2.1rem;
     letter-spacing: 8px;
-    margin-bottom: 25px;
+    margin-bottom: 4px;
 }
 
 .character-card img {
@@ -226,7 +226,7 @@ body::before {
     max-width: 360px;
     height: 360px;
     object-fit: contain;
-    margin-bottom: 30px;
+    margin-bottom: 4px;
 }
 
 .character-info p {
@@ -268,14 +268,18 @@ body::before {
 }
 
 .roles-section {
-    padding: 0px 10% 0 10%;
+    padding: 15px 10% 0 10%;
+}
+
+.roles-section .section-title {
+    margin-bottom: 50px;
 }
 
 .role-block {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
-    gap: 60px;
-    margin-bottom: 80px;
+    gap: 35px;
+    margin-bottom: 40px;
     align-items: center;
 }
 
@@ -387,7 +391,7 @@ body::before {
     align-items: center;
     justify-content: center;
     gap: 15px;
-    margin: 40px 0 30px 0;
+    margin: 12px 0 10px 0;
 }
 
 .section-title h2 {
@@ -420,6 +424,246 @@ body::before {
 }
 
 #char-image {
-    transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease, filter 0.3s ease;
     opacity: 1;
+}
+.fnaf1-hamburger { display: none; }
+
+@media (max-width: 768px) {
+
+    /* NAVBAR */
+    .fnaf1-nav {
+        top: 10px;
+        width: 92%;
+        padding: 9px 14px;
+        border-radius: 12px;
+    }
+
+    .fnaf1-hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background: rgba(74,134,255,0.1);
+        border: 1px solid rgba(74,134,255,0.45);
+        border-radius: 8px;
+        cursor: pointer;
+        padding: 7px 9px;
+        z-index: 10;
+        box-shadow: 0 0 10px rgba(74,134,255,0.2);
+    }
+
+    .fnaf1-hamburger span {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background: #C8D7F1;
+        border-radius: 2px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        box-shadow: 0 0 5px rgba(74,134,255,0.8);
+    }
+
+    .fnaf1-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .fnaf1-hamburger.open span:nth-child(2) { opacity: 0; }
+    .fnaf1-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .fnaf1-nav-right {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0; right: 0;
+        background: rgba(5,10,30,0.97);
+        border: 1px solid rgba(74,134,255,0.4);
+        border-radius: 12px;
+        padding: 14px 18px;
+        flex-direction: column;
+        gap: 4px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 8px 40px rgba(74,134,255,0.25);
+    }
+
+    .fnaf1-nav-right.open { display: flex; }
+
+    .fnaf1-nav-right > a,
+    .fnaf1-nav-right > div > a {
+        padding: 10px 4px;
+        font-size: 0.8rem;
+        border-bottom: 1px solid rgba(74,134,255,0.1);
+    }
+
+    .fnaf1-nav-right > a:last-child { border-bottom: none; }
+
+    .fnaf1-dropdown > a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 4px;
+        border-bottom: 1px solid rgba(74,134,255,0.1);
+    }
+
+    .fnaf1-dropdown > a::after {
+        content: "›";
+        font-size: 1.1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .fnaf1-dropdown.open > a::after { transform: rotate(90deg); }
+
+    .fnaf1-dropdown-menu {
+        position: static !important;
+        display: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-top: 1px solid rgba(74,134,255,0.12) !important;
+        background: transparent !important;
+        padding-top: 0 !important;
+        backdrop-filter: none !important;
+        border-radius: 0 !important;
+        min-width: unset !important;
+    }
+
+    .fnaf1-dropdown.open .fnaf1-dropdown-menu { display: block !important; }
+
+    /* HEADER */
+    .fnaf1-header {
+        height: auto;
+        min-height: 55vh;
+        padding: 100px 20px 50px;
+    }
+
+    .header-content h1 {
+        font-size: 1.9rem !important;
+        letter-spacing: 5px !important;
+    }
+
+    .subtitle {
+        font-size: 0.85rem !important;
+        letter-spacing: 5px !important;
+    }
+
+    /* CONTENT */
+    .fnaf1-content {
+        padding: 20px 5% 0;
+    }
+
+    .intro-box h2 {
+        font-size: 1.2rem !important;
+        letter-spacing: 4px !important;
+    }
+
+    .grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+        margin-top: 28px !important;
+        margin-bottom: 36px !important;
+    }
+
+    .description h3 {
+        font-size: 1.1rem !important;
+        letter-spacing: 4px !important;
+        padding-right: 0 !important;
+        margin-bottom: 14px !important;
+    }
+
+    .description p {
+        font-size: 0.88rem !important;
+        line-height: 1.8 !important;
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+        gap: 12px !important;
+    }
+
+    .section-title h2 {
+        font-size: 1.4rem !important;
+        letter-spacing: 6px !important;
+        white-space: nowrap;
+    }
+
+    .characters-title,
+    .roles-title {
+        font-size: 1.4rem !important;
+        letter-spacing: 6px !important;
+    }
+
+    /* CHARACTERS */
+    .characters-section {
+        padding: 0 4% 20px;
+    }
+
+    .character-carousel {
+        gap: 10px;
+    }
+
+    .character-card {
+        width: 100% !important;
+        max-width: 280px;
+    }
+
+    .character-card h3 {
+        font-size: 1.3rem !important;
+        letter-spacing: 5px !important;
+    }
+
+    .character-card img {
+        max-width: 220px !important;
+        height: 220px !important;
+    }
+
+    .character-info p {
+        font-size: 0.85rem !important;
+        line-height: 1.7 !important;
+    }
+
+    .arrow {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* ROLES */
+    .roles-section {
+        padding: 15px 5% 0;
+    }
+
+    .role-block {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+        margin-bottom: 30px !important;
+    }
+
+    .role-block.reverse {
+        direction: ltr !important;
+    }
+
+    .role-header {
+        gap: 14px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .role-header h3 {
+        font-size: 1.2rem !important;
+        letter-spacing: 5px !important;
+    }
+
+    .role-icon {
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    .role-desc {
+        padding: 18px !important;
+    }
+
+    .role-desc p {
+        font-size: 0.88rem !important;
+        line-height: 1.75 !important;
+    }
+
+    /* PLAY BUTTON */
+    .play-btn {
+        font-size: 1.3rem !important;
+        letter-spacing: 7px !important;
+        padding: 10px 28px !important;
+    }
 }
