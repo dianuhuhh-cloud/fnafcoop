@@ -27,6 +27,10 @@
 }
 .fnaf1-nav-left { display: flex; align-items: center; gap: 20px; }
 .fnaf1-nav-right { display: flex; align-items: center; gap: 28px; }
+@media (max-width: 768px) {
+    .fnaf1-nav-right { display: none !important; }
+    .fnaf1-nav-right.open { display: flex !important; }
+}
 .fnaf1-nav a, .fnaf1-nav span {
     font-family: 'Consolas', monospace;
     text-decoration: none;
@@ -315,34 +319,54 @@ const characters = [
     document.addEventListener('dblclick', skipIntro);
     document.addEventListener('touchend', handleTap);
 
-// MOBILE NAV
-const fnafHamburger = document.getElementById("fnaf1-hamburger");
-const fnafNavRight = document.getElementById("fnaf1-nav-right");
-const fnafDropdown = document.querySelector(".fnaf1-dropdown");
+// MOBILE NAV — rebuilt clean
+(function() {
+    const hamburger = document.getElementById("fnaf1-hamburger");
+    const navRight  = document.getElementById("fnaf1-nav-right");
+    const dropdown  = document.querySelector(".fnaf1-dropdown");
 
-if (fnafHamburger && fnafNavRight) {
-    fnafHamburger.addEventListener("click", e => {
+    if (!hamburger || !navRight) return;
+
+    // toggle main menu
+    hamburger.addEventListener("click", function(e) {
         e.stopPropagation();
-        fnafHamburger.classList.toggle("open");
-        fnafNavRight.classList.toggle("open");
+        const isOpen = navRight.classList.toggle("open");
+        hamburger.classList.toggle("open", isOpen);
+        // close sub-dropdown when main menu closes
+        if (!isOpen && dropdown) dropdown.classList.remove("open");
     });
-    document.addEventListener("click", e => {
-        if (!fnafHamburger.contains(e.target) && !fnafNavRight.contains(e.target)) {
-            fnafHamburger.classList.remove("open");
-            fnafNavRight.classList.remove("open");
-            if (fnafDropdown) fnafDropdown.classList.remove("open");
+
+    // toggle gamemodes sub-dropdown (mobile only)
+    if (dropdown) {
+        const dropToggle = dropdown.querySelector(":scope > a");
+        if (dropToggle) {
+            dropToggle.addEventListener("click", function(e) {
+                if (window.innerWidth > 768) return;
+                e.preventDefault();
+                e.stopPropagation();
+                dropdown.classList.toggle("open");
+            });
+        }
+    }
+
+    // close everything on outside click / tap
+    document.addEventListener("click", function(e) {
+        if (!hamburger.contains(e.target) && !navRight.contains(e.target)) {
+            hamburger.classList.remove("open");
+            navRight.classList.remove("open");
+            if (dropdown) dropdown.classList.remove("open");
         }
     });
-}
-if (fnafDropdown) {
-    fnafDropdown.querySelector(":scope > a").addEventListener("click", e => {
-        if (window.innerWidth <= 768) {
-            e.preventDefault();
-            e.stopPropagation();
-            fnafDropdown.classList.toggle("open");
-        }
+
+    // close menu when a leaf link (not the dropdown toggle) is tapped
+    navRight.querySelectorAll("a:not(.fnaf1-dropdown > a)").forEach(function(link) {
+        link.addEventListener("click", function() {
+            hamburger.classList.remove("open");
+            navRight.classList.remove("open");
+            if (dropdown) dropdown.classList.remove("open");
+        });
     });
-}
+})();
 
 // GOLDEN FREDDY EASTER -
 let keyBuffer = "";
