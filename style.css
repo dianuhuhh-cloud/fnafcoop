@@ -498,7 +498,7 @@ box-shadow:
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
-    padding: 18px 25px;
+    padding: 12px 25px;
     border-radius: 18px;
 
     display: flex;
@@ -570,7 +570,7 @@ box-shadow:
 
 .hero {
     position: relative;
-    height: 100vh;
+    height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
