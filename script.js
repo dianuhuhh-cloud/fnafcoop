@@ -140,7 +140,7 @@ if (window.innerWidth <= 768) {
             
             if (Math.abs(deltaX) > 5) dragged = true;
 
-            let newTime = trackAnim.currentTime - (deltaX * 6);
+            let newTime = trackAnim.currentTime - (deltaX * 12);
             
             if (newTime < 0) newTime += animDuration;
             if (newTime > animDuration) newTime -= animDuration;
