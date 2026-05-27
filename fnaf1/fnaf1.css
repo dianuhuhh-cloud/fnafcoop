@@ -430,6 +430,29 @@ body::before {
 .fnaf1-hamburger { display: none; }
 
 /* =============================================
+   NARROW DESKTOP — 769px to 1100px
+   Tightens navbar spacing to prevent crowding.
+   Zero mobile rules touched.
+   ============================================= */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .fnaf1-nav {
+        padding: 10px 18px;
+    }
+    .fnaf1-nav-left { gap: 12px; }
+    .fnaf1-nav-right { gap: 14px; }
+    .fnaf1-nav a,
+    .fnaf1-nav span {
+        font-size: 0.74rem;
+        letter-spacing: 1.5px;
+    }
+    .fnaf1-nav-home { letter-spacing: 2px; }
+    .fnaf1-nav-play {
+        padding: 6px 12px;
+        letter-spacing: 2px;
+    }
+}
+
+/* =============================================
    MOBILE — rebuilt from scratch
    Only touches screens ≤ 768px.
    Zero desktop rules were changed.
