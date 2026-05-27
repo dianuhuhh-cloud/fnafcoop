@@ -111,3 +111,63 @@ if (navDropdownLink) {
         }
     });
 }
+
+
+if (window.innerWidth <= 768) {
+    const track = document.querySelector('.modes-track');
+    const wrapper = document.querySelector('.modes-wrapper');
+    
+    if (track && wrapper) {
+
+        track.style.animation = 'none';
+        track.style.transform = 'translateX(0px)';
+        
+        let isDragging = false;
+        let startX = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let dragged = false;
+
+        wrapper.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            dragged = false;
+            startX = e.touches[0].clientX;
+
+            const style = window.getComputedStyle(track);
+            const matrix = new WebKitCSSMatrix(style.transform);
+            prevTranslate = matrix.m41; 
+        }, { passive: true });
+
+        wrapper.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            
+            const currentX = e.touches[0].clientX;
+            const deltaX = currentX - startX;
+
+            if (Math.abs(deltaX) > 10) {
+                dragged = true;
+            }
+            
+            currentTranslate = prevTranslate + deltaX;
+            
+            // Bound controls: Don't let user slide past the first or last card
+            const maxScroll = -(track.offsetWidth - wrapper.offsetWidth);
+            if (currentTranslate > 0) currentTranslate = 0;
+            if (currentTranslate < maxScroll) currentTranslate = maxScroll;
+            
+            track.style.transform = `translateX(${currentTranslate}px)`;
+        }, { passive: true });
+
+        wrapper.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        track.addEventListener('click', (e) => {
+            if (dragged) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+            }
+        }, true); 
+    }
+}
