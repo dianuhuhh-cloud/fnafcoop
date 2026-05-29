@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Five Nights at Freddy's 2</title>
+<title>Five Nights at Freddy's 1</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="fnaf2.css">
+<link rel="stylesheet" href="fnaf1.css">
 <style>
-.fnaf2-nav {
+.fnaf1-nav {
     position: fixed;
     top: 20px;
     left: 50%;
@@ -18,226 +18,86 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(30, 5, 5, 0.72);
-    border: 1px solid rgba(255,17,0,0.5);
+    background: rgba(5, 10, 30, 0.72);
+    border: 1px solid rgba(74,134,255,0.5);
     backdrop-filter: blur(16px);
     box-shadow:
-        0 0 28px rgba(255,17,0,0.3),
-        inset 0 0 20px rgba(255,17,0,0.06);
+        0 0 28px rgba(74,134,255,0.3),
+        inset 0 0 20px rgba(74,134,255,0.06);
 }
-.fnaf2-nav-left { display: flex; align-items: center; gap: 20px; }
-.fnaf2-nav-right { display: flex; align-items: center; gap: 28px; }
-.fnaf2-nav a, .fnaf2-nav span {
-    font-family: 'Impact', 'Arial Black', sans-serif;
+.fnaf1-nav-left { display: flex; align-items: center; gap: 20px; }
+.fnaf1-nav-right { display: flex; align-items: center; gap: 28px; }
+.fnaf1-hamburger { display: none; }
+.fnaf1-nav a, .fnaf1-nav span {
+    font-family: 'Consolas', monospace;
     text-decoration: none;
-    color: #FF8A65;
+    color: #C8D7F1;
     letter-spacing: 2px;
     font-size: 0.82rem;
     text-transform: uppercase;
     transition: 0.3s ease;
     cursor: pointer;
 }
-.fnaf2-nav a:hover {
+.fnaf1-nav a:hover {
     color: #fff;
-    text-shadow: 0 0 6px #FF1100, 0 0 16px #FF1100;
+    text-shadow: 0 0 6px #4A86FF, 0 0 16px #4A86FF;
 }
-.fnaf2-nav-home { font-size: 0.82rem; letter-spacing: 3px; }
-.fnaf2-nav-play {
+.fnaf1-nav-home { font-size: 0.82rem; letter-spacing: 3px; }
+.fnaf1-nav-play {
     padding: 7px 18px;
-    border: 1px solid rgba(255,17,0,0.6);
-    background: rgba(255,17,0,0.08);
+    border: 1px solid rgba(74,134,255,0.6);
+    background: rgba(74,134,255,0.08);
     letter-spacing: 3px;
     transition: 0.3s ease;
 }
-.fnaf2-nav-play:hover {
-    background: rgba(255,17,0,0.18) !important;
-    box-shadow: 0 0 14px rgba(255,17,0,0.4);
+.fnaf1-nav-play:hover {
+    background: rgba(74,134,255,0.18) !important;
+    box-shadow: 0 0 14px rgba(74,134,255,0.4);
 }
-.fnaf2-dropdown { position: relative; }
-.fnaf2-dropdown-menu {
+.fnaf1-dropdown { position: relative; }
+.fnaf1-dropdown-menu {
     display: none;
     position: absolute;
     top: 100%;
     padding-top: 14px;
     right: 0;
     min-width: 210px;
-    background: rgba(30, 5, 5, 0.97);
-    border: 1px solid rgba(255,17,0,0.45);
+    background: rgba(5, 10, 30, 0.97);
+    border: 1px solid rgba(74,134,255,0.45);
     border-radius: 10px;
     backdrop-filter: blur(18px);
-    box-shadow: 0 0 28px rgba(255,17,0,0.35);
+    box-shadow: 0 0 28px rgba(74,134,255,0.35);
     overflow: hidden;
     z-index: 500;
 }
-.fnaf2-dropdown:hover .fnaf2-dropdown-menu { display: block; }
-.fnaf2-dropdown-menu a {
+.fnaf1-dropdown:hover .fnaf1-dropdown-menu { display: block; }
+.fnaf1-dropdown-menu a {
     display: block;
     padding: 11px 20px;
     font-size: 0.78rem;
     letter-spacing: 2px;
-    color: #FF8A65 !important;
+    color: #C8D7F1 !important;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255,17,0,0.12);
+    border-bottom: 1px solid rgba(74,134,255,0.12);
     transition: background 0.2s ease, padding-left 0.2s ease;
     text-transform: uppercase;
 }
-.fnaf2-dropdown-menu a:last-child { border-bottom: none; }
-.fnaf2-dropdown-menu a:hover {
-    background: rgba(255,17,0,0.12);
+.fnaf1-dropdown-menu a:last-child { border-bottom: none; }
+.fnaf1-dropdown-menu a:hover {
+    background: rgba(74,134,255,0.12);
     color: #fff !important;
-    text-shadow: 0 0 8px #FF1100;
+    text-shadow: 0 0 8px #4A86FF;
     padding-left: 26px;
 }
-.fnaf2-hamburger { display: none; }
-.fnaf2-discord {
-    color: #ff7a55;
+.fnaf1-discord {
+    color: #7aaeff;
     display: flex;
     align-items: center;
     transition: 0.3s ease;
 }
-.fnaf2-discord:hover {
+.fnaf1-discord:hover {
     color: #fff;
-    text-shadow: 0 0 14px #FF1100 !important;
-}
-
-@media (max-width: 768px) {
-    .fnaf2-nav {
-        top: 3px;
-        width: 92%;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 9px 14px;
-        border-radius: 14px;
-        box-sizing: border-box;
-        overflow: visible;
-    }
-
-    .fnaf2-nav-right {
-        display: none !important;
-        position: absolute;
-        top: calc(100% + 10px);
-        left: 0;
-        right: 0;
-        background: rgba(30, 5, 5, 0.97);
-        border: 1px solid rgba(255,17,0,0.4);
-        border-radius: 14px;
-        padding: 16px 20px;
-        flex-direction: column;
-        gap: 4px;
-        backdrop-filter: blur(20px);
-        box-shadow: 0 8px 40px rgba(255,17,0,0.3);
-        z-index: 200;
-        align-items: stretch;
-    }
-
-    .fnaf2-nav-right.open { display: flex !important; }
-
-    .fnaf2-hamburger {
-        display: flex !important;
-        flex-direction: column;
-        justify-content: center;
-        gap: 5px;
-        background: rgba(255,17,0,0.12);
-        border: 1px solid rgba(255,17,0,0.45);
-        border-radius: 8px;
-        cursor: pointer;
-        padding: 7px 9px;
-        z-index: 10;
-        flex-shrink: 0;
-        box-shadow: 0 0 10px rgba(255,17,0,0.2);
-        margin-right: -10px;
-    }
-
-    .fnaf2-hamburger span {
-        display: block;
-        width: 18px;
-        height: 2px;
-        background: #FF8A65;
-        border-radius: 2px;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        box-shadow: 0 0 5px rgba(255,17,0,0.8);
-    }
-
-    .fnaf2-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .fnaf2-hamburger.open span:nth-child(2) { opacity: 0; }
-    .fnaf2-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    .fnaf2-nav-right > a {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 4px;
-        font-size: 0.85rem;
-        letter-spacing: 2px;
-        border-bottom: 1px solid rgba(255,17,0,0.1);
-        transition: background 0.2s;
-    }
-
-    .fnaf2-nav-right > .fnaf2-dropdown > a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 10px 4px;
-        font-size: 0.85rem;
-        letter-spacing: 2px;
-        border-bottom: 1px solid rgba(255,17,0,0.1);
-        transition: background 0.2s;
-    }
-
-    .fnaf2-nav-right > a:last-child,
-    .fnaf2-nav-right > .fnaf2-dropdown:last-child > a { border-bottom: none; }
-
-    .fnaf2-nav-right > a.fnaf2-nav-play {
-        justify-content: center;
-        border: 1px solid rgba(255,17,0,0.6) !important;
-        background: rgba(255,17,0,0.08) !important;
-        border-radius: 0;
-        margin-top: 6px;
-        padding: 9px 18px !important;
-        letter-spacing: 3px !important;
-        text-align: center;
-        font-size: 0.82rem !important;
-    }
-
-    .fnaf2-discord {
-        padding: 8px 4px !important;
-        border-bottom: none !important;
-        justify-content: center !important;
-        gap: 0;
-    }
-
-    .fnaf2-dropdown > a::after {
-        content: "›";
-        font-size: 1.1rem;
-        line-height: 1;
-        transition: transform 0.3s ease;
-        color: rgba(255,138,101,0.7);
-    }
-
-    .fnaf2-dropdown.open > a::after { transform: rotate(90deg); }
-
-    .fnaf2-dropdown-menu {
-        position: static !important;
-        display: none !important;
-        padding-top: 0 !important;
-        background: transparent !important;
-        border: none !important;
-        border-top: 1px solid rgba(255,17,0,0.15) !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        backdrop-filter: none !important;
-        min-width: unset !important;
-        overflow: visible !important;
-    }
-
-    .fnaf2-dropdown.open .fnaf2-dropdown-menu { display: block !important; }
-
-    .fnaf2-dropdown-menu a {
-        font-size: 0.75rem !important;
-        padding: 9px 10px !important;
-        letter-spacing: 1.5px !important;
-    }
+    text-shadow: 0 0 14px #4A86FF !important;
 }
 
 #fnaf-overlay {
@@ -272,37 +132,31 @@
 }
 
 @media (max-width: 768px) {
-    .fnaf2-nav {
+    .fnaf1-nav {
         top: 10px;
         width: 96%;
         padding: 7px 28px;
     }
-    .fnaf2-hamburger {
-        margin-right: -14px;
+    .fnaf1-hamburger {
+        margin-right: -15px;
     }
 }
 </style>
 </head>
-
-<div id="jj-egg" style="display: none; position: fixed; bottom: -50%; left: 5%; z-index: 9998;">
-    <img src="../characters/JJ.webp" style="width: 250px; filter: drop-shadow(0 0 20px rgba(0,0,0,0.8));">
-</div>
-
 <body>
     <div id="fnaf-overlay"></div>
     <div class="tv-noise" style="z-index:9001;"></div>
-    <header class="fnaf2-header">
-        <nav class="fnaf2-nav" id="fnaf2-nav" style="opacity:0; z-index:9003;">
-            <div class="fnaf2-nav-left">
-                <a href="../index.html" class="fnaf2-nav-home">&#8592; Home</a>
+    <header class="fnaf1-header">
+        <nav class="fnaf1-nav" id="fnaf1-nav" style="opacity:0; z-index:9003;">            <div class="fnaf1-nav-left">
+                <a href="../index.html" class="fnaf1-nav-home">&#8592; Home</a>
             </div>
-            <button class="fnaf2-hamburger" id="fnaf2-hamburger" aria-label="Toggle menu">
+            <button class="fnaf1-hamburger" id="fnaf1-hamburger" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
-            <div class="fnaf2-nav-right" id="fnaf2-nav-right">
-                <div class="fnaf2-dropdown">
+            <div class="fnaf1-nav-right" id="fnaf1-nav-right">
+                <div class="fnaf1-dropdown">
                     <a>Gamemodes</a>
-                    <div class="fnaf2-dropdown-menu">
+                    <div class="fnaf1-dropdown-menu">
                         <a href="../fnaf1/fnaf1.html">FNAF 1</a>
                         <a href="../fnaf2/fnaf2.html">FNAF 2</a>
                         <a href="../fnaf3/fnaf3.html">FNAF 3</a>
@@ -313,8 +167,8 @@
                         <a href="../basementhunt/basementhunt.html">Basement Hunt</a>
                     </div>
                 </div>
-                <a href="https://www.roblox.com/games/12495498157/FNAF-Co-op" target="_blank" class="fnaf2-nav-play">Play</a>
-                <a href="https://discord.com/invite/fnafroblox" target="_blank" class="fnaf2-discord">
+                <a href="https://www.roblox.com/games/12495498157/FNAF-Co-op" target="_blank" class="fnaf1-nav-play">Play</a>
+                <a href="https://discord.com/invite/fnafroblox" target="_blank" class="fnaf1-discord">
                     <svg width="22" height="22" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
                         <path fill="currentColor" d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.8 97.68 97.68 0 0 0-29.1 0A72.37 72.37 0 0 0 45.65 0 105.89 105.89 0 0 0 19.42 8.08C2.7 33.24-1.69 57.79.53 82a105.73 105.73 0 0 0 32.17 16.3 77.7 77.7 0 0 0 6.94-11.3 68.42 68.42 0 0 1-10.92-5.18c.92-.67 1.82-1.37 2.69-2.1 20.92 9.53 43.66 9.53 64.37 0 .88.73 1.78 1.43 2.7 2.1a68.68 68.68 0 0 1-10.92 5.18 77.73 77.73 0 0 0 6.94 11.3A105.25 105.25 0 0 0 126.6 82c2.6-28.75-4.42-53.07-18.9-73.93zM42.45 65.69c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8zm42.24 0c-6.27 0-11.4-5.73-11.4-12.8s5.06-12.8 11.4-12.8 11.47 5.73 11.4 12.8c0 7.08-5.06 12.8-11.4 12.8z"/>
                     </svg>
@@ -322,28 +176,26 @@
             </div>
         </nav>
         <div class="header-content" style="position:relative; z-index:9002;">
-            <div id="h1-wrap"><h1>Five Nights at Freddy's 2</h1></div>
-            <div id="sub-wrap"><p class="subtitle">FREDDY FAZBEAR'S PIZZA GRAND REOPENING</p></div>
+            <div id="h1-wrap"><h1>Five Nights at Freddy's</h1></div>
+            <div id="sub-wrap"><p class="subtitle">FREDDY FAZBEAR'S PIZZA</p></div>
         </div>
     </header>
-
-    <section class="fnaf2-content">
+    <section class="fnaf1-content">
         <div class="intro-box">
-            <h2>WELCOME TO THE NEW AND IMPROVED FREDDY FAZBEAR'S PIZZA</h2>
+            <h2>WELCOME TO FREDDY FAZBEAR'S PIZZERIA</h2>
         </div>
         <div class="grid">
             <div class="description">
                 <h3>ABOUT THE GAME</h3>
-                <p>Welcome to the new and improved Freddy Fazbear's Pizza! You're the new security guard working the night shift. There are no doors this time to protect you... just an empty Freddy Fazbear head to fool the animatronics, and a Music Box you must keep wound up. Survive five nights as the new cast joins the old, withered ones.</p>
+                <p>You're an employee at the newly established Freddy Fazbear's Pizzeria. The animatronics move dangerously at night. Use cameras, doors, and lights with limited power to survive five nights. Each night gets harder. They don't like being watched, stay alert and plan carefully.</p>
             </div>
             <div class="video-preview">
                 <video autoplay muted loop playsinline>
-                    <source src="../videos/fnaf2footage.mp4" type="video/mp4">
+                    <source src="../videos/fnaf1footage.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
     </section>
-
     <section class="characters-section">
         <div class="section-title">
             <span class="line"></span>
@@ -357,11 +209,11 @@
                 </svg>
             </button>
             <div class="character-card">
-                <h3 id="char-name">TOY FREDDY</h3>
-                <img id="char-image" src="../characters/toyfreddy.webp" alt="Toy Freddy">
+                <h3 id="char-name">FREDDY</h3>
+                <img id="char-image" src="../characters/freddyfazbear.webp" alt="Freddy">
                 <div class="character-info">
-                    <p id="char-desc">The new and improved face of Freddy Fazbear's Pizza. Approaches through the main hallway. Put on the Freddy mask when he enters the office.</p>
-                    <a id="char-link" href="https://fnaf-coop.fandom.com/wiki/Toy_Freddy" target="_blank" class="discover-btn">DISCOVER</a>
+                    <p id="char-desc">Only moves when not being stared at in the monitor. Attacks from the right door and when the power runs out to 0%.</p>
+                    <a id="char-link" href="https://fnaf-coop.fandom.com/wiki/Freddy_Fazbear" target="_blank" class="discover-btn">DISCOVER</a>
                 </div>
             </div>
             <button class="arrow right">
@@ -371,41 +223,67 @@
             </button>
         </div>
     </section>
-
     <script>
-    const characters = [
-        { name: "TOY FREDDY", image: "../characters/toyfreddy.webp", desc: "The new and improved face of Freddy Fazbear's Pizza. Approaches through the main hallway. Put on the Freddy mask when he enters the office.", link: "https://fnaf-coop.fandom.com/wiki/Toy_Freddy" },
-        { name: "TOY BONNIE", image: "../characters/toybonnie.webp", desc: "Crawls into the right air vent. Put the mask on when he is in the blind spot and wait for him to slide across your screen.", link: "https://fnaf-coop.fandom.com/wiki/Toy_Bonnie" },
-        { name: "TOY CHICA", image: "../characters/toychica.webp", desc: "Removes her beak when hunting. Approaches through the main hall and the left air vent. Use the Freddy mask to ward her off.", link: "https://fnaf-coop.fandom.com/wiki/Toy_Chica" },
-        { name: "MANGLE", image: "../characters/mangle.webp", desc: "Enters through the right vent, emitting radio static. Put the mask on immediately when you see him, or she will trap herself inside your office.", link: "https://fnaf-coop.fandom.com/wiki/Mangle" },
-        { name: "BALLOON BOY", image: "../characters/balloonboy.webp", desc: "Enters through the left air vent. He won't attack directly, but if he gets in, he will disable your flashlight. Put on the mask when he's in the vent.", link: "https://fnaf-coop.fandom.com/wiki/Balloon_Boy" },
-        { name: "THE MARIONETTE", image: "../characters/marionette.webp", desc: "Requires the Music Box in the Prize Corner to be constantly wound up. If the music stops, it will attack, and nothing can stop it.", link: "https://fnaf-coop.fandom.com/wiki/The_Puppet" },
-        { name: "WITHERED FREDDY", image: "../characters/witheredfreddy.webp", desc: "The original mascot, now broken down. Approaches through the main hall. Quickly equip the empty Freddy head as soon as he enters the office.", link: "https://fnaf-coop.fandom.com/wiki/Withered_Freddy" },
-        { name: "WITHERED BONNIE", image: "../characters/witheredbonnie.webp", desc: "Crawls through the left air vent and appears directly in front of your desk. Put the mask on within a split second to survive.", link: "https://fnaf-coop.fandom.com/wiki/Withered_Bonnie" },
-        { name: "WITHERED CHICA", image: "../characters/witheredchica.webp", desc: "Crawls through the right vent and forcefully stands inside your office. Quickly flip the mask on within a split second to survive.", link: "https://fnaf-coop.fandom.com/wiki/Withered_Chica" },
-        { name: "WITHERED FOXY", image: "../characters/witheredfoxy.webp", desc: "Immune to the Freddy mask. Stands at the end of the main hallway. Flash your light repeatedly at him to reset his system.", link: "https://fnaf-coop.fandom.com/wiki/Withered_Foxy" },
-        { name: "GOLDEN FREDDY", image: "../characters/goldenfreddy.webp", desc: "An empty golden apparition of the original bear. Appears randomly in the office or hallway. Put on the Freddy mask immediately.", link: "https://fnaf-coop.fandom.com/wiki/Golden_Freddy" }
+const characters = [
+        { 
+            name: "FREDDY", 
+            image: "../characters/freddyfazbear.webp", 
+            desc: "Only moves when not being stared at in the monitor. Attacks from the right door and when the power runs out to 0%.", 
+            link: "https://fnaf-coop.fandom.com/wiki/Freddy_Fazbear",
+            shadow: "rgba(180, 110, 50, 0.8)" 
+        },
+        { 
+            name: "BONNIE", 
+            image: "../characters/bonnie.webp", 
+            desc: "The most active animatronic. Attacks from the left door and can teleport to any room on the left side of the building.", 
+            link: "https://fnaf-coop.fandom.com/wiki/Bonnie",
+            shadow: "rgba(140, 60, 255, 0.8)" 
+        },
+        { 
+            name: "CHICA", 
+            image: "../characters/chica.webp", 
+            desc: "Moves in a set loop on the right side. Spends time in the kitchen (audio-only). Attacks from the right door.", 
+            link: "https://fnaf-coop.fandom.com/wiki/Chica",
+            shadow: "rgba(175, 140, 20, 0.85)" 
+        },
+        { 
+            name: "FOXY", 
+            image: "../characters/foxy.webp", 
+            desc: "Aggression builds based on how often he's monitored. Runs down the West Hall and drains your power if he hits the left door.", 
+            link: "https://fnaf-coop.fandom.com/wiki/Foxy",
+            shadow: "rgba(255, 50, 50, 0.8)" 
+        }
     ];
+
     let current = 0;
     const nameEl = document.getElementById("char-name");
     const imgEl = document.getElementById("char-image");
     const descEl = document.getElementById("char-desc");
     const linkEl = document.getElementById("char-link");
+
+    imgEl.style.filter = `drop-shadow(0 0 18px ${characters[current].shadow})`;
+
     document.querySelector(".arrow.right").addEventListener("click", () => {
         current = (current + 1) % characters.length;
         updateCharacter();
     });
+
     document.querySelector(".arrow.left").addEventListener("click", () => {
         current = (current - 1 + characters.length) % characters.length;
         updateCharacter();
     });
+
     function updateCharacter() {
         imgEl.style.opacity = "0";
+        
         setTimeout(() => {
             nameEl.textContent = characters[current].name;
             imgEl.src = characters[current].image;
             descEl.textContent = characters[current].desc;
             linkEl.href = characters[current].link;
+            
+            imgEl.style.filter = `drop-shadow(0 0 18px ${characters[current].shadow})`;
+            
             imgEl.style.opacity = "1";
         }, 150);
     }
@@ -418,7 +296,7 @@
     const t2 = setTimeout(() => { subwrap.classList.add('go'); }, 1800);
     const t3 = setTimeout(() => {
         overlay.style.opacity = '0';
-        const nav = document.getElementById('fnaf2-nav');
+        const nav = document.getElementById('fnaf1-nav');
         nav.style.transition = 'opacity 0.8s ease';
         nav.style.opacity = '1';
         setTimeout(() => overlay.remove(), 1400);
@@ -431,7 +309,7 @@
         subwrap.classList.add('go');
         overlay.style.transition = 'opacity 0.4s ease';
         overlay.style.opacity = '0';
-        const nav = document.getElementById('fnaf2-nav');
+        const nav = document.getElementById('fnaf1-nav');
         nav.style.transition = 'opacity 0.4s ease';
         nav.style.opacity = '1';
         setTimeout(() => { if (overlay.parentNode) overlay.remove(); }, 500);
@@ -449,60 +327,24 @@
     document.addEventListener('dblclick', skipIntro);
     document.addEventListener('touchend', handleTap);
 
-// --- JJ EASTER EGG ONLY ---
-let jjBuffer = "";
-let jjActive = false;
-
-document.addEventListener("keydown", (e) => {
-    // If JJ is already on screen, don't trigger again
-    if (jjActive) return;
-
-    if (e.key.length === 1) {
-        jjBuffer += e.key.toLowerCase();
-        if (jjBuffer.length > 2) jjBuffer = jjBuffer.slice(-2);
-
-        if (jjBuffer === "jj" || jjBuffer === "gg") {
-            triggerJJ();
-            jjBuffer = "";
-        }
-    }
-});
-
-function triggerJJ() {
-    jjActive = true;
-    const jj = document.getElementById("jj-egg");
-    
-    jj.style.display = "block";
-    jj.style.transition = "bottom 0.5s ease-out";
-    
-    // Slide up
-    setTimeout(() => { jj.style.bottom = "0%"; }, 50);
-    
-    // Slide back down after 3 seconds
-    setTimeout(() => { 
-        jj.style.bottom = "-50%"; 
-        setTimeout(() => { 
-            jj.style.display = "none"; 
-            jjActive = false;
-        }, 500);
-    }, 3000);
-}
-
-// MOBILE NAV
+// MOBILE NAV — rebuilt clean
 (function() {
-    const hamburger = document.getElementById("fnaf2-hamburger");
-    const navRight  = document.getElementById("fnaf2-nav-right");
-    const dropdown  = document.querySelector(".fnaf2-dropdown");
+    const hamburger = document.getElementById("fnaf1-hamburger");
+    const navRight  = document.getElementById("fnaf1-nav-right");
+    const dropdown  = document.querySelector(".fnaf1-dropdown");
 
     if (!hamburger || !navRight) return;
 
+    // toggle main menu
     hamburger.addEventListener("click", function(e) {
         e.stopPropagation();
         const isOpen = navRight.classList.toggle("open");
         hamburger.classList.toggle("open", isOpen);
+        // close sub-dropdown when main menu closes
         if (!isOpen && dropdown) dropdown.classList.remove("open");
     });
 
+    // toggle gamemodes sub-dropdown (mobile only)
     if (dropdown) {
         const dropToggle = dropdown.querySelector(":scope > a");
         if (dropToggle) {
@@ -515,6 +357,7 @@ function triggerJJ() {
         }
     }
 
+    // close everything on outside click / tap
     document.addEventListener("click", function(e) {
         if (!hamburger.contains(e.target) && !navRight.contains(e.target)) {
             hamburger.classList.remove("open");
@@ -523,7 +366,8 @@ function triggerJJ() {
         }
     });
 
-    navRight.querySelectorAll("a:not(.fnaf2-dropdown > a)").forEach(function(link) {
+    // close menu when a leaf link (not the dropdown toggle) is tapped
+    navRight.querySelectorAll("a:not(.fnaf1-dropdown > a)").forEach(function(link) {
         link.addEventListener("click", function() {
             hamburger.classList.remove("open");
             navRight.classList.remove("open");
@@ -532,8 +376,47 @@ function triggerJJ() {
     });
 })();
 
-    </script>
+// GOLDEN FREDDY EASTER -
+let keyBuffer = "";
+const trigger1 = "goldenfreddy";
+const trigger2 = "1987";
+const maxBufferLength = Math.max(trigger1.length, trigger2.length);
 
+let jumpscareTriggered = false; 
+
+document.addEventListener("keydown", (e) => {
+    if (jumpscareTriggered) return;
+
+    if (e.key.length === 1) {
+        keyBuffer += e.key.toLowerCase(); 
+       
+        if (keyBuffer.length > maxBufferLength) {
+            keyBuffer = keyBuffer.slice(-maxBufferLength);
+        }
+
+        if (keyBuffer.endsWith(trigger1) || keyBuffer.endsWith(trigger2)) {
+            triggerGoldenFreddy();
+            keyBuffer = ""; 
+        }
+    }
+});
+
+function triggerGoldenFreddy() {
+    jumpscareTriggered = true; 
+
+    const jumpscareScreen = document.getElementById("gf-jumpscare");
+    const jumpscareSound = document.getElementById("gf-sound");
+  
+    jumpscareScreen.style.display = "flex";
+    
+    jumpscareSound.currentTime = 0.5; 
+    jumpscareSound.play().catch(err => console.log("Audio blocked by browser:", err));
+
+    document.body.style.pointerEvents = "none";
+    document.body.style.overflow = "hidden";
+}
+    
+    </script>
     <section class="roles-section">
         <div class="section-title">
             <span class="line"></span>
@@ -547,12 +430,12 @@ function triggerJJ() {
                     <h3>NIGHTGUARD</h3>
                 </div>
                 <div class="role-desc">
-                    <p>Watch the cameras, keep the music box wound, use your flashlight, and put on the Freddy head when they get too close. No doors this time. Just you and the dark until 6 AM.</p>
+                    <p>Monitor security cameras, manage limited power usage, and strategically defend your office while surviving until 6 AM as the animatronics roam the halls.</p>
                 </div>
             </div>
             <div class="role-video">
                 <video autoplay muted loop playsinline>
-                    <source src="../videos/fnaf2Nightguard.mp4" type="video/mp4">
+                    <source src="../videos/fnaf1Nightguard.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -563,12 +446,12 @@ function triggerJJ() {
                     <h3>JANITOR</h3>
                 </div>
                 <div class="role-desc">
-                    <p>Clean up the party rooms after the crowds go home. The kids leave a mess, the building makes noise, and something in Parts & Service doesn't sound right tonight.</p>
+                    <p>The janitor maintains the hallways of the pizzeria by cleaning up the messes that the kids left behind while strange sounds echo through the building.</p>
                 </div>
             </div>
             <div class="role-video">
                 <video autoplay muted loop playsinline>
-                    <source src="../videos/fnaf2Janitor.mp4" type="video/mp4">
+                    <source src="../videos/fnaf1Janitor.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -579,12 +462,12 @@ function triggerJJ() {
                     <h3>ENGINEER</h3>
                 </div>
                 <div class="role-desc">
-                    <p>Keep the new facial recognition systems from going offline and fix what breaks before it becomes a problem. Stay sharp. The Mangle has a habit of showing up where it shouldn't.</p>
+                    <p>Restore failing systems and respond to unexpected technical malfunctions to keep the pizzeria operational throughout the night, all while staying alert to the subtle signs of trouble lurking.</p>
                 </div>
             </div>
             <div class="role-video">
                 <video autoplay muted loop playsinline>
-                    <source src="../videos/fnaf2Engineer.mp4" type="video/mp4">
+                    <source src="../videos/fnaf1Engineer.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -595,17 +478,16 @@ function triggerJJ() {
                     <h3>POLICEMAN</h3>
                 </div>
                 <div class="role-desc">
-                    <p>Brought in to look into the rumors surrounding the grand reopening. Help the night guard keep things under control while you figure out what's really going on inside these walls.</p>
+                    <p>The policeman is an externally hired entity by Freddy Fazbear's investigating the disappearances of the missing children that happened that one night while assisting the night guard during his duty.</p>
                 </div>
             </div>
             <div class="role-video">
                 <video autoplay muted loop playsinline>
-                    <source src="../videos/fnaf2Policeman.mp4" type="video/mp4">
+                    <source src="../videos/fnaf1Policeman.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
     </section>
-
     <section class="play-section">
         <div class="section-title play-title">
             <span class="line"></span>
@@ -613,5 +495,11 @@ function triggerJJ() {
             <span class="line"></span>
         </div>
     </section>
+
+<div id="gf-jumpscare" style="display: none; position: fixed; inset: 0; z-index: 9999; background: #000; justify-content: center; align-items: center;">
+    <img src="../images/goldenfreddy.webp" alt="IT'S ME" style="width: 100vw; height: 100vh; object-fit: fill; image-rendering: crisp-edges;">
+</div>
+<audio id="gf-sound" src="../images/goldenfreddy.mp3" preload="auto"></audio>
+
 </body>
 </html>
