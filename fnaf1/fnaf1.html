@@ -27,10 +27,7 @@
 }
 .fnaf1-nav-left { display: flex; align-items: center; gap: 20px; }
 .fnaf1-nav-right { display: flex; align-items: center; gap: 28px; }
-@media (max-width: 768px) {
-    .fnaf1-nav-right { display: none !important; }
-    .fnaf1-nav-right.open { display: flex !important; }
-}
+.fnaf1-hamburger { display: none; }
 .fnaf1-nav a, .fnaf1-nav span {
     font-family: 'Consolas', monospace;
     text-decoration: none;
@@ -133,6 +130,17 @@
     opacity: 1;
     animation: flickerFadeIn 0.9s linear, fnafFlicker 4s infinite 0.9s;
 }
+
+@media (max-width: 768px) {
+    .fnaf1-nav {
+        top: 10px;
+        width: 96%;
+        padding: 7px 28px;
+    }
+    .fnaf1-hamburger {
+        margin-right: -15px;
+    }
+}
 </style>
 </head>
 <body>
@@ -227,7 +235,7 @@ const characters = [
         { 
             name: "BONNIE", 
             image: "../characters/bonnie.webp", 
-            desc: "Most active animatronic. Attacks from the left door. Can move to any room on the left side instantly.", 
+            desc: "The most active animatronic. Attacks from the left door and can teleport to any room on the left side of the building.", 
             link: "https://fnaf-coop.fandom.com/wiki/Bonnie",
             shadow: "rgba(140, 60, 255, 0.8)" 
         },
@@ -454,7 +462,7 @@ function triggerGoldenFreddy() {
                     <h3>ENGINEER</h3>
                 </div>
                 <div class="role-desc">
-                    <p>Restore failing systems and respond to unexpected technical malfunctions to keep the pizzeria operational throughout the night, all while staying alert to the subtle signs of trouble lurking in the halls.</p>
+                    <p>Restore failing systems and respond to unexpected technical malfunctions to keep the pizzeria operational throughout the night, all while staying alert to the subtle signs of trouble lurking.</p>
                 </div>
             </div>
             <div class="role-video">
