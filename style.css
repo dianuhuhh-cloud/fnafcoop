@@ -3,6 +3,11 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Cinzel', serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+a, button {
+    outline: none;  
 }
 
 body {
@@ -139,7 +144,7 @@ body {
     box-shadow:
         0 0 35px rgba(190,130,255,0.9),
         0 0 80px rgba(120,60,220,0.6);
-    z-index: 10; 
+    z-index: 10; /* Raises the hovered card above neighboring cards */
 }
 
 .mode-card:hover img {
@@ -899,6 +904,7 @@ html {
     display: none;
 }
 
+
 @media (min-width: 769px) and (max-width: 1100px) {
     .navbar {
         padding: 10px 18px;
@@ -1057,7 +1063,7 @@ html {
     }
 
     
-    .hero {
+  .hero {
         min-height: unset;
         height: auto;
         padding: 100px 20px 20px;
@@ -1067,6 +1073,7 @@ html {
 
     .hero-center {
         padding: 0 8px;
+        transform: translateY(-20px); 
     }
 
     .hero-center h1,
@@ -1084,12 +1091,12 @@ html {
     }
 
     .hero-tags span {
-        font-size: 0.6rem !important;
+        font-size: 0.52rem !important; 
         letter-spacing: 2px !important;
     }
 
     .hero-desc {
-        font-size: 0.9rem !important;
+        font-size: 0.82rem !important; 
         line-height: 1.7 !important;
         margin-bottom: 24px !important;
     }
@@ -1126,7 +1133,7 @@ html {
     .section-title {
         gap: 14px !important;
         margin-bottom: 30px;
-        padding: 0 4%;
+        padding: 0 5% !important;
     }
 
     .section-title h2 {
@@ -1137,7 +1144,7 @@ html {
 
     
     .game-selection {
-        padding: 0 4% 50px 4%;
+        padding: 0 0 50px 0;
         margin-top: 20px;
     }
 
@@ -1149,7 +1156,7 @@ html {
     .game-entry {
         flex-direction: row !important;
         gap: 16px !important;
-        padding: 22px 0 !important;
+        padding: 22px 5% !important;
         align-items: flex-start;
     }
 
@@ -1191,12 +1198,13 @@ html {
     }
 
     .credits-section {
-        padding: 60px 6% 40px 6%;
+        padding: 60px 0 40px 0 !important; 
         margin-top: -40px !important;
     }
 
     .credits-grid {
         gap: 24px !important;
+        padding: 0 5%;
     }
 
     .credit-role {
