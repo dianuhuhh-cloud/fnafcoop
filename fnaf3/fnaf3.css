@@ -3,6 +3,11 @@
     src: url('../fonts/fnaf3.ttf') format('truetype');
 }
 
+* {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
 body {
     margin: 0;
     background: #000;
@@ -195,13 +200,13 @@ body::before {
 }
 
 .fnaf3-content {
-    padding: 70px 10%;
+    padding: 40px 10%;
 }
 
 .intro-box {
     text-align: center;
-    padding: 30px;
-    margin-bottom: 60px;
+    padding: 20px;
+    margin-bottom: 30px;
     background: rgba(10,10,5,0.95);
     border: 1px solid rgba(120,150,40,0.3);
     animation: boxFlicker 6s infinite;
@@ -225,7 +230,7 @@ body::before {
 .grid {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
-    gap: 50px;
+    gap: 35px;
 }
 
 .description {
@@ -284,7 +289,7 @@ body::before {
     gap: 30px;
     font-size: 2.3rem;
     letter-spacing: 6px;
-    margin-bottom: 70px;
+    margin-bottom: 40px;
     color: #9cc54b;
     text-shadow:
         0 0 8px rgba(140,255,60,0.4),
@@ -330,7 +335,7 @@ body::before {
     padding: 18px 24px;
     cursor: pointer;
     transition: 0.3s ease;
-    margin-top: 400px;
+    margin-top: 220px;
 }
 
 .arrow:hover {
@@ -396,14 +401,14 @@ body::before {
 }
 
 .roles-section {
-    padding: 70px 10%;
+    padding: 15px 10% 40px 10%;
 }
 
 .role-block {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr; 
-    gap: 50px;                           
-    margin-bottom: 100px;
+    gap: 35px;                           
+    margin-bottom: 55px;
 }
 
 .role-block.reverse {
@@ -486,7 +491,7 @@ body::before {
     gap: 30px;
     font-size: 2.3rem;
     letter-spacing: 6px;
-    margin: 20px 0 80px 0;
+    margin: 0px 0 45px 0;
     color: #9cc54b;
     text-shadow:
         0 0 8px rgba(140,255,60,0.4),
@@ -515,7 +520,7 @@ body::before {
     align-items: center;
     justify-content: center;
     gap: 30px;
-    margin: -100px 0 100px 0;
+    margin: -60px 0 60px 0;
 }
 
 .play-section::before,
@@ -571,4 +576,307 @@ body::before {
     0% { opacity: 0; }
     50% { opacity: 1; }
     100% { opacity: 0; }
+}
+/* ══════════════════════════════════════
+   TABLET
+══════════════════════════════════════ */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .fnaf3-nav { padding: 10px 18px; }
+    .fnaf3-nav-left { gap: 12px; }
+    .fnaf3-nav-right { gap: 14px; }
+    .fnaf3-nav a, .fnaf3-nav span { font-size: 0.74rem; letter-spacing: 1.5px; }
+    .fnaf3-nav-home { letter-spacing: 2px; }
+    .fnaf3-nav-play { padding: 6px 12px; letter-spacing: 2px; }
+}
+
+/* ══════════════════════════════════════
+   MOBILE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* ── HEADER ── */
+    .fnaf3-header {
+        height: 38vh;
+        min-height: unset;
+        padding: 0 18px 0 !important;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 0 !important;
+        background:
+            linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.82)),
+            url("../images/fnaf3header.webp") center/cover no-repeat !important;
+    }
+
+    .header-content {
+        padding-left: 0 !important;
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .glitch-title {
+        font-size: 1.55rem !important;
+        letter-spacing: 3px !important;
+        line-height: 1.2 !important;
+        margin: 0 0 4px !important;
+    }
+
+    .subtitle {
+        font-size: 0.72rem !important;
+        letter-spacing: 4px !important;
+        margin-top: 4px !important;
+    }
+
+    .intro-text {
+        font-size: 0.75rem !important;
+        letter-spacing: 3px !important;
+    }
+
+    /* ── CONTENT ── */
+    .fnaf3-content {
+        padding: 18px 4% 0 !important;
+    }
+
+    .intro-box {
+        padding: 12px 10px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .intro-box h2 {
+        font-size: 1.1rem !important;
+        letter-spacing: 3px !important;
+        line-height: 1.4 !important;
+    }
+
+    .grid {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+        margin-bottom: 20px !important;
+    }
+
+    .grid .description {
+        order: 2;
+        border-top: 1px solid rgba(120,150,40,0.3) !important;
+    }
+
+    .grid .video-preview {
+        order: 1;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        min-height: unset;
+        height: auto;
+        border-bottom: none !important;
+    }
+
+    .grid .video-preview video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .description {
+        padding: 12px !important;
+    }
+
+    .description h3 {
+        font-size: 0.78rem !important;
+        letter-spacing: 3px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .description p {
+        font-size: 0.78rem !important;
+        line-height: 1.65 !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    /* ── CHARACTERS ── */
+    .characters-section {
+        padding: 0 0 14px;
+        margin-top: 40px;
+    }
+
+    .characters-title {
+        font-size: 1.4rem !important;
+        letter-spacing: 5px !important;
+        gap: 16px !important;
+        margin-bottom: 14px !important;
+        padding: 0 !important;
+        width: 100vw !important;
+        position: relative !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        box-sizing: border-box;
+    }
+
+    .characters-title::before,
+    .characters-title::after {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .character-carousel {
+        gap: 5px !important;
+        padding: 0 4%;
+        margin-top: 0 !important;
+        margin-bottom: 20px !important;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center !important;
+    }
+
+    .character-card {
+        width: auto !important;
+        max-width: 230px;
+        flex: 1;
+        align-items: center !important;
+    }
+
+    .character-card h3 {
+        font-size: 1.0rem !important;
+        letter-spacing: 4px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .character-card img {
+        max-width: 160px !important;
+        height: 160px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .character-info {
+        padding: 10px !important;
+    }
+
+    .character-card p {
+        font-size: 0.72rem !important;
+        line-height: 1.55 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .discover-btn {
+        font-size: 0.72rem !important;
+        letter-spacing: 3px !important;
+        padding: 7px 16px !important;
+    }
+
+    .arrow {
+        padding: 8px 10px !important;
+        font-size: 1.1rem !important;
+        margin-top: 0 !important;
+        flex-shrink: 0;
+    }
+
+    /* ── ROLES ── */
+    .roles-section {
+        padding: 10px 0 0;
+    }
+
+    .roles-title {
+        font-size: 1.4rem !important;
+        letter-spacing: 5px !important;
+        gap: 16px !important;
+        margin: 0 0 40px 0 !important;
+        width: 100vw !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .roles-title::before,
+    .roles-title::after {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .role-block {
+        grid-template-columns: 0.9fr 1.1fr !important;
+        gap: 0 !important;
+        margin-bottom: 16px !important;
+        direction: ltr !important;
+        align-items: stretch !important;
+        margin-left: 4% !important;
+        margin-right: 4% !important;
+        border: 1px solid rgba(120,150,40,0.4) !important;
+    }
+
+    .role-block.reverse { direction: ltr !important; }
+    .role-block.reverse > * { direction: ltr !important; }
+
+    .role-block .role-text {
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 8px 10px !important;
+        background: rgba(12,12,8,0.95) !important;
+        border: none !important;
+    }
+
+    .role-block .role-desc {
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        align-items: flex-start !important;
+    }
+
+    .role-block .role-video {
+        order: 2;
+        min-height: 140px !important;
+        box-sizing: border-box !important;
+        background: #000 !important;
+        overflow: hidden;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-right: none !important;
+        border-left: 1px solid rgba(120,150,40,0.4) !important;
+        outline: none !important;
+    }
+
+    .role-block .role-video video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover !important;
+        display: block;
+    }
+
+    .role-header {
+        gap: 5px !important;
+        margin-bottom: 5px !important;
+        flex-wrap: wrap;
+    }
+
+    .role-header h3 {
+        font-size: 0.58rem !important;
+        letter-spacing: 2.5px !important;
+    }
+
+    .role-icon { width: 22px !important; height: 22px !important; }
+
+    .role-desc p {
+        font-size: 0.58rem !important;
+        line-height: 1.55 !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    .play-section {
+        gap: 16px !important;
+        margin: 30px 0 60px 0 !important;
+        width: 100vw !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .play-btn {
+        font-size: 1.4rem !important;
+        letter-spacing: 5px !important;
+        padding: 8px 20px !important;
+    }
+
+    .play-btn:hover {
+        letter-spacing: 7px !important;
+    }
 }
