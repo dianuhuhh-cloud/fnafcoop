@@ -654,10 +654,10 @@ body::before {
     .character-carousel {
         display: flex !important;
         flex-direction: row !important;
-        align-items: flex-start !important;
+        align-items: center !important;
         justify-content: center !important;
         gap: 5px !important;
-        margin-top: -10px !important;
+        margin-top: -35px !important;
         padding: 0 !important;
         width: 100% !important;
         box-sizing: border-box !important;
