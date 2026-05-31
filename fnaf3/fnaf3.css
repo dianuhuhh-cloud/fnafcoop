@@ -577,9 +577,7 @@ body::before {
     50% { opacity: 1; }
     100% { opacity: 0; }
 }
-/* ══════════════════════════════════════
-   TABLET
-══════════════════════════════════════ */
+
 @media (min-width: 769px) and (max-width: 1100px) {
     .fnaf3-nav { padding: 10px 18px; }
     .fnaf3-nav-left { gap: 12px; }
@@ -589,12 +587,8 @@ body::before {
     .fnaf3-nav-play { padding: 6px 12px; letter-spacing: 2px; }
 }
 
-/* ══════════════════════════════════════
-   MOBILE
-══════════════════════════════════════ */
 @media (max-width: 768px) {
 
-    /* ── HEADER ── */
     .fnaf3-header {
         height: 38vh;
         min-height: unset;
@@ -631,7 +625,6 @@ body::before {
         letter-spacing: 3px !important;
     }
 
-    /* ── CONTENT ── */
     .fnaf3-content {
         padding: 18px 4% 0 !important;
     }
