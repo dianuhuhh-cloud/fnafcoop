@@ -72,7 +72,7 @@ body::before {
 
 .fnaf4-header {
     position: relative;
-    height: 80vh;
+    height: 68vh;
     background:
         linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(3,0,0,0.3) 20%, rgba(4,0,0,0.5) 40%, rgba(5,0,0,0.7) 55%, rgba(5,0,0,0.88) 68%, rgba(5,0,0,0.96) 78%, #050000 88%),
         url("../images/fnaf4header.webp") center/cover no-repeat;
@@ -85,7 +85,7 @@ body::before {
 .subtitle {
     font-size: 0.95rem;
     letter-spacing: 6px;
-    margin-top: -8px;
+    margin-top: 10px;
     opacity: 0.85;
     position: relative;
     animation: subtitleFlicker 4s infinite;
@@ -147,7 +147,7 @@ body::before {
 
 .character-carousel {
     display: grid;
-    grid-template-columns: 60px 520px 60px; 
+    grid-template-columns: 60px minmax(0, 520px) 60px; 
     align-items: center;
     justify-content: center;
     gap: 20px;
@@ -312,7 +312,7 @@ body::before {
 .animatronics-title-wrapper {
     position: relative;
     text-align: center;
-    margin: 100px 0 60px 0;
+    margin: 60px 0 60px 0;
 }
 
 .animatronics-title {
@@ -403,6 +403,8 @@ body::before {
     color: #7a0000;
     opacity: 0.18;
     pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
     z-index: 1;
     text-shadow:
         0 0 60px #7a0000,
@@ -537,3 +539,215 @@ body::before {
 .fnaf4-content { position: relative; }
 .characters-section { position: relative; }
 .play-section { position: relative; }
+@media (max-width: 768px) {
+
+    * {
+        outline: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+
+    .fnaf4-nav {
+        top: 10px !important;
+        width: 88% !important;
+        padding: 9px 14px !important;
+        box-shadow: none !important;
+    }
+
+    .fnaf4-nav-right {
+        gap: 14px !important;
+    }
+
+    .fnaf4-nav a,
+    .fnaf4-nav span {
+        font-size: 0.65rem !important;
+        letter-spacing: 1.5px !important;
+    }
+
+    .fnaf4-dropdown-menu {
+        min-width: 150px !important;
+        font-size: 0.65rem !important;
+    }
+
+    .fnaf4-header {
+        height: 40vh !important;
+        background-position: center center !important;
+    }
+
+    .big-4 {
+        font-size: 11rem !important;
+        opacity: 0.12 !important;
+    }
+
+    .header-content h1 {
+        font-size: 1.25rem !important;
+        letter-spacing: 5px !important;
+    }
+
+    .subtitle {
+        font-size: 0.52rem !important;
+        letter-spacing: 3px !important;
+        margin-top: 2px !important;
+    }
+
+    .trailer-text {
+        font-size: 1rem !important;
+        letter-spacing: 5px !important;
+    }
+
+    .fnaf4-content {
+        padding: 30px 5% 0 5% !important;
+        margin-top: -20px !important;
+    }
+
+    .intro-box h2 {
+        font-size: 1rem !important;
+        letter-spacing: 4px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .grid {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+        margin-top: 16px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .description {
+        order: 2;
+        padding: 14px 0 0 0 !important;
+        border-top: 1px solid rgba(122,0,0,0.3) !important;
+    }
+
+    .video-preview {
+        order: 1;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-bottom: none !important;
+    }
+
+    .description h3 {
+        font-size: 0.9rem !important;
+        letter-spacing: 4px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .description p {
+        font-size: 0.82rem !important;
+        line-height: 1.75 !important;
+    }
+
+    .animatronics-title-wrapper {
+        margin: 10px 0 24px 0 !important;
+    }
+
+    .animatronics-title {
+        font-size: 1.1rem !important;
+        letter-spacing: 5px !important;
+    }
+
+    .character-carousel {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+        gap: 18px !important;
+        margin-top: -35px !important;
+        padding: 0 4% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        position: static !important;
+    }
+
+    .arrow {
+        flex-shrink: 0 !important;
+        width: 26px !important;
+        height: 72px !important;
+        position: static !important;
+        transform: none !important;
+        margin-top: 89px !important;
+        align-self: auto !important;
+    }
+
+    .arrow.left {
+        left: auto !important;
+        right: auto !important;
+        margin-top: 89px !important;
+    }
+
+    .arrow.right {
+        left: auto !important;
+        right: auto !important;
+        margin-top: 89px !important;
+    }
+
+    .arrow span {
+        width: 13px !important;
+        height: 50px !important;
+    }
+
+    .character-card {
+        flex: 1 !important;
+        min-width: 0 !important;
+        text-align: center !important;
+        max-width: 310px !important;
+    }
+
+    .character-card {
+        flex: 1 !important;
+        min-width: 0 !important;
+        text-align: center !important;
+    }
+
+    .character-card h3 {
+        font-size: 0.75rem !important;
+        letter-spacing: 1.5px !important;
+        margin-bottom: 6px !important;
+        white-space: nowrap !important;
+    }
+
+    .character-card img {
+        height: 190px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
+    .character-card .character-info p {
+        font-size: 0.68rem !important;
+        line-height: 1.6 !important;
+        color: #5a0000 !important;
+    }
+
+    .discover-btn {
+        font-size: 0.68rem !important;
+        letter-spacing: 3px !important;
+        margin-top: 8px !important;
+        display: inline-block !important;
+    }
+
+    .play-section {
+        padding: 24px 5% 60px 5% !important;
+    }
+
+    .play-btn {
+        font-size: 1.2rem !important;
+        letter-spacing: 9px !important;
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+        text-shadow: none !important;
+    }
+
+    .play-btn:hover {
+        letter-spacing: 12px !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    .play-lines,
+    .animatronics-lines {
+        width: 100vw !important;
+    }
+
+}
