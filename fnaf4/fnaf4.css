@@ -657,7 +657,7 @@ body::before {
         align-items: center !important;
         justify-content: center !important;
         gap: 5px !important;
-        margin-top: -35px !important;
+        margin-top: -40px !important;
         padding: 0 !important;
         width: 100% !important;
         box-sizing: border-box !important;
@@ -735,6 +735,8 @@ body::before {
 
     .play-section {
         padding: 24px 5% 60px 5% !important;
+        overflow: hidden !important; 
+        position: relative !important;
     }
 
     .play-btn {
@@ -752,10 +754,14 @@ body::before {
         text-shadow: none !important;
     }
 
-    .play-lines,
-    .animatronics-lines {
-        width: 100% !important;
-        overflow-x: hidden !important;
+    play-lines {
+        width: 85vw !important; 
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
     }
 
-}
+    .animatronics-lines {
+        width: 85vw !important; 
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+    }
