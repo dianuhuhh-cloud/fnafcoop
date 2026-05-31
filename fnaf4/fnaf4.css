@@ -579,14 +579,14 @@ body::before {
     }
 
     .header-content h1 {
-        font-size: 1.25rem !important;
-        letter-spacing: 5px !important;
+        font-size: 1.8rem !important;
+        letter-spacing: 8px !important;
     }
 
     .subtitle {
-        font-size: 0.52rem !important;
-        letter-spacing: 3px !important;
-        margin-top: 2px !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 4px !important;
+        margin-top: 5px !important;
     }
 
     .trailer-text {
@@ -650,9 +650,9 @@ body::before {
         flex-direction: row !important;
         align-items: flex-start !important;
         justify-content: center !important;
-        gap: 18px !important;
-        margin-top: -35px !important;
-        padding: 0 4% !important;
+        gap: 10px !important;
+        margin-top: -10px !important;
+        padding: 0 !important;
         width: 100% !important;
         box-sizing: border-box !important;
         position: static !important;
@@ -672,6 +672,7 @@ body::before {
         left: auto !important;
         right: auto !important;
         margin-top: 89px !important;
+        margin-left: 0 !important;
     }
 
     .arrow.right {
@@ -747,7 +748,8 @@ body::before {
 
     .play-lines,
     .animatronics-lines {
-        width: 100vw !important;
+        width: 100% !important;
+        overflow-x: hidden !important;
     }
 
 }
