@@ -541,6 +541,12 @@ body::before {
 .play-section { position: relative; }
 @media (max-width: 768px) {
 
+    html, body {
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        position: relative !important;
+    }
+
     * {
         outline: none !important;
         -webkit-tap-highlight-color: transparent !important;
@@ -650,7 +656,7 @@ body::before {
         flex-direction: row !important;
         align-items: flex-start !important;
         justify-content: center !important;
-        gap: 10px !important;
+        gap: 5px !important;
         margin-top: -10px !important;
         padding: 0 !important;
         width: 100% !important;
