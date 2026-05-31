@@ -754,7 +754,7 @@ body::before {
         text-shadow: none !important;
     }
 
-    play-lines {
+    .play-lines {
         width: 85vw !important; 
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
