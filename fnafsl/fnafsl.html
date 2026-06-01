@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="fnafsl.css">
 <style>
 .fnafsl-nav {
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -119,7 +119,10 @@
         <div class="fnafsl-nav-left">
             <a href="../index.html" class="fnafsl-nav-home">&#8592; Home</a>
         </div>
-        <div class="fnafsl-nav-right">
+        <button class="fnafsl-hamburger" id="fnafsl-hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="fnafsl-nav-right" id="fnafsl-nav-right">
             <div class="fnafsl-dropdown">
                 <a>Gamemodes</a>
                 <div class="fnafsl-dropdown-menu">
@@ -230,7 +233,7 @@
                 <h3>THE BREAKER ROOM</h3>
             </div>
             <div class="night-desc">
-                <p>Return to the facility for your second shift. Crawl beneath the desk to hide from certain danger. Navigate Ballora’s Gallery to each the Breaker Room to manually restore power to the building while staying one step ahead of Funtime Freddy.</p>
+                <p>Return to the facility for your second shift. Crawl beneath the desk to hide from certain danger. Navigate Ballora's Gallery to each the Breaker Room to manually restore power to the building while staying one step ahead of Funtime Freddy.</p>
             </div>
         </div>
         <div class="night-video">
@@ -244,7 +247,7 @@
         <div class="night-text">
             <div class="night-header">
                 <div class="night-number">N<span>3</span></div>
-                <h3>PARTS & SERVICE</h3>
+                <h3>PARTS &amp; SERVICE</h3>
             </div>
             <div class="night-desc">
                 <p>Venture deeper into the facility. Sneak through the corridors of Funtime Auditorium using your flash beacon to avoid Funtime Foxy to reach Parts and Service to carefully perform maintenance on Funtime Freddy, and try to make it back.</p>
@@ -304,12 +307,12 @@
                     <h3>THE PRIVATE ROOM</h3>
                 </div>
                 <div class="night-desc">
-                    <p>Disobey the instructions and find your way into the facility's secret observation room. Use the classic camera system and security doors to defend yourself. Conserve your limited power and hold out until 6 AM against ennard.</p>
+                    <p>Disobey the instructions and find your way into the facility's secret observation room. Use the classic camera system and security doors to defend yourself. Conserve your limited power and hold out until 6 AM against Ennard.</p>
                 </div>
             </div>
         </div>
         <div class="spoiler-overlay" id="spoilerOverlay">
-            <div class="spoiler-icon">⚠</div>
+            <div class="spoiler-icon">&#9888;</div>
             <div class="spoiler-label">Spoiler Warning</div>
             <div class="spoiler-sub">Click to reveal</div>
         </div>
@@ -331,7 +334,7 @@
             <h3 id="char-name">CIRCUS BABY</h3>
             <img id="char-image" src="../characters/circusbaby.webp" alt="Circus Baby">
             <div class="character-info">
-                <p id="char-desc">The main attraction of Circus Baby's Pizza World. She guides you through the facility — but her true intentions are never clear. Check under the stage.</p>
+                <p id="char-desc">The main attraction of Circus Baby's Pizza World. She guides you through the facility, but her true intentions are never clear. Check under the stage.</p>
                 <a id="char-link" href="https://freddy-fazbears-pizza.fandom.com/wiki/Circus_Baby" target="_blank" class="discover-btn"><span class="disc-glitch" data-text="DISCOVER">DISCOVER</span></a>
             </div>
         </div>
@@ -350,13 +353,12 @@
 
 <script>
 const customNightCharacters = [
-    { name:"YENNDO",        image:"../characters/yenndo.webp",        desc:"A rare Funtime Freddy variant with hollow eyes. He lurks in the Funtime Auditorium and will attack if he spots you. He should not exist.",                                    link:"https://freddy-fazbears-pizza.fandom.com/wiki/Yenndo" },
-    { name:"BONNET",        image:"../characters/bonnet.webp",        desc:"A pink Bon-Bon variant encountered in the Custom Night. She walks across your screen — click her nose before she reaches the other side.",                                     link:"https://freddy-fazbears-pizza.fandom.com/wiki/Bonnet" },
-    { name:"BIDYBAB",       image:"../characters/bidybab.webp",       desc:"Tiny and relentless. Bidybabs crawl through the vents and flood the Primary Control Module. Wind the music box or they will get in.",                                         link:"https://freddy-fazbears-pizza.fandom.com/wiki/BidyBab" },
-    { name:"ELECTROBAB",    image:"../characters/electrobab.webp",    desc:"An electrified Bidybab variant. Appears in the Custom Night at higher difficulties. Faster than the original and just as relentless.",                                        link:"https://freddy-fazbears-pizza.fandom.com/wiki/Electrobab" },
+    { name:"YENNDO",        image:"../characters/yenndo.webp",        desc:"An exposed bear endoskeleton with yellow eyes. It appears in your office and drains your oxygen until you raise your monitor.",                                    link:"https://freddy-fazbears-pizza.fandom.com/wiki/Yenndo" },
+    { name:"BONNET",        image:"../characters/bonnet.webp",        desc:"A frantic pink hand-puppet. She scurries across your room, and you must click her nose before she reaches the other side.",                                     link:"https://freddy-fazbears-pizza.fandom.com/wiki/Bonnet" },
+    { name:"BIDYBAB",       image:"../characters/bidybab.webp",       desc:"A baby-like animatronic that crawls through the overhead vent. Close the vent door when she speaks to block her entry.",                                         link:"https://freddy-fazbears-pizza.fandom.com/wiki/BidyBab" },
+    { name:"ELECTROBAB",    image:"../characters/electrobab.webp",    desc:"A glowing-eyed variant of the Bidybab. It hides in closets and rapidly drains your power unless you shock it with a controlled shock.",                                        link:"https://freddy-fazbears-pizza.fandom.com/wiki/Electrobab" },
     { name:"LOLBIT",        image:"../characters/lolbit.webp",        desc:"A glitched variant of Funtime Foxy. It forces itself onto your screen during the Custom Night, demanding you type a code before it moves on.",                                 link:"https://freddy-fazbears-pizza.fandom.com/wiki/Lolbit" },
-    { name:"MINIREENA",     image:"../characters/minireena.webp",     desc:"Ballora's miniature companions. During the Breaker Room they swarm the body suit. If too many climb up, your vision goes dark.",                                               link:"https://freddy-fazbears-pizza.fandom.com/wiki/Minireena" },
-    { name:"MINIREENA 2",   image:"../characters/minireena2.webp",    desc:"A darker variant of Minireena. Encountered in the Custom Night. Same swarming behavior, different look — and somehow even more unsettling.",                                  link:"https://freddy-fazbears-pizza.fandom.com/wiki/Minireena" }
+    { name:"MINIREENA",     image:"../characters/minireena.webp",     desc:"The tiny nimble dancers that assist Ballora. They work in swarms to block your view, shock them when they sabotage your oxygen.",                                               link:"https://freddy-fazbears-pizza.fandom.com/wiki/Minireena" },
 ];
 
 let spoilerRevealed = false;
@@ -389,11 +391,11 @@ document.getElementById('spoilerOverlay').addEventListener('click', () => {
 });
 
 const characters = [
-    { name:"CIRCUS BABY",     image:"../characters/circusbaby.webp",     desc:"The main attraction of Circus Baby's Pizza World. She guides you through the facility — but her true intentions are never clear. Check under the stage.",                                              link:"https://freddy-fazbears-pizza.fandom.com/wiki/Circus_Baby" },
-    { name:"BALLORA",         image:"../characters/ballora.webp",         desc:"The graceful dancer of the facility. She patrols Ballora Gallery. She cannot see you — but she hears every step. Keep quiet and move carefully.",                                                   link:"https://freddy-fazbears-pizza.fandom.com/wiki/Ballora" },
+    { name:"CIRCUS BABY",     image:"../characters/circusbaby.webp",     desc:"The main attraction of Circus Baby's Pizza World. She guides you through the facility, but her true intentions are never clear.",                                              link:"https://freddy-fazbears-pizza.fandom.com/wiki/Circus_Baby" },
+    { name:"BALLORA",         image:"../characters/ballora.webp",         desc:"A blind ballerina animatronic who glides along a track. She relies entirely on her acute hearing to hunt you in the dark.",                                                   link:"https://freddy-fazbears-pizza.fandom.com/wiki/Ballora" },
     { name:"FUNTIME FREDDY",  image:"../characters/funtimefreddy.webp",  desc:"An upgraded Freddy unit with Bon-Bon on his hand. Resides in Parts & Service. He may send Bon-Bon at any moment without warning.",                                                               link:"https://freddy-fazbears-pizza.fandom.com/wiki/Funtime_Freddy" },
-    { name:"FUNTIME FOXY",    image:"../characters/funtimefoxy.webp",    desc:"Patrols the Funtime Auditorium. Provoked by flashlight use. Navigate the dark with caution — time your flashes or face the consequences.",                                                        link:"https://freddy-fazbears-pizza.fandom.com/wiki/Funtime_Foxy" },
-    { name:"ENNARD",          image:"../characters/ennard.webp",          desc:"The amalgamation lurking beneath the facility. The true threat of Sister Location. It has been watching. It has been waiting. There's a little of it in every body.",                              link:"https://freddy-fazbears-pizza.fandom.com/wiki/Ennard" }
+    { name:"FUNTIME FOXY",    image:"../characters/funtimefoxy.webp",    desc:"A sleek motion-activated fox. he hunts in complete darkness, forcing you to use a flash beacon to freeze him in place.",                                                        link:"https://freddy-fazbears-pizza.fandom.com/wiki/Funtime_Foxy" },
+    { name:"ENNARD",          image:"../characters/ennard.webp",          desc:"A mysterious, tangled mass of of wires and endoskeleton parts. It has no clear form, but it wants to escape the facility.",                              link:"https://freddy-fazbears-pizza.fandom.com/wiki/Ennard" }
 ];
 
 let current = 0;
@@ -493,11 +495,12 @@ function update() {
 
     var startDelay = 800;
     var gap = 180;
+    var timeoutIds = []; 
 
     letterIndices.forEach(function(spanIdx, order) {
-        setTimeout(function() {
+        timeoutIds.push(setTimeout(function() {
             spans[spanIdx].classList.add('visible');
-        }, startDelay + order * gap);
+        }, startDelay + order * gap));
     });
 
     var totalTime = startDelay + letterIndices.length * gap;
@@ -506,7 +509,7 @@ function update() {
         letterSpans.forEach(function(s) {
             if (s.classList.contains('visible')) {
                 s.style.animation = 'allLettersFlicker 0.35s ease forwards';
-                setTimeout(function() { s.style.animation = ''; }, 360);
+                timeoutIds.push(setTimeout(function() { s.style.animation = ''; }, 360));
             }
         });
     }
@@ -518,26 +521,72 @@ function update() {
         startDelay + gap * 12 + Math.random() * 100,
         totalTime - 100
     ];
-    flickerTimes.forEach(function(t) { setTimeout(flickerAll, t); });
+    flickerTimes.forEach(function(t) { timeoutIds.push(setTimeout(flickerAll, t)); });
 
-    setTimeout(function() {
+    timeoutIds.push(setTimeout(function() {
         var p = eyebrowWrap.querySelector('p');
         eyebrowWrap.style.opacity = '1';
         p.style.animation = 'eyebrowSweepIn 1.6s ease forwards';
-    }, totalTime + 500);
+    }, totalTime + 500));
 
-    setTimeout(function() {
+    timeoutIds.push(setTimeout(function() {
         var p = subWrap.querySelector('p');
         subWrap.style.opacity = '1';
         p.style.animation = 'subtitleMistIn 1.8s ease forwards';
-    }, totalTime + 1600);
+    }, totalTime + 1600));
 
-    setTimeout(function() {
-        overlay.style.transition = 'opacity 1.3s ease';
-        overlay.style.opacity = '0';
-        nav.style.opacity = '1';
-        setTimeout(function() { overlay.remove(); }, 1400);
-    }, totalTime + 3600);
+    timeoutIds.push(setTimeout(function() {
+        if (overlay) overlay.style.transition = 'opacity 1.3s ease';
+        if (overlay) overlay.style.opacity = '0';
+        if (nav) nav.style.opacity = '1';
+        timeoutIds.push(setTimeout(function() { if (overlay && overlay.parentNode) overlay.remove(); }, 1400));
+    }, totalTime + 3600));
+
+    // Skip Intro Logic
+    function skipIntro() {
+        timeoutIds.forEach(clearTimeout);
+        
+        letterSpans.forEach(function(s) {
+            s.classList.add('visible');
+            s.style.animation = ''; 
+        });
+        
+        if (eyebrowWrap) {
+            eyebrowWrap.style.opacity = '1';
+            var eyebrowP = eyebrowWrap.querySelector('p');
+            if (eyebrowP) eyebrowP.style.animation = '';  
+        }
+        
+        if (subWrap) {
+            subWrap.style.opacity = '1';
+            var subP = subWrap.querySelector('p');
+            if (subP) subP.style.animation = ''; 
+        }
+        
+        if (overlay) {
+            overlay.style.transition = 'opacity 0.4s ease';
+            overlay.style.opacity = '0';
+            setTimeout(function() { if (overlay && overlay.parentNode) overlay.remove(); }, 500);
+        }
+        
+        if (nav) {
+            nav.style.transition = 'opacity 0.4s ease';
+            nav.style.opacity = '1';
+        }
+        
+        document.removeEventListener('dblclick', skipIntro);
+        document.removeEventListener('touchend', handleTap);
+    }
+
+    var lastTap = 0;
+    function handleTap() {
+        var now = Date.now();
+        if (now - lastTap < 300) skipIntro();
+        lastTap = now;
+    }
+
+    document.addEventListener('dblclick', skipIntro);
+    document.addEventListener('touchend', handleTap);
 })();
 </script>
 
@@ -566,5 +615,467 @@ function update() {
     100% { opacity: 1; filter: none; }
 }
 </style>
+<style>
+
+.fnafsl-hamburger { display: none; }
+
+
+@media (max-width: 768px) {
+
+    html, body {
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+
+    * { -webkit-tap-highlight-color: transparent !important; outline: none !important; }
+
+    /* ── NAV ── */
+    .fnafsl-nav {
+        top: 10px !important;
+        width: 92% !important;
+        padding: 8px 14px !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+        box-sizing: border-box !important;
+    }
+
+    .fnafsl-nav-right {
+        display: none !important;
+        position: absolute !important;
+        top: calc(100% + 10px) !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: rgba(2, 0, 9, 0.97) !important;
+        border: 1px solid rgba(157,0,255,0.4) !important;
+        padding: 14px 18px !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        backdrop-filter: blur(20px) !important;
+        box-shadow: none !important;
+        z-index: 200 !important;
+        align-items: stretch !important;
+    }
+    .fnafsl-nav-right.open { display: flex !important; }
+
+  
+    .fnafsl-hamburger {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 5px !important;
+        background: rgba(157,0,255,0.12) !important;
+        border: 1px solid rgba(157,0,255,0.5) !important;
+        cursor: pointer !important;
+        padding: 7px 9px !important;
+        z-index: 10 !important;
+        flex-shrink: 0 !important;
+        box-shadow: none !important;
+        margin-right: -6px !important;
+    }
+    .fnafsl-hamburger span {
+        display: block !important;
+        width: 18px !important;
+        height: 2px !important;
+        background: #bf7fff !important;
+        transition: transform 0.3s ease, opacity 0.3s ease !important;
+        box-shadow: 0 0 5px rgba(191,0,255,0.8) !important;
+    }
+    .fnafsl-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
+    .fnafsl-hamburger.open span:nth-child(2) { opacity: 0 !important; }
+    .fnafsl-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
+
+
+    .fnafsl-nav-right > a {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 10px 4px !important;
+        font-size: 0.78rem !important;
+        letter-spacing: 2px !important;
+        border-bottom: 1px solid rgba(157,0,255,0.12) !important;
+    }
+    .fnafsl-nav-right > .fnafsl-dropdown > a {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 10px 4px !important;
+        font-size: 0.78rem !important;
+        letter-spacing: 2px !important;
+        border-bottom: 1px solid rgba(157,0,255,0.12) !important;
+    }
+    .fnafsl-nav-right > a.fnafsl-nav-play {
+        justify-content: center !important;
+        border: none !important;
+        background: none !important;
+        padding: 10px 4px !important;
+        letter-spacing: 2px !important;
+        border-bottom: 1px solid rgba(157,0,255,0.12) !important;
+    }
+    a.fnafsl-discord {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 8px 4px !important;
+        border-bottom: none !important;
+    }
+    .fnafsl-dropdown > a::after {
+        content: "\203a" !important;
+        font-size: 1.1rem !important;
+        transition: transform 0.3s ease !important;
+        color: rgba(191,0,255,0.7) !important;
+    }
+    .fnafsl-dropdown.open > a::after { transform: rotate(90deg) !important; }
+    .fnafsl-dropdown-menu {
+        position: static !important;
+        display: none !important;
+        padding-top: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        border-top: 1px solid rgba(157,0,255,0.15) !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        min-width: unset !important;
+        overflow: visible !important;
+    }
+    .fnafsl-dropdown.open .fnafsl-dropdown-menu { display: block !important; }
+    .fnafsl-dropdown-menu a {
+        display: block !important;
+        font-size: 0.72rem !important;
+        padding: 9px 18px !important;
+        letter-spacing: 1.5px !important;
+        margin: 0 -18px !important;
+    }
+    .fnafsl-dropdown-menu a:hover {
+        background: rgba(157,0,255,0.12) !important;
+        padding-left: 26px !important;
+    }
+
+
+    .fnafsl-header {
+        height: 40vh !important;
+    }
+
+    .header-corner {
+        display: block !important;
+        width: 28px !important;
+        height: 28px !important;
+        opacity: 0.7 !important;
+    }
+    .header-corner.tl { top: 10px !important; left: 10px !important; }
+    .header-corner.tr { top: 10px !important; right: 10px !important; }
+    .header-corner.bl { bottom: 10px !important; left: 10px !important; }
+    .header-corner.br { bottom: 10px !important; right: 10px !important; }
+
+    .header-img {
+        filter: brightness(0.95) contrast(1.1) saturate(1.2) !important;
+    }
+    .header-content h1 {
+        font-size: 1.6rem !important;
+        letter-spacing: 8px !important;
+        margin-bottom: 6px !important;
+    }
+    .header-eyebrow {
+        font-size: 0.7rem !important;
+        letter-spacing: 8px !important;
+        margin-bottom: 6px !important;
+    }
+    .subtitle {
+        font-size: 0.65rem !important;
+        letter-spacing: 4px !important;
+    }
+
+
+    .fnafsl-content {
+        padding: 22px 4% 0 4% !important;
+        text-align: left !important;
+        overflow: hidden !important;
+    }
+    .intro-box { margin-bottom: 14px !important; text-align: center !important; }
+    .intro-box h2 {
+        font-size: 1rem !important;
+        letter-spacing: 3px !important;
+        line-height: 1.4 !important;
+        animation: none !important;
+        text-shadow:
+            0 0 4px var(--sl-core),
+            0 0 8px var(--sl-core) !important;
+    }
+    .grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        margin-top: 14px !important;
+        margin-bottom: 20px !important;
+    }
+    .description { order: 2 !important; padding-top: 25px !important; border-top: 1px solid rgba(157,0,255,0.2) !important; }
+    .video-preview { order: 1 !important; aspect-ratio: 16/9 !important; width: 100% !important; }
+    .description h3 {
+        font-size: 0.85rem !important;
+        letter-spacing: 4px !important;
+        margin-bottom: 8px !important;
+    }
+    .description p {
+        font-size: 0.75rem !important;
+        line-height: 1.75 !important;
+        letter-spacing: 0.5px !important;
+    }
+
+
+    .section-title {
+        width: 100vw !important;
+        position: relative !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        gap: 0 !important;
+        margin: 24px 0 !important;
+        overflow: hidden !important;
+    }
+
+    .section-title h2 {
+        font-size: 1.3rem !important;
+        letter-spacing: 5px !important;
+        white-space: nowrap !important;
+        padding: 0 10px !important;
+        text-shadow:
+            0 0 4px var(--sl-core),
+            0 0 8px var(--sl-core) !important;
+    }
+  
+    .section-title h2::before,
+    .section-title h2::after,
+    .section-title h2 .corner-tr,
+    .section-title h2 .corner-bl {
+        display: none !important;
+    }
+    .section-title .line { flex: 1 !important; min-width: 0 !important; }
+
+
+    .nights-section { padding: 0 4% !important; overflow: hidden !important; }
+
+
+    .night-block {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0 !important;
+        margin-bottom: 14px !important;
+        direction: ltr !important;
+        align-items: stretch !important;
+        border: 1px solid rgba(157,0,255,0.25) !important;
+    }
+    .night-block.reverse { direction: ltr !important; }
+    .night-block.reverse > * { direction: ltr !important; }
+
+  
+    .night-block .night-text {
+        order: 1 !important;
+        padding: 10px !important;
+        justify-content: center !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+    .night-block .night-video {
+        order: 2 !important;
+        min-height: 130px !important;
+        border: none !important;
+        border-left: 1px solid rgba(157,0,255,0.25) !important;
+        border-right: none !important;
+    }
+   
+    .night-block.reverse .night-text {
+        order: 2 !important;
+        border-left: 1px solid rgba(157,0,255,0.25) !important;
+    }
+    .night-block.reverse .night-video {
+        order: 1 !important;
+        border-left: none !important;
+        border-right: 1px solid rgba(157,0,255,0.25) !important;
+    }
+
+    .night-block .night-video::before,
+    .night-block .night-video::after {
+        display: block !important;
+        width: 16px !important;
+        height: 16px !important;
+        opacity: 0.5 !important;
+    }
+
+    .night-header {
+        gap: 8px !important;
+        margin-bottom: 8px !important;
+        flex-wrap: wrap !important;
+    }
+    .night-number {
+        min-width: 36px !important;
+        padding: 4px 6px !important;
+        font-size: 0.7rem !important;
+    }
+    .night-number span { font-size: 1.4rem !important; }
+    .night-header h3 {
+        font-size: 0.75rem !important;
+        letter-spacing: 3px !important;
+    }
+    .night-desc {
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+    .night-desc::before, .night-desc::after { display: none !important; }
+    .night-desc p {
+        font-size: 0.62rem !important;
+        line-height: 1.6 !important;
+        letter-spacing: 0.5px !important;
+    }
+
+   
+    .night6-wrapper {
+        margin-bottom: 14px !important;
+        margin-top: 0 !important;
+    }
+    .night6-inner {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0 !important;
+        border: 1px solid rgba(157,0,255,0.25) !important;
+        align-items: stretch !important;
+        filter: none !important;
+    }
+    .night6-wrapper:not(.revealed) .night6-inner {
+        filter: blur(18px) brightness(0.25) !important;
+    }
+    .night6-inner .night-video {
+        grid-column: 1 !important;
+        min-height: unset !important;
+        height: 100% !important;
+        border: none !important;
+        border-right: 1px solid rgba(157,0,255,0.25) !important;
+    }
+    .night6-inner .night-video video {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
+        min-height: 120px !important;
+    }
+   
+    .night6-inner .night-video::before,
+    .night6-inner .night-video::after {
+        display: block !important;
+        width: 16px !important;
+        height: 16px !important;
+        opacity: 0.5 !important;
+    }
+    .night6-inner .night-text {
+        grid-column: 2 !important;
+        padding: 10px !important;
+    }
+    .spoiler-label { font-size: 0.65rem !important; letter-spacing: 6px !important; }
+    .spoiler-icon  { font-size: 1.8rem !important; }
+    .spoiler-sub   { font-size: 0.5rem !important; letter-spacing: 4px !important; }
+
+    .characters-section { padding: 0 4% 14px !important; overflow: hidden !important; margin-top: 4px !important; }
+    .characters-section .section-title { margin-top: 10px !important; margin-bottom: 14px !important; }
+    .character-carousel {
+        gap: 6px !important;
+        align-items: center !important;
+    }
+    .character-card {
+        width: 100% !important;
+        max-width: 260px !important;
+        flex: 1 !important;
+    }
+    .character-card h3 {
+        font-size: 0.85rem !important;
+        letter-spacing: 4px !important;
+        margin-bottom: 6px !important;
+    }
+    .character-card img {
+        max-width: 180px !important;
+        height: 180px !important;
+        margin-bottom: 8px !important;
+    }
+    .character-info p {
+        font-size: 0.68rem !important;
+        line-height: 1.6 !important;
+        letter-spacing: 0.5px !important;
+    }
+    .discover-btn {
+        font-size: 0.68rem !important;
+        letter-spacing: 4px !important;
+        margin-top: 8px !important;
+    }
+  
+    .arrow {
+        width: 26px !important;
+        height: 80px !important;
+        flex-shrink: 0 !important;
+    }
+    .sl-triangle {
+        width: 10px !important;
+        height: 46px !important;
+    }
+
+  
+    .play-section {
+        padding: 0 4% 50px !important;
+        overflow: hidden !important;
+    }
+    .play-title {
+        margin: 20px auto 30px !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+    .play-btn {
+        font-size: 1.3rem !important;
+        letter-spacing: 10px !important;
+        padding: 10px 20px !important;
+    }
+}
+</style>
+
+<script>
+
+(function() {
+    var hamburger = document.getElementById("fnafsl-hamburger");
+    var navRight  = document.getElementById("fnafsl-nav-right");
+    var dropdown  = document.querySelector(".fnafsl-dropdown");
+
+    if (!hamburger || !navRight) return;
+
+    hamburger.addEventListener("click", function(e) {
+        e.stopPropagation();
+        var isOpen = navRight.classList.toggle("open");
+        hamburger.classList.toggle("open", isOpen);
+        if (!isOpen && dropdown) dropdown.classList.remove("open");
+    });
+
+    if (dropdown) {
+        var dropToggle = dropdown.querySelector(":scope > a");
+        if (dropToggle) {
+            dropToggle.addEventListener("click", function(e) {
+                if (window.innerWidth > 768) return;
+                e.preventDefault();
+                e.stopPropagation();
+                dropdown.classList.toggle("open");
+            });
+        }
+    }
+
+    document.addEventListener("click", function(e) {
+        if (!hamburger.contains(e.target) && !navRight.contains(e.target)) {
+            hamburger.classList.remove("open");
+            navRight.classList.remove("open");
+            if (dropdown) dropdown.classList.remove("open");
+        }
+    });
+
+    navRight.querySelectorAll("a:not(.fnafsl-dropdown > a)").forEach(function(link) {
+        link.addEventListener("click", function() {
+            hamburger.classList.remove("open");
+            navRight.classList.remove("open");
+            if (dropdown) dropdown.classList.remove("open");
+        });
+    });
+})();
+</script>
 </body>
 </html>
