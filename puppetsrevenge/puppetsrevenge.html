@@ -12,7 +12,7 @@
     transition: opacity 1.3s ease;
 }
 .pr-nav {
-    position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
     width: 90%; padding: 12px 28px; z-index: 9003;
     display: flex; justify-content: space-between; align-items: center;
     background: rgba(5,5,5,0.72);
@@ -68,6 +68,13 @@
     color: rgba(255,255,255,0.9) !important;
     text-shadow: 0 0 10px rgba(255,255,255,0.3) !important;
 }
+
+
+.puppet-ghost {
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
 </style>
 </head>
 <body>
@@ -77,7 +84,10 @@
         <div class="pr-nav-left">
             <a href="../index.html">&#8592; Home</a>
         </div>
-        <div class="pr-nav-right">
+        <button class="pr-hamburger" id="pr-hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="pr-nav-right" id="pr-nav-right">
             <div class="pr-dropdown">
                 <a>Gamemodes</a>
                 <div class="pr-dropdown-menu">
@@ -102,9 +112,9 @@
     <div class="header-content">
         <div class="title-container">
             <div class="puppet-ghost-wrap">
-                <img src="../images/puppet.webp" alt="" class="puppet-ghost" aria-hidden="true">
-                <img src="../images/puppet.webp" alt="" class="puppet-ghost red" aria-hidden="true">
-                <img src="../images/puppet.webp" alt="" class="puppet-ghost blue" aria-hidden="true">
+                <img src="../images/puppet.webp" alt="" class="puppet-ghost" aria-hidden="true" draggable="false" ondragstart="return false;" oncontextmenu="return false;">
+                <img src="../images/puppet.webp" alt="" class="puppet-ghost red" aria-hidden="true" draggable="false" ondragstart="return false;" oncontextmenu="return false;">
+                <img src="../images/puppet.webp" alt="" class="puppet-ghost blue" aria-hidden="true" draggable="false" ondragstart="return false;" oncontextmenu="return false;">
             </div>
             <div class="text-stack">
                 <p class="game-label">Five Nights at Freddy's Co-op</p>
@@ -131,7 +141,7 @@
     <div class="grid">
         <div class="description">
             <p>
-                You are trapped inside a labyrinthine Freddy Fazbear's Pizza — and the Puppet is already hunting.
+                You are trapped inside a labyrinthine Freddy Fazbear's Pizza, and the Puppet is already hunting.
                 Find batteries scattered across the maze, activate all ten generators, and reach the basement before she finds you.
                 The moment she locks eyes on you, she accelerates. You have three flashbangs.
                 Use them wisely. There are no second chances.
@@ -182,6 +192,10 @@
 </section>
 
 <script>
+// Global tracking for skipping intros
+window.skipPuppet = false;
+window.puppetTimeouts = [];
+
 function puppetize(el, stringHeight, originDist, fallStaggerBase, fallStaggerStep) {
     fallStaggerBase  = fallStaggerBase  || 200;
     fallStaggerStep  = fallStaggerStep  || 60;
@@ -215,13 +229,17 @@ function puppetize(el, stringHeight, originDist, fallStaggerBase, fallStaggerSte
         const delayMs = fallStaggerBase + i * fallStaggerStep;
 
         if (!isSpace) {
-            setTimeout(() => {
+            window.puppetTimeouts.push(setTimeout(() => {
+                if (window.skipPuppet) return;
+                
                 const startY = -(window.innerHeight * 0.94);
                 let t0 = null;
                 span.style.opacity         = '1';
                 span.style.transformOrigin = '50% 50%';
 
                 function tick(now) {
+                    if (window.skipPuppet) return;
+
                     if (!t0) t0 = now;
                     const p  = Math.min((now - t0) / FALL_DUR, 1);
                     const ep = 1 - Math.pow(1 - p, 3);
@@ -240,7 +258,7 @@ function puppetize(el, stringHeight, originDist, fallStaggerBase, fallStaggerSte
                     }
                 }
                 requestAnimationFrame(tick);
-            }, delayMs);
+            }, delayMs));
         } else {
             span.style.opacity = '1';
         }
@@ -381,19 +399,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const subtitleText = document.querySelector('.subtitle').textContent;
     const lastLands = 1100 + (subtitleText.length - 1) * 18 + 2100;
 
-    setTimeout(() => {
+    const t1 = setTimeout(() => {
+        if (window.skipPuppet) return;
         const ghostWrap = document.querySelector('.puppet-ghost-wrap');
         if (ghostWrap) ghostWrap.classList.add('revealed');
         document.getElementById('pr-nav').style.opacity = '1';
 
-        setTimeout(() => {
+        const t2 = setTimeout(() => {
+            if (window.skipPuppet) return;
             const content = document.querySelector('.pr-content');
             const play    = document.querySelector('.play-section');
             if (content) content.classList.add('revealed');
             if (play)    play.classList.add('revealed');
 
         }, 700);
+        window.puppetTimeouts.push(t2);
     }, lastLands + 200);
+    window.puppetTimeouts.push(t1);
 
     const introLeftPath  = document.querySelector('#intro-str-left path');
     const introRightPath = document.querySelector('#intro-str-right path');
@@ -449,8 +471,285 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         requestAnimationFrame(h2Tick);
     }
+    
+    // Skip Logic 
+    function skipIntro() {
+        window.skipPuppet = true;
+        window.puppetTimeouts.forEach(clearTimeout);
+
+        document.querySelectorAll('.puppet-letter').forEach(span => {
+            span.style.opacity = '1';
+            span.style.transform = '';
+            span.style.transformOrigin = `50% ${span.style.getPropertyValue('--origin-y')}`;
+            span.style.animation = `letterSway ${span.style.getPropertyValue('--sway-dur')} ease-in-out ${span.style.getPropertyValue('--sway-delay')} infinite alternate`;
+        });
+
+        const ghostWrap = document.querySelector('.puppet-ghost-wrap');
+        if (ghostWrap) {
+            ghostWrap.style.transition = 'opacity 0.4s ease';
+            ghostWrap.classList.add('revealed');
+        }
+        
+        const nav = document.getElementById('pr-nav');
+        if (nav) {
+            nav.style.transition = 'opacity 0.4s ease';
+            nav.style.opacity = '1';
+        }
+
+        const content = document.querySelector('.pr-content');
+        if (content) {
+            content.style.transition = 'opacity 0.4s ease';
+            content.classList.add('revealed');
+        }
+
+        const play = document.querySelector('.play-section');
+        if (play) {
+            play.style.transition = 'opacity 0.4s ease';
+            play.classList.add('revealed');
+        }
+
+        document.removeEventListener('dblclick', skipIntro);
+        document.removeEventListener('touchend', handleTap);
+    }
+
+    let lastTap = 0;
+    function handleTap() {
+        const now = Date.now();
+        if (now - lastTap < 300) skipIntro();
+        lastTap = now;
+    }
+
+    document.addEventListener('dblclick', skipIntro);
+    document.addEventListener('touchend', handleTap);
 });
 </script>
 
+<style>
+
+.pr-hamburger { display: none; }
+
+
+@media (max-width: 768px) {
+
+    html, body {
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+    * { -webkit-tap-highlight-color: transparent !important; outline: none !important; }
+
+
+    .pr-nav {
+        top: 10px !important;
+        width: 92% !important;
+        padding: 8px 14px !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+        box-sizing: border-box !important;
+    }
+    .pr-nav-right {
+        display: none !important;
+        position: absolute !important;
+        top: calc(100% + 10px) !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: rgba(5,5,5,0.97) !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+        padding: 10px 16px !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        backdrop-filter: blur(18px) !important;
+        z-index: 200 !important;
+    }
+    .pr-nav-right.open { display: flex !important; }
+
+
+    .pr-hamburger {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 5px !important;
+        background: rgba(255,255,255,0.05) !important;
+        border: 1px solid rgba(255,255,255,0.18) !important;
+        cursor: pointer !important;
+        padding: 7px 9px !important;
+        flex-shrink: 0 !important;
+        box-shadow: none !important;
+    }
+    .pr-hamburger span {
+        display: block !important;
+        width: 18px !important;
+        height: 1.5px !important;
+        background: rgba(255,255,255,0.55) !important;
+        transition: transform 0.3s ease, opacity 0.3s ease !important;
+    }
+    .pr-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg) !important; }
+    .pr-hamburger.open span:nth-child(2) { opacity: 0 !important; }
+    .pr-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg) !important; }
+
+
+    .pr-nav-right > a,
+    .pr-nav-right > .pr-dropdown > a {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 10px 4px !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 2px !important;
+        border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+        color: rgba(255,255,255,0.45) !important;
+    }
+    .pr-nav-right > a:last-child { border-bottom: none !important; }
+    .pr-discord {
+        justify-content: center !important;
+        border-bottom: none !important;
+        padding: 8px 4px !important;
+    }
+    .pr-dropdown > a::after {
+        content: "\203a" !important;
+        font-size: 1.1rem !important;
+        color: rgba(255,255,255,0.3) !important;
+        transition: transform 0.3s ease !important;
+    }
+    .pr-dropdown.open > a::after { transform: rotate(90deg) !important; }
+    .pr-dropdown-menu {
+        position: static !important;
+        display: none !important;
+        background: transparent !important;
+        border: none !important;
+        border-top: 1px solid rgba(255,255,255,0.07) !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        min-width: unset !important;
+    }
+    .pr-dropdown:hover .pr-dropdown-menu { display: none !important; }
+    .pr-dropdown.open .pr-dropdown-menu { display: block !important; }
+    .pr-dropdown-menu a {
+        font-size: 0.7rem !important;
+        padding: 9px 16px !important;
+        letter-spacing: 1.5px !important;
+    }
+
+    .pr-header {
+        height: 44vh !important;
+    }
+    .puppet-ghost-wrap {
+        width: 180px !important;
+        height: 240px !important;
+        opacity: 0 !important;
+    }
+    .puppet-ghost-wrap.revealed { opacity: 1 !important; }
+    .game-label {
+        font-size: 0.55rem !important;
+        letter-spacing: 5px !important;
+        margin-bottom: 10px !important;
+    }
+    .glitch-title {
+        font-size: 1.8rem !important;
+        letter-spacing: 6px !important;
+    }
+    .subtitle {
+        font-size: 0.6rem !important;
+        letter-spacing: 5px !important;
+        margin-top: 6px !important;
+    }
+  
+    .puppet-letter::before {
+        height: 160px !important;
+    }
+
+  
+    .pr-content {
+        padding: 20px 5% 0 5% !important;
+        margin-top: -20px !important;
+    }
+    .intro-box {
+        margin-bottom: 18px !important;
+    }
+  
+    .intro-string-row {
+        width: 100vw !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        overflow: hidden !important;
+    }
+    #intro-h2 {
+        font-size: 0.85rem !important;
+        letter-spacing: 3px !important;
+        padding: 0 8px !important;
+        white-space: nowrap !important;
+    }
+    .grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        margin-top: 10px !important;
+        margin-bottom: 20px !important;
+    }
+    .video-preview { order: 1 !important; width: 100% !important; aspect-ratio: 16/9 !important; }
+    .description { order: 2 !important; padding-top: 12px !important; border-top: 1px solid rgba(255,255,255,0.07) !important; }
+    .description p {
+        font-size: 0.78rem !important;
+        line-height: 1.8 !important;
+        letter-spacing: 0.3px !important;
+    }
+
+    
+    .play-section {
+        margin: 20px 0 60px 0 !important;
+        overflow: hidden !important;
+    }
+    .play-btn {
+        font-size: 1.3rem !important;
+        letter-spacing: 10px !important;
+        margin: 0 !important;
+    }
+}
+</style>
+
+<script>
+
+(function () {
+    var hamburger = document.getElementById('pr-hamburger');
+    var navRight  = document.getElementById('pr-nav-right');
+    var dropdown  = document.querySelector('.pr-dropdown');
+
+    if (!hamburger || !navRight) return;
+
+    hamburger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = navRight.classList.toggle('open');
+        hamburger.classList.toggle('open', isOpen);
+        if (!isOpen && dropdown) dropdown.classList.remove('open');
+    });
+
+    if (dropdown) {
+        var dropToggle = dropdown.querySelector(':scope > a');
+        if (dropToggle) {
+            dropToggle.addEventListener('click', function (e) {
+                if (window.innerWidth > 768) return;
+                e.preventDefault();
+                e.stopPropagation();
+                dropdown.classList.toggle('open');
+            });
+        }
+    }
+
+    document.addEventListener('click', function (e) {
+        if (!hamburger.contains(e.target) && !navRight.contains(e.target)) {
+            hamburger.classList.remove('open');
+            navRight.classList.remove('open');
+            if (dropdown) dropdown.classList.remove('open');
+        }
+    });
+
+    navRight.querySelectorAll('a:not(.pr-dropdown > a)').forEach(function (link) {
+        link.addEventListener('click', function () {
+            hamburger.classList.remove('open');
+            navRight.classList.remove('open');
+            if (dropdown) dropdown.classList.remove('open');
+        });
+    });
+})();
+</script>
 </body>
 </html>
