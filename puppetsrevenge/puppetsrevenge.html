@@ -214,8 +214,11 @@ function puppetize(el, stringHeight, originDist, fallStaggerBase, fallStaggerSte
         span.classList.add('puppet-letter');
         if (isSpace) span.classList.add('puppet-space');
 
+        const isMobile  = window.innerWidth <= 768;
         const swayDur   = (3.2 + Math.random() * 3.6).toFixed(2);
-        const swayAmp   = ((Math.random() * 3.4) - 1.7).toFixed(2);
+        const ampRange  = isMobile ? 1.2 : 3.4;
+        const ampOffset = isMobile ? 0.6 : 1.7;
+        const swayAmp   = ((Math.random() * ampRange) - ampOffset).toFixed(2);
         const swayDelay = (-(Math.random() * 6)).toFixed(2);
 
         span.style.setProperty('--str-h',      stringHeight + 'px');
@@ -271,12 +274,14 @@ const WAVE_N = 40;
 
 function wavyLeft(t) {
     const pts = [];
+    const mob = window.innerWidth <= 768;
+    const a1 = mob ? 4.5 : 7.5, a2 = mob ? 2.0 : 3.5, a3 = mob ? 1.2 : 2.2;
     for (let i = 0; i < WAVE_N; i++) {
         const x = i / (WAVE_N - 1);
         pts.push(
-            15 + Math.sin(t * 0.50 + x * 6.28)       * 7.5
-               + Math.sin(t * 0.33 + x * 13.0 + 0.9) * 3.5
-               + Math.sin(t * 0.71 + x * 3.5 + 2.1) * 2.2
+            15 + Math.sin(t * 0.50 + x * 6.28)       * a1
+               + Math.sin(t * 0.33 + x * 13.0 + 0.9) * a2
+               + Math.sin(t * 0.71 + x * 3.5 + 2.1) * a3
         );
     }
     return pts;
@@ -284,12 +289,14 @@ function wavyLeft(t) {
 
 function wavyRight(t) {
     const pts = [];
+    const mob = window.innerWidth <= 768;
+    const a1 = mob ? 4.5 : 7.5, a2 = mob ? 2.0 : 3.5, a3 = mob ? 1.2 : 2.2;
     for (let i = 0; i < WAVE_N; i++) {
         const x = i / (WAVE_N - 1);
         pts.push(
-            15 + Math.sin(t * 0.48 + x * 6.28 + 1.5)  * 7.5
-               + Math.sin(t * 0.31 + x * 13.0 + 2.3)  * 3.5
-               + Math.sin(t * 0.67 + x * 3.5 + 0.4)  * 2.2
+            15 + Math.sin(t * 0.48 + x * 6.28 + 1.5)  * a1
+               + Math.sin(t * 0.31 + x * 13.0 + 2.3)  * a2
+               + Math.sin(t * 0.67 + x * 3.5 + 0.4)  * a3
         );
     }
     return pts;
@@ -433,6 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const rightAnim = rightPath ? makeStringAnimator(rightPath, wavyRight, 15, 1.57, 0.009) : null;
 
     function sizePlayStrings() {
+        if (window.innerWidth <= 768) return;
         const section = document.getElementById('play-section');
         const btn     = document.getElementById('play-btn');
         const svgL    = document.getElementById('play-str-left');
@@ -440,10 +448,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!section || !btn || !svgL || !svgR) return;
         const secRect = section.getBoundingClientRect();
         const btnRect = btn.getBoundingClientRect();
-        svgL.style.width = (btnRect.left  - secRect.left)  + 'px';
-        svgR.style.width = (secRect.right - btnRect.right) + 'px';
+        // btn has margin: 0 20px 0 -20px in base CSS which shifts it left visually
+        // compensate so strings appear symmetric around the visual center of the text
+        const offset = 20;
+        const leftW  = (btnRect.left  - secRect.left)  + offset;
+        const rightW = (secRect.right - btnRect.right) - offset;
+        if (leftW <= 0 || rightW <= 0) return;
+        svgL.style.width = leftW  + 'px';
+        svgR.style.width = rightW + 'px';
     }
-    setTimeout(sizePlayStrings, 200);
+    // On mobile fonts + puppetize spans settle late; poll until strings fill correctly
+    let sizeTries = 0;
+    function trySizePlayStrings() {
+        sizePlayStrings();
+        sizeTries++;
+        if (sizeTries < 12) setTimeout(trySizePlayStrings, 180);
+    }
+    setTimeout(trySizePlayStrings, 80);
     window.addEventListener('resize', sizePlayStrings);
 
     const playRow = document.getElementById('play-string-row');
@@ -696,12 +717,40 @@ document.addEventListener('DOMContentLoaded', () => {
     
     .play-section {
         margin: 20px 0 60px 0 !important;
-        overflow: hidden !important;
+        overflow: visible !important;
+        width: 100% !important;
+        left: 0 !important;
+        transform: none !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    .play-string-row {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        transform: none !important;
+        transform-origin: unset !important;
+    }
+    .play-string-svg {
+        flex: 1 1 0 !important;
+        width: 0 !important;
+        min-width: 0 !important;
+        height: 26px !important;
+        display: block !important;
+        overflow: visible !important;
     }
     .play-btn {
         font-size: 1.3rem !important;
-        letter-spacing: 10px !important;
-        margin: 0 !important;
+        letter-spacing: 6px !important;
+        margin: 0 18px 0 -12px !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
+        transform-origin: center top !important;
     }
 }
 </style>
