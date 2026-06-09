@@ -140,6 +140,7 @@
 
     <div class="grid">
         <div class="description">
+            <h3>ABOUT THE MODE</h3>
             <p>
                 You are trapped inside a labyrinthine Freddy Fazbear's Pizza, and the Puppet is already hunting.
                 Find batteries scattered across the maze, activate all ten generators, and reach the basement before she finds you.
@@ -448,11 +449,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!section || !btn || !svgL || !svgR) return;
         const secRect = section.getBoundingClientRect();
         const btnRect = btn.getBoundingClientRect();
-        // btn has margin: 0 20px 0 -20px in base CSS which shifts it left visually
-        // compensate so strings appear symmetric around the visual center of the text
-        const offset = 20;
-        const leftW  = (btnRect.left  - secRect.left)  + offset;
-        const rightW = (secRect.right - btnRect.right) - offset;
+        const leftW  = btnRect.left  - secRect.left;
+        const rightW = secRect.right - btnRect.right;
         if (leftW <= 0 || rightW <= 0) return;
         svgL.style.width = leftW  + 'px';
         svgR.style.width = rightW + 'px';
