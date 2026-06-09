@@ -769,12 +769,166 @@ body {
     .header-content { max-width: 70%; }
     .header-content h1 { font-size: 3.8rem; }
 }
-@media (max-width: 650px) {
-    .grid { grid-template-columns: 1fr; }
-    .bh-content { padding: 50px 6%; }
-    .header-content { max-width: 100%; padding: 0 6%; }
-    .header-content h1 { font-size: 3rem; }
-    .endo-figure { opacity: 0.3; width: 100%; right: 0; }
-    .play-btn span { font-size: 1.8rem; }
-    .ping-terminal { display: none; }
+
+@media (max-width: 768px) {
+
+    .bh-nav {
+        top: 10px !important;
+        width: 92% !important;
+        padding: 8px 14px !important;
+        overflow: visible !important;
+        box-sizing: border-box !important;
+    }
+    .bh-nav-right {
+        display: none !important;
+        position: absolute !important;
+        top: calc(100% + 10px) !important;
+        left: 0 !important; right: 0 !important;
+        background: rgba(4,3,1,0.97) !important;
+        border: 1px solid rgba(196,154,58,0.25) !important;
+        padding: 14px 18px !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        backdrop-filter: blur(20px) !important;
+        z-index: 9010 !important;
+        align-items: stretch !important;
+    }
+    .bh-nav-right.open { display: flex !important; }
+    .bh-hamburger {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 5px !important;
+        background: rgba(196,154,58,0.08) !important;
+        border: 1px solid rgba(196,154,58,0.35) !important;
+        cursor: pointer !important;
+        padding: 7px 9px !important;
+        z-index: 10 !important;
+        flex-shrink: 0 !important;
+        margin-right: -4px !important;
+    }
+    .bh-hamburger span {
+        display: block !important;
+        width: 18px !important; height: 2px !important;
+        background: rgba(196,154,58,0.8) !important;
+        transition: transform 0.3s ease, opacity 0.3s ease !important;
+        box-shadow: 0 0 5px rgba(196,154,58,0.4) !important;
+    }
+    .bh-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
+    .bh-hamburger.open span:nth-child(2) { opacity: 0 !important; }
+    .bh-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
+    .bh-nav-right > a,
+    .bh-nav-right > .bh-dropdown > a {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 10px 4px !important;
+        font-size: 0.78rem !important;
+        letter-spacing: 2px !important;
+        border-bottom: 1px solid rgba(196,154,58,0.1) !important;
+    }
+    .bh-dropdown > a {
+        justify-content: center !important;
+        gap: 8px !important;
+    }
+    .bh-dropdown > a::after {
+        content: "\203a" !important;
+        font-size: 1.1rem !important;
+        transition: transform 0.3s ease !important;
+        color: rgba(196,154,58,0.5) !important;
+    }
+    .bh-dropdown.open > a::after { transform: rotate(90deg) !important; }
+    .bh-dropdown-menu {
+        position: static !important;
+        display: none !important;
+        padding-top: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        border-top: 1px solid rgba(196,154,58,0.1) !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        min-width: unset !important;
+    }
+    .bh-dropdown.open .bh-dropdown-menu { display: block !important; }
+    .bh-dropdown-menu a {
+        font-size: 0.72rem !important;
+        padding: 9px 18px !important;
+        letter-spacing: 1.5px !important;
+        margin: 0 -18px !important;
+    }
+    .bh-discord {
+        justify-content: center !important;
+        padding: 8px 4px !important;
+        border-bottom: none !important;
+    }
+
+    .bh-header {
+        height: auto !important;
+        min-height: 38vh !important;
+        padding: 80px 18px 36px !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+    }
+    .header-content {
+        max-width: 100% !important;
+        padding: 0 !important;
+        position: relative !important;
+        z-index: 10 !important;
+    }
+    .header-content h1 {
+        font-size: 2.4rem !important;
+        line-height: 0.9 !important;
+        letter-spacing: -1px !important;
+    }
+    .eyebrow {
+        font-size: 0.58rem !important;
+        letter-spacing: 3px !important;
+        margin-bottom: 10px !important;
+    }
+    .subtitle {
+        font-size: 0.56rem !important;
+        letter-spacing: 5px !important;
+        margin-top: 10px !important;
+    }
+    .endo-figure {
+        opacity: 0.52 !important;
+        width: 100% !important;
+        right: 0 !important;
+    }
+    .bh-header::after {
+        background: linear-gradient(to bottom, transparent, rgba(1,1,0,0.52)) !important;
+    }
+    .ping-terminal { display: none !important; }
+
+    .bh-content { padding: 10px 4% 40px !important; }
+
+    .intro-box {
+        padding: 18px 14px !important;
+        margin-bottom: 24px !important;
+    }
+    .intro-box h2 {
+        font-size: 0.78rem !important;
+        letter-spacing: 4px !important;
+    }
+
+    .grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        margin-top: 0 !important;
+        margin-bottom: 28px !important;
+    }
+    .grid .video-preview { order: 1 !important; }
+    .grid .description  { order: 2 !important; }
+
+    .description { padding: 20px 18px !important; gap: 14px !important; }
+    .description h3 { font-size: 0.56rem !important; letter-spacing: 6px !important; }
+    .description p  { font-size: 0.82rem !important; line-height: 1.85 !important; }
+    .warning-line   { font-size: 0.58rem !important; letter-spacing: 2px !important; }
+
+    .video-preview { max-height: 200px !important; overflow: hidden !important; }
+    .video-preview video { height: 100% !important; object-fit: cover !important; }
+
+    .play-section { margin: -28px 0 60px !important; }
+    .play-btn { padding: 8px 24px !important; }
+    .play-btn span { font-size: 1.5rem !important; letter-spacing: 10px !important; }
 }
