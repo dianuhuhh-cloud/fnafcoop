@@ -381,7 +381,7 @@ function updateItem() {
   setBar('risk', item.risk, 9);
   
   if (riskRow) {
-    riskRow.style.display = item.name === 'Lefty' ? '' : 'none';
+    riskRow.classList.toggle('risk-visible', item.name === 'Lefty');
   }
 }
 
@@ -422,7 +422,7 @@ const salvages = [
     img: "./fnaf6assets/scrapbaby.webp",
     link: "https://freddy-fazbears-pizza.fandom.com/wiki/Scrap_Baby",
     condition: "UNSTABLE",
-    desc: "A rebuilt female animatronic with a large claw grafted onto one arm and a wide, practiced smile. She speaks clearly and patiently. She listened to all five prompts without interrupting. That is the part you should be afraid of.",
+    desc: "A rebuilt female animatronic with a large claw grafted onto one arm and a wide, practiced smile. She speaks clearly and patiently. She listened to all five prompts without interrupting.",
   },
   {
     name: "LEFTY",
