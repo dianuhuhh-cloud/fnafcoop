@@ -143,6 +143,8 @@ body.night-mode .mode-toggle {
   background: rgba(245,248,255,0.55);
   backdrop-filter: blur(1px);
   display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  padding: 8px 16px;
 }
 
 .day-welcome-content {
@@ -189,6 +191,9 @@ body.night-mode .mode-toggle {
   backdrop-filter: blur(1px);
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
+}
+@media (max-width: 900px) {
+  .day-play-bar { margin-top: 0; }
 }
 
 .star-canvas {
@@ -256,6 +261,10 @@ body.night-mode .mode-toggle {
   text-shadow: 0 2px 0 rgba(255,255,255,0.45), 0 3px 0 rgba(0,0,0,0.12);
   letter-spacing: 2px;
   transform: translateY(-3px);
+  text-align: center;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .left-menu {
@@ -384,7 +393,8 @@ body.night-mode .mode-toggle {
 .bar-wrap { overflow: hidden; }
 .bonus-bar { height: 20px; background: rgba(255,255,255,0.92); width: 0%; transition: width 0.45s ease; }
 
-.stat-row-risk { color: #ff0000; }
+.stat-row-risk { color: #ff0000; display: none !important; }
+.stat-row-risk.risk-visible { display: grid !important; }
 .risk-value { color: #ff0000; }
 .risk-bar   { background: #ff0000; }
 
@@ -731,7 +741,7 @@ body.night-mode .mode-toggle {
 }
 
 .terminal-header {
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   padding: 12px 26px;
   border-bottom: 1px solid rgba(232,120,32,0.28);
   background: rgba(232,120,32,0.05);
@@ -741,17 +751,20 @@ body.night-mode .mode-toggle {
   font-family: 'VT323', monospace; font-size: 1rem;
   letter-spacing: 4px; color: var(--night-orange);
   text-transform: uppercase;
+  justify-self: start;
 }
 
 .terminal-id {
   font-family: 'VT323', monospace; font-size: 1rem;
   letter-spacing: 4px; color: rgba(240,216,144,0.5);
+  justify-self: center;
 }
 
 .terminal-status {
   font-family: 'VT323', monospace; font-size: 1rem;
   letter-spacing: 4px; color: var(--night-orange);
   animation: terminalBlink 1.6s step-start infinite;
+  justify-self: end;
 }
 
 @keyframes terminalBlink { 
@@ -969,16 +982,728 @@ body.night-mode .mode-toggle {
   100% { color: #fff; text-shadow: 0 0 12px #fff, 0 0 32px var(--night-orange), 0 -10px 28px rgba(200,40,0,0.8), 0 0 90px rgba(232,120,32,0.55); }
 }
 
+@media (max-width: 1100px) {
+  .left-menu { left: 3%; width: 30%; }
+  .item-panel { left: 36%; width: 34%; }
+  .stats-panel { left: 3%; width: 33%; top: 54%; }
+  .buy-wrap { left: 36%; width: 34%; }
+  .helpy-group { width: 200px; height: 260px; }
+}
+
 @media (max-width: 900px) {
-  .night-grid, .role-block, .day-welcome-content { grid-template-columns: 1fr; }
-  .role-block.reverse { direction: ltr; }
-  .stat-row { grid-template-columns: 150px 38px 1fr; font-size: 15px; }
-  .left-menu { left: 2%; width: 34%; }
-  .item-panel { left: 38%; width: 38%; }
-  .stats-panel { left: 2%; width: 36%; }
-  .buy-wrap { left: 38%; width: 38%; }
-  .terminal-body { grid-template-columns: 1fr; }
-  .terminal-img-panel { border-right: none; border-bottom: 1px solid rgba(232,120,32,0.2); }
-  .night-section-title { margin-left: -5%; margin-right: -5%; }
-  .night-section-title.no-lines { margin-left: 0; margin-right: 0; }
+
+  .night-grid, .role-block, .day-welcome-content { grid-template-columns: 1fr !important; }
+  .role-block.reverse { direction: ltr !important; }
+  .terminal-body { grid-template-columns: 1fr !important; }
+  .terminal-img-panel {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(232,120,32,0.2) !important;
+    min-height: 260px !important;
+  }
+  .night-section-title { margin-left: 0 !important; margin-right: 0 !important; }
+  .day-welcome-content { padding: 36px 6% !important; gap: 28px !important; }
+  .night-content { padding: 50px 6% !important; }
+  .night-chars-section, .roles-section { padding: 24px 6% !important; }
+
+  .fnaf6-nav { padding: 10px 16px !important; }
+  .fnaf6-nav a, .fnaf6-nav span { letter-spacing: 1px !important; font-size: 0.75rem !important; }
+  .fnaf6-nav-right { gap: 14px !important; }
+  .mode-toggle { top: 74px !important; right: 12px !important; width: 130px !important; height: 36px !important; font-size: 0.8rem !important; }
+
+  .day-title-text {
+    font-size: clamp(18px, 3.8vw, 44px) !important;
+    letter-spacing: 0px !important;
+    white-space: normal !important;
+    text-align: center !important;
+    padding: 4px 10px !important;
+    word-break: break-word !important;
+    line-height: 1.2 !important;
+  }
+  .day-welcome-bar {
+    height: 34px !important;
+    min-height: unset !important;
+    padding: 0px 14px !important;
+  }
+  .day-play-bar {
+    height: 34px !important;
+    min-height: unset !important;
+    margin-top: 0 !important;
+  }
+  .top-bar {
+    height: 34px !important;
+    min-height: unset !important;
+    padding: 0px 14px !important;
+  }
+  @keyframes catalogPulse {
+    0%, 100% { transform: scale(1);    letter-spacing: 0px; }
+    50%       { transform: scale(1.03); letter-spacing: 1px; }
+  }
+
+  .catalog-section { min-height: unset !important; }
+
+  .screen {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: unset !important;
+    overflow: visible !important;
+    display: grid !important;
+    grid-template-columns: 43% 57% !important;
+    grid-template-rows: auto !important;
+    grid-template-areas:
+      "topbar  topbar"
+      "menu    item  "
+      "stats   item  "
+      "buywrap buywrap"
+      "helpy   helpy " !important;
+    align-items: start !important;
+    padding-bottom: 16px !important;
+  }
+
+
+  .top-bar {
+    grid-area: topbar !important;
+    position: relative !important;
+    left: unset !important; right: unset !important; top: unset !important;
+    width: 100% !important;
+  }
+
+  .left-menu {
+    grid-area: menu !important;
+    position: relative !important;
+    left: unset !important; top: unset !important; width: 100% !important;
+    padding: 10px 6px 6px 10px !important;
+    gap: 6px !important;
+    z-index: 3 !important;
+  }
+  .menu-tile { height: 54px !important; }
+  .menu-tile.active { transform: none !important; opacity: 1 !important; }
+  .tile-label { font-size: clamp(13px, 2.4vw, 22px) !important; }
+
+  .item-panel {
+    grid-area: item !important;
+    position: relative !important;
+    left: unset !important; top: unset !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 340px !important;
+    border-radius: 0 !important;
+    z-index: 2 !important;
+    align-self: stretch !important;
+  }
+  .item-header { font-size: clamp(14px, 2.2vw, 28px) !important; }
+  .item-price-top .big { font-size: clamp(22px, 3vw, 40px) !important; }
+  .price-dollar { font-size: clamp(14px, 1.8vw, 22px) !important; }
+  .item-condition { font-size: clamp(12px, 1.6vw, 20px) !important; }
+  .nav-arrow { width: 50px !important; height: 50px !important; }
+  .nav-left  { right: 70px !important; }
+  .nav-right { right: 10px !important; }
+
+  .stats-panel {
+    grid-area: stats !important;
+    position: relative !important;
+    left: unset !important; top: unset !important;
+    width: 100% !important;
+    height: 150px !important;
+    min-height: 150px !important;
+    padding: 10px 10px !important;
+    border-radius: 0 !important;
+    z-index: 2 !important;
+    box-sizing: border-box !important;
+  }
+  .stat-row {
+    grid-template-columns: 1fr 32px 60px !important;
+    font-size: clamp(11px, 2.2vw, 16px) !important;
+    margin-bottom: 5px !important;
+    line-height: 1.2 !important;
+  }
+  .bar-wrap { min-width: 0 !important; margin-left: -12px !important; }
+  .bonus-bar { height: 14px !important; }
+
+  .buy-wrap {
+    grid-area: buywrap !important;
+    position: relative !important;
+    left: unset !important; top: unset !important;
+    width: calc(100% - 20px) !important;
+    height: auto !important;
+    margin: 6px 10px !important;
+    gap: 8px !important;
+    z-index: 3 !important;
+  }
+  .cost-row {
+    flex: 0 0 45% !important;
+    width: 45% !important;
+    height: 56px !important;
+  }
+  .cost-val { font-size: clamp(18px, 3vw, 32px) !important; }
+  .buy-button { flex: 1 !important; height: 56px !important; }
+
+  .helpy-group {
+    grid-area: helpy !important;
+    position: relative !important;
+    right: unset !important; bottom: unset !important;
+    width: 120px !important;
+    height: 160px !important;
+    margin: 4px auto 8px !important;
+  }
+  .footer-fade { display: none !important; }
+}
+
+@media (max-width: 600px) {
+  .day-title-text {
+    font-size: clamp(15px, 5vw, 26px) !important;
+    letter-spacing: 0px !important;
+  }
+  .day-eyebrow { letter-spacing: 3px !important; font-size: clamp(0.9rem, 4vw, 1.4rem) !important; }
+  .day-tagline  { letter-spacing: 1px !important; font-size: clamp(0.65rem, 3vw, 0.9rem) !important; }
+
+  .fnaf6-nav-left a { font-size: 0.68rem !important; }
+  .fnaf6-nav-right { gap: 10px !important; }
+
+  .screen {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "topbar"
+      "item  "
+      "menu  "
+      "stats "
+      "buywrap"
+      "helpy " !important;
+  }
+  .item-panel { min-height: 280px !important; }
+
+  .night-title { letter-spacing: 4px; }
+  .night-section-title { gap: 14px; font-size: clamp(20px, 5vw, 32px); }
+
+  .day-welcome-content { padding: 30px 5%; gap: 24px; }
+  .night-content { padding: 50px 5%; }
+  .night-chars-section, .roles-section { padding: 24px 5% 24px; }
+}
+
+@media (max-width: 768px) {
+
+  .day-banner {
+    height: auto !important;
+    min-height: 25vh !important;
+  }
+  .day-banner-content {
+    padding: 28px 20px 18px !important;
+    gap: 8px !important;
+  }
+  .night-header {
+    height: auto !important;
+    min-height: 25vh !important;
+  }
+  .night-header-content {
+    padding: 28px 20px !important;
+  }
+  .night-header-bg {
+    filter: brightness(0.5) contrast(1.15) saturate(0.85) !important;
+    background-size: 130% auto !important;
+    background-position: 75% 20% !important;
+  }
+  .night-header-bg::after {
+    background: linear-gradient(180deg,
+      rgba(6,2,8,0) 0%,
+      rgba(6,2,8,0.05) 50%,
+      rgba(6,2,8,0.45) 80%,
+      rgba(6,2,8,0.9) 94%,
+      #060208 100%) !important;
+  }
+
+  .night-eyebrow {
+    font-size: 0.85rem !important;
+    letter-spacing: 6px !important;
+    margin-bottom: 4px !important;
+  }
+  .night-title {
+    font-size: 1.55rem !important;
+    letter-spacing: 3px !important;
+    line-height: 1.2 !important;
+    margin: 0 0 4px !important;
+  }
+  .night-subtitle {
+    font-size: 0.72rem !important;
+    letter-spacing: 4px !important;
+  }
+
+  .fnaf6-nav {
+    top: 10px !important;
+    width: 92% !important;
+    padding: 8px 14px !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+  .fnaf6-nav-right {
+    display: none !important;
+    position: absolute !important;
+    top: calc(100% + 10px) !important;
+    left: 0 !important; right: 0 !important;
+    padding: 14px 18px !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    backdrop-filter: blur(20px) !important;
+    z-index: 9010 !important;
+    align-items: stretch !important;
+  }
+  body.day-mode .fnaf6-nav-right {
+    background: rgba(220,230,255,0.97) !important;
+    border: 1px solid rgba(41,78,177,0.3) !important;
+  }
+  body.night-mode .fnaf6-nav-right {
+    background: rgba(4,1,8,0.97) !important;
+    border: 1px solid rgba(232,120,32,0.35) !important;
+  }
+  .fnaf6-nav-right.open { display: flex !important; }
+
+  .fnaf6-hamburger {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    cursor: pointer !important;
+    padding: 7px 9px !important;
+    z-index: 10 !important;
+    flex-shrink: 0 !important;
+    background: none !important;
+    border: none !important;
+  }
+  body.day-mode .fnaf6-hamburger {
+    background: rgba(41,78,177,0.1) !important;
+    border: 1px solid rgba(41,78,177,0.35) !important;
+  }
+  body.night-mode .fnaf6-hamburger {
+    background: rgba(232,120,32,0.1) !important;
+    border: 1px solid rgba(232,120,32,0.35) !important;
+  }
+  .fnaf6-hamburger span {
+    display: block !important;
+    width: 18px !important; height: 2px !important;
+    transition: transform 0.3s ease, opacity 0.3s ease !important;
+  }
+  body.day-mode .fnaf6-hamburger span { background: rgba(12,60,140,0.8) !important; }
+  body.night-mode .fnaf6-hamburger span { background: rgba(232,120,32,0.8) !important; }
+  .fnaf6-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
+  .fnaf6-hamburger.open span:nth-child(2) { opacity: 0 !important; }
+  .fnaf6-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
+
+  .fnaf6-nav-right > a,
+  .fnaf6-nav-right > .fnaf6-dropdown > a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 10px 4px !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 2px !important;
+    border-bottom: 1px solid rgba(41,78,177,0.1) !important;
+  }
+  body.night-mode .fnaf6-nav-right > a,
+  body.night-mode .fnaf6-nav-right > .fnaf6-dropdown > a {
+    border-bottom-color: rgba(232,120,32,0.15) !important;
+  }
+  .fnaf6-dropdown > a::after {
+    content: "\203a" !important;
+    font-size: 1.1rem !important;
+    margin-left: 6px !important;
+    transition: transform 0.3s ease !important;
+  }
+  .fnaf6-dropdown.open > a::after { transform: rotate(90deg) !important; }
+  .fnaf6-dropdown-menu {
+    position: static !important;
+    display: none !important;
+    padding-top: 0 !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    min-width: unset !important;
+    border: none !important;
+    border-top: 1px solid rgba(41,78,177,0.1) !important;
+  }
+  body.night-mode .fnaf6-dropdown-menu {
+    border-top-color: rgba(232,120,32,0.15) !important;
+    background: transparent !important;
+  }
+  body.day-mode .fnaf6-dropdown-menu { background: transparent !important; }
+  .fnaf6-dropdown.open .fnaf6-dropdown-menu { display: block !important; }
+  .fnaf6-dropdown-menu a {
+    text-align: center !important;
+    font-size: 0.72rem !important;
+    padding: 9px 18px !important;
+    letter-spacing: 1.5px !important;
+  }
+  .fnaf6-discord { justify-content: center !important; border-bottom: none !important; padding: 8px 4px !important; }
+
+  .mode-toggle {
+    top: 68px !important;
+    right: 4% !important;
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    justify-content: center !important;
+  }
+  .mode-label { display: none !important; }
+  .mode-icon { font-size: 1.2rem !important; margin: 0 !important; }
+
+  .catalog-section { min-height: unset !important; }
+  .screen {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: unset !important;
+    overflow: visible !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "topbar "
+      "item   "
+      "buywrap"
+      "menu   "
+      "stats  "
+      "helpy  " !important;
+    align-items: start !important;
+    padding-bottom: 16px !important;
+  }
+
+
+  .top-bar {
+    grid-area: topbar !important;
+    position: relative !important;
+    left: unset !important; right: unset !important; top: unset !important;
+    width: 100% !important;
+    height: 34px !important;
+    min-height: unset !important;
+    padding: 0px 10px !important;
+    overflow: visible !important;
+  }
+  .day-welcome-bar {
+    height: 34px !important;
+    min-height: unset !important;
+    padding: 0px 10px !important;
+  }
+  .day-play-bar {
+    height: 34px !important;
+    min-height: unset !important;
+    margin-top: -10px !important;
+  }
+  .day-title-text {
+    font-size: clamp(13px, 4.2vw, 22px) !important;
+    letter-spacing: 0 !important;
+    white-space: normal !important;
+    text-align: center !important;
+    word-break: break-word !important;
+    line-height: 1 !important;
+  }
+
+  .item-panel {
+    grid-area: item !important;
+    position: relative !important;
+    left: unset !important; top: unset !important;
+    width: calc(100% - 180px) !important;
+    margin: 0 auto !important;
+    height: auto !important;
+    min-height: 180px !important;
+    max-height: 220px !important;
+    border-radius: 6px !important;
+    border: var(--thick-border) !important;
+    z-index: 2 !important;
+    overflow: hidden !important;
+  }
+  .item-header { font-size: clamp(11px, 3vw, 15px) !important; }
+  .item-price-top .big { font-size: clamp(16px, 4vw, 22px) !important; }
+  .price-dollar { font-size: clamp(9px, 2.2vw, 12px) !important; }
+  .item-condition { font-size: clamp(9px, 2vw, 11px) !important; }
+  .nav-arrow { width: 32px !important; height: 32px !important; bottom: 7px !important; }
+  .nav-left  { right: 48px !important; }
+  .nav-right { right: 8px !important; }
+
+  .left-menu {
+    grid-area: menu !important;
+    position: relative !important;
+    left: unset !important; top: unset !important;
+    width: 100% !important;
+    padding: 2px 8px 4px !important;
+    gap: 5px !important;
+    z-index: 3 !important;
+  }
+  .menu-tile { height: 46px !important; }
+  .menu-tile.active { transform: none !important; opacity: 1 !important; }
+  .tile-label { font-size: clamp(12px, 3.5vw, 18px) !important; }
+
+  .stats-panel {
+    grid-area: stats !important;
+    position: relative !important;
+    left: unset !important; top: unset !important;
+    width: calc(100% - 16px) !important;
+    margin: 6px 8px 0 !important;
+    height: 145px !important;
+    min-height: 145px !important;
+    border-radius: 6px !important;
+    border: var(--thick-border) !important;
+    padding: 8px 10px !important;
+    z-index: 2 !important;
+    box-sizing: border-box !important;
+  }
+  .stat-row {
+    display: grid !important;
+    grid-template-columns: 1fr 30px 60px !important;
+    font-size: clamp(11px, 3vw, 13px) !important;
+    margin-bottom: 4px !important;
+    line-height: 1.3 !important;
+    gap: 4px !important;
+    align-items: center !important;
+  }
+  .stat-row .value {
+    text-align: left !important;
+    padding-right: 0 !important;
+    font-weight: 700 !important;
+  }
+  .bar-wrap { min-width: 0 !important; overflow: hidden !important; margin-left: -12px !important; }
+  .bonus-bar { height: 10px !important; }
+
+  .stat-row-risk { display: none !important; }
+  .stat-row-risk.risk-visible { display: grid !important; }
+
+  .buy-wrap {
+    grid-area: buywrap !important;
+    position: relative !important;
+    left: unset !important; top: unset !important;
+    width: calc(100% - 180px) !important;
+    height: auto !important;
+    margin: 4px auto 8px !important;
+    gap: 6px !important;
+    z-index: 3 !important;
+    align-items: flex-start !important;
+    display: flex !important;
+  }
+  .cost-row {
+    flex: 0 0 46% !important;
+    width: 46% !important;
+    height: 36px !important;
+    padding-right: 10px !important;
+  }
+  .cost-val { font-size: clamp(14px, 4vw, 20px) !important; }
+  .buy-button { flex: 1 !important; height: 40px !important; }
+  .buy-button img { width: 100% !important; height: 40px !important; object-fit: fill !important; }
+
+  .item-panel,
+  .stats-panel,
+  .menu-tile { border-width: 3px !important; }
+
+  .item-header { left: 8px !important; top: 4px !important; }
+  .price-dollar { margin-top: 4px !important; left: 74% !important; }
+  .item-price-top { right: 6px !important; top: 2px !important; }
+
+  .stats-panel {
+    min-height: 110px !important;
+    padding: 8px 10px !important;
+  }
+  .stat-row {
+    display: grid !important;
+    grid-template-columns: 110px 26px 1fr !important;
+    font-size: clamp(11px, 2.8vw, 13px) !important;
+    gap: 2px !important;
+    align-items: center !important;
+    margin-bottom: 3px !important;
+  }
+  .stat-row .value { text-align: left !important; padding-right: 0 !important; }
+  .bar-wrap { min-width: 0 !important; overflow: hidden !important; margin-left: -12px !important; }
+  .bonus-bar { height: 10px !important; }
+
+  .stat-row-risk { display: none !important; }
+  .stat-row-risk.risk-visible { display: grid !important; }
+  .helpy-group {
+    grid-area: helpy !important;
+    position: relative !important;
+    right: unset !important; bottom: unset !important;
+    width: 100px !important;
+    height: 130px !important;
+    margin: -32px auto 6px !important;
+  }
+  .footer-fade { display: none !important; }
+
+  /* REST OF PAGE */
+  .night-grid, .day-welcome-content { grid-template-columns: 1fr !important; }
+  .night-grid .night-video-preview { order: 1; }
+  .night-grid .night-description { order: 2; }
+  .night-description {
+    padding: 16px !important;
+  }
+  .night-description h3 {
+    font-size: 1rem !important;
+    letter-spacing: 3px !important;
+    margin-bottom: 10px !important;
+  }
+  .night-description p {
+    font-size: 0.82rem !important;
+    line-height: 1.6 !important;
+  }
+  .night-video-preview {
+    aspect-ratio: 16/10 !important;
+    width: 100% !important;
+    min-height: unset !important;
+  }
+  .role-block {
+    grid-template-columns: 0.9fr 1.1fr !important;
+    gap: 0 !important;
+    margin-bottom: 16px !important;
+    direction: ltr !important;
+    align-items: stretch !important;
+    border-top: 1px solid rgba(232,120,32,0.25) !important;
+    border-bottom: 1px solid rgba(232,120,32,0.25) !important;
+    border-left: 1px solid rgba(232,120,32,0.25) !important;
+    border-right: 1px solid rgba(232,120,32,0.25) !important;
+  }
+  .role-block.reverse { direction: ltr !important; }
+  .role-block.reverse > * { direction: ltr !important; }
+  .role-block .role-text {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 10px !important;
+    background: rgba(232,120,32,0.04) !important;
+  }
+  .role-header {
+    gap: 5px !important;
+    margin-bottom: 5px !important;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .role-header h3 {
+    font-size: 0.58rem !important;
+    letter-spacing: 2.5px !important;
+  }
+  .role-icon {
+    width: 22px !important;
+    height: 22px !important;
+  }
+  .role-desc {
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+  }
+  .role-desc p {
+    font-size: 0.58rem !important;
+    line-height: 1.55 !important;
+  }
+  .role-block .role-video {
+    order: 2;
+    min-height: 140px !important;
+    width: 100%;
+    background: #000 !important;
+    overflow: hidden;
+    border: none !important;
+    border-left: 1px solid rgba(232,120,32,0.25) !important;
+  }
+  .role-block .role-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+    display: block;
+  }
+  .role-video::before {
+    font-size: 0.55rem !important;
+    letter-spacing: 2px !important;
+  }
+  .terminal-header {
+    gap: 4px !important;
+    padding: 10px 12px !important;
+  }
+  .terminal-label, .terminal-id, .terminal-status {
+    font-size: 0.62rem !important;
+    letter-spacing: 1.5px !important;
+  }
+  .terminal-body {
+    grid-template-columns: 1fr 1.3fr !important;
+    min-height: unset !important;
+  }
+  .terminal-img-panel {
+    border-right: 1px solid rgba(232,120,32,0.2) !important;
+    border-bottom: none !important;
+    min-height: 140px !important;
+    aspect-ratio: unset !important;
+  }
+  .terminal-condition {
+    font-size: 0.55rem !important;
+    letter-spacing: 1px !important;
+  }
+  .terminal-info-panel {
+    padding: 10px 12px !important;
+  }
+  .terminal-name-label {
+    font-size: 0.55rem !important;
+    letter-spacing: 3px !important;
+    margin-bottom: 4px !important;
+  }
+  .terminal-char-name {
+    font-size: 0.95rem !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 8px !important;
+  }
+  .terminal-divider {
+    margin-bottom: 8px !important;
+  }
+  .terminal-char-desc {
+    font-size: 0.62rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+  }
+  .terminal-wiki-link {
+    font-size: 0.6rem !important;
+    letter-spacing: 2px !important;
+  }
+  .terminal-nav-btn, .terminal-counter {
+    font-size: 0.65rem !important;
+  }
+  .day-welcome-content { padding: 28px 5% !important; gap: 16px !important; }
+  .day-welcome-content .day-welcome-video { order: 1; }
+  .day-welcome-content .day-welcome-text { order: 2; }
+  .day-welcome-text {
+    padding: 16px !important;
+    border-radius: 4px !important;
+  }
+  .day-section-h3 {
+    font-size: 1rem !important;
+    letter-spacing: 3px !important;
+    margin-bottom: 10px !important;
+  }
+  .day-welcome-text p {
+    font-size: 0.82rem !important;
+    line-height: 1.6 !important;
+  }
+  .day-welcome-video {
+    aspect-ratio: 16/10 !important;
+    width: 100% !important;
+    min-height: unset !important;
+  }
+  .night-content { padding: 40px 5% !important; }
+  .night-chars-section { padding: 10px 5% 20px !important; }
+  .roles-section { padding: 20px 5% !important; }
+  .play-section { padding: 0 5% 55px !important; }
+  .play-title { margin-top: 10px !important; padding-bottom: 20px !important; }
+  .night-section-title {
+    margin-left: -5% !important;
+    margin-right: -5% !important;
+    width: auto !important;
+    gap: 12px !important;
+    font-size: 1.05rem !important;
+    padding: 0 !important;
+  }
+  .intro-box {
+    padding: 16px !important;
+    margin-bottom: 24px !important;
+  }
+  .intro-box h2 {
+    font-size: clamp(0.7rem, 4.6vw, 1.05rem) !important;
+    letter-spacing: 1px !important;
+    line-height: 1.4 !important;
+    white-space: nowrap !important;
+  }
+  .day-eyebrow { letter-spacing: 3px !important; font-size: clamp(0.8rem, 3.3vw, 1.15rem) !important; }
+  .day-title-fallback {
+    font-size: 1.65rem !important;
+    letter-spacing: 3px !important;
+    line-height: 1.2 !important;
+  }
+  .day-tagline { letter-spacing: 4px !important; font-size: 0.72rem !important; }
 }
