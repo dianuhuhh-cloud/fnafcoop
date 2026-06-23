@@ -38,18 +38,19 @@
 .fnaf6-nav {
   position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
   width: 90%; padding: 12px 28px; z-index: 200;
+  border-radius: 16px;
   display: flex; justify-content: space-between; align-items: center;
   backdrop-filter: blur(16px);
   opacity: 0; transition: opacity 1s ease;
 }
 body.day-mode .fnaf6-nav {
   background: rgba(220,230,255,0.72);
-  border: 1px solid rgba(41,78,177,0.35);
+  border: 1px solid rgba(41,78,177,0.5);
   box-shadow: 0 0 28px rgba(41,78,177,0.15), inset 0 0 20px rgba(41,78,177,0.05);
 }
 body.night-mode .fnaf6-nav {
   background: rgba(4,1,8,0.8);
-  border: 1px solid rgba(232,120,32,0.4);
+  border: 1px solid rgba(232,120,32,0.5);
   box-shadow: 0 0 28px rgba(232,120,32,0.12), inset 0 0 20px rgba(232,120,32,0.04);
 }
 .fnaf6-nav-left { display: flex; align-items: center; gap: 20px; }
@@ -135,7 +136,10 @@ body.night-mode .fnaf6-discord:hover { color: #fff; text-shadow: 0 0 14px var(--
     <div class="fnaf6-nav-left">
       <a href="../index.html">&#8592; Home</a>
     </div>
-    <div class="fnaf6-nav-right">
+    <button class="fnaf6-hamburger" id="fnaf6-hamburger" aria-label="Toggle menu" style="display:none;background:none;border:none;cursor:pointer;">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="fnaf6-nav-right" id="fnaf6-nav-right">
       <div class="fnaf6-dropdown">
         <a>Gamemodes</a>
         <div class="fnaf6-dropdown-menu">
@@ -194,7 +198,7 @@ body.night-mode .fnaf6-discord:hover { color: #fff; text-shadow: 0 0 14px var(--
           <p>
             Freddy Fazbear's Pizza Place is under new management — yours. As the freshly hired franchise owner, your job is simple: stock the restaurant, purchase equipment from four different catalogs, and build the most successful Freddy Fazbear location this side of town.
             <br><br>
-            Each catalog offers something different. Dumpster Diver Weekly for budget finds. Stan's Budget Tech for practical equipment. Smiles and Servos for entertainment upgrades. And Rare Finds Auction for the premium stuff — if you can afford it.
+            Each catalog offers something different. Dumpster Diver Weekly for budget finds. Stan's Budget Tech for practical equipment. Smiles and Servos for entertainment upgrades. And Rare Finds Auction for the premium stuff, if you can afford it.
             <br><br>
             Keep your Atmosphere, Health and Safety, and Entertainment scores high. Keep the customers happy. Keep the revenue up. Open on Monday. Close on Friday. Do not ask questions about what happens after Friday.
           </p>
@@ -323,7 +327,7 @@ body.night-mode .fnaf6-discord:hover { color: #fff; text-shadow: 0 0 14px var(--
 
     <section class="night-content">
       <div class="intro-box">
-        <h2>WELCOME TO FREDDY FAZBEAR'S PIZZA PLACE</h2>
+        <h2>WELCOME TO FREDDY FAZBEAR'S PIZZA&nbsp;PLACE</h2>
       </div>
       <div class="night-grid">
         <div class="night-description">
@@ -444,7 +448,7 @@ body.night-mode .fnaf6-discord:hover { color: #fff; text-shadow: 0 0 14px var(--
             <h3>POLICEMAN</h3>
           </div>
           <div class="role-desc">
-            <p>You sit at the terminal in the office and work the systems. Cameras, audio routing, motion alerts — all of it runs through your screen. When something moves that should not be moving, you are the first to know. Click fast. You do not get many chances.</p>
+            <p>You sit at the terminal in the office and work the systems. Cameras, audio routing, motion alerts, all of it runs through your screen. When something moves that should not be moving, you are the first to know. Click fast. You do not get many chances.</p>
           </div>
         </div>
         <div class="role-video">
@@ -474,25 +478,94 @@ body.night-mode .fnaf6-discord:hover { color: #fff; text-shadow: 0 0 14px var(--
   var scary   = document.getElementById('intro-scary');
   var funny   = document.getElementById('intro-funny');
 
-  setTimeout(function() { scary.style.opacity = '1'; }, 600);
+  var t1 = setTimeout(function() { if (scary) scary.style.opacity = '1'; }, 600);
 
-  setTimeout(function() {
-    scary.style.transition = 'none';
-    scary.style.opacity = '0';
-    funny.style.opacity = '1';
+  var t2 = setTimeout(function() {
+    if (scary) {
+      scary.style.transition = 'none';
+      scary.style.opacity = '0';
+    }
+    if (funny) funny.style.opacity = '1';
   }, 2700);
 
-  setTimeout(function() {
-    overlay.style.opacity = '0';
-    nav.style.opacity = '1';
-    setTimeout(function() { overlay.remove(); }, 1300);
+  var t3 = setTimeout(function() {
+    if (overlay) overlay.style.opacity = '0';
+    if (nav) nav.style.opacity = '1';
+    setTimeout(function() { if (overlay && overlay.parentNode) overlay.remove(); }, 1300);
   }, 4800);
+
+  function skipIntro() {
+    clearTimeout(t1);
+    clearTimeout(t2);
+    clearTimeout(t3);
+
+    if (overlay) {
+      overlay.style.transition = 'opacity 0.4s ease';
+      overlay.style.opacity = '0';
+      setTimeout(function() { if (overlay && overlay.parentNode) overlay.remove(); }, 400);
+    }
+    
+    if (nav) {
+      nav.style.transition = 'opacity 0.4s ease';
+      nav.style.opacity = '1';
+    }
+
+    document.removeEventListener('dblclick', skipIntro);
+    document.removeEventListener('touchend', handleTap);
+  }
+
+  var lastTap = 0;
+  function handleTap() {
+    var now = Date.now();
+    if (now - lastTap < 300) skipIntro();
+    lastTap = now;
+  }
+
+  document.addEventListener('dblclick', skipIntro);
+  document.addEventListener('touchend', handleTap);
 })();
 
 document.getElementById('buyBtn').addEventListener('click', function() {
   var snd = new Audio('./fnaf6assets/error.mp3');
   snd.play();
 });
+
+(function () {
+  var hamburger = document.getElementById('fnaf6-hamburger');
+  var navRight  = document.getElementById('fnaf6-nav-right');
+  var dropdown  = document.querySelector('.fnaf6-dropdown');
+  if (!hamburger || !navRight) return;
+  hamburger.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var isOpen = navRight.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    if (!isOpen && dropdown) dropdown.classList.remove('open');
+  });
+  if (dropdown) {
+    var dropToggle = dropdown.querySelector(':scope > a');
+    if (dropToggle) {
+      dropToggle.addEventListener('click', function (e) {
+        if (window.innerWidth > 768) return;
+        e.preventDefault(); e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+    }
+  }
+  document.addEventListener('click', function (e) {
+    if (!hamburger.contains(e.target) && !navRight.contains(e.target)) {
+      hamburger.classList.remove('open');
+      navRight.classList.remove('open');
+      if (dropdown) dropdown.classList.remove('open');
+    }
+  });
+  navRight.querySelectorAll('a:not(.fnaf6-dropdown > a)').forEach(function (link) {
+    link.addEventListener('click', function () {
+      hamburger.classList.remove('open');
+      navRight.classList.remove('open');
+      if (dropdown) dropdown.classList.remove('open');
+    });
+  });
+}());
 </script>
 </body>
 </html>
