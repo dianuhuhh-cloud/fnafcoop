@@ -1120,6 +1120,7 @@ body.night-mode .mode-toggle {
   .bar-wrap { min-width: 0 !important; margin-left: -12px !important; }
   .bonus-bar { height: 14px !important; }
 
+  /* Buy row — full width under both columns */
   .buy-wrap {
     grid-area: buywrap !important;
     position: relative !important;
@@ -1138,6 +1139,7 @@ body.night-mode .mode-toggle {
   .cost-val { font-size: clamp(18px, 3vw, 32px) !important; }
   .buy-button { flex: 1 !important; height: 56px !important; }
 
+  /* Helpy mascot */
   .helpy-group {
     grid-area: helpy !important;
     position: relative !important;
@@ -1182,6 +1184,7 @@ body.night-mode .mode-toggle {
 
 @media (max-width: 768px) {
 
+  /* Banner height — shrink like fnaf2/fnaf3 instead of fixed 65vh */
   .day-banner {
     height: auto !important;
     min-height: 25vh !important;
@@ -1211,6 +1214,7 @@ body.night-mode .mode-toggle {
       #060208 100%) !important;
   }
 
+  /* Night header title — match fnaf2/fnaf3 mobile header sizing */
   .night-eyebrow {
     font-size: 0.85rem !important;
     letter-spacing: 6px !important;
@@ -1227,6 +1231,7 @@ body.night-mode .mode-toggle {
     letter-spacing: 4px !important;
   }
 
+  /* NAV — hide right side, show hamburger */
   .fnaf6-nav {
     top: 10px !important;
     width: 92% !important;
@@ -1269,20 +1274,31 @@ body.night-mode .mode-toggle {
     border: none !important;
   }
   body.day-mode .fnaf6-hamburger {
-    background: rgba(41,78,177,0.1) !important;
-    border: 1px solid rgba(41,78,177,0.35) !important;
+    background: rgba(41,78,177,0.12) !important;
+    border: 1px solid rgba(41,78,177,0.45) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 10px rgba(41,78,177,0.2) !important;
   }
   body.night-mode .fnaf6-hamburger {
-    background: rgba(232,120,32,0.1) !important;
-    border: 1px solid rgba(232,120,32,0.35) !important;
+    background: rgba(232,120,32,0.12) !important;
+    border: 1px solid rgba(232,120,32,0.45) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 10px rgba(232,120,32,0.2) !important;
   }
   .fnaf6-hamburger span {
     display: block !important;
     width: 18px !important; height: 2px !important;
+    border-radius: 2px !important;
     transition: transform 0.3s ease, opacity 0.3s ease !important;
   }
-  body.day-mode .fnaf6-hamburger span { background: rgba(12,60,140,0.8) !important; }
-  body.night-mode .fnaf6-hamburger span { background: rgba(232,120,32,0.8) !important; }
+  body.day-mode .fnaf6-hamburger span {
+    background: rgba(12,60,140,0.8) !important;
+    box-shadow: 0 0 5px rgba(41,78,177,0.8) !important;
+  }
+  body.night-mode .fnaf6-hamburger span {
+    background: rgba(232,120,32,0.8) !important;
+    box-shadow: 0 0 5px rgba(232,120,32,0.8) !important;
+  }
   .fnaf6-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
   .fnaf6-hamburger.open span:nth-child(2) { opacity: 0 !important; }
   .fnaf6-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
@@ -1332,6 +1348,7 @@ body.night-mode .mode-toggle {
   }
   .fnaf6-discord { justify-content: center !important; border-bottom: none !important; padding: 8px 4px !important; }
 
+  /* MODE TOGGLE — move below nav, icon-only on mobile */
   .mode-toggle {
     top: 68px !important;
     right: 4% !important;
@@ -1344,6 +1361,7 @@ body.night-mode .mode-toggle {
   .mode-label { display: none !important; }
   .mode-icon { font-size: 1.2rem !important; margin: 0 !important; }
 
+  /* CATALOG — single column, proper order */
   .catalog-section { min-height: unset !important; }
   .screen {
     position: relative !important;
@@ -1459,7 +1477,7 @@ body.night-mode .mode-toggle {
   }
   .bar-wrap { min-width: 0 !important; overflow: hidden !important; margin-left: -12px !important; }
   .bonus-bar { height: 10px !important; }
-
+  /* Liability Risk row stays hidden on mobile unless explicitly revealed for Lefty */
   .stat-row-risk { display: none !important; }
   .stat-row-risk.risk-visible { display: grid !important; }
 
@@ -1508,7 +1526,7 @@ body.night-mode .mode-toggle {
   .stat-row .value { text-align: left !important; padding-right: 0 !important; }
   .bar-wrap { min-width: 0 !important; overflow: hidden !important; margin-left: -12px !important; }
   .bonus-bar { height: 10px !important; }
-
+  /* Liability Risk row stays hidden on mobile unless explicitly revealed for Lefty */
   .stat-row-risk { display: none !important; }
   .stat-row-risk.risk-visible { display: grid !important; }
   .helpy-group {
