@@ -1059,7 +1059,10 @@ body.night-mode .mode-toggle {
     align-items: start !important;
     padding-bottom: 16px !important;
   }
-
+  .screen::before {
+    width: 100% !important;
+    animation: none !important;
+  }
 
   .top-bar {
     grid-area: topbar !important;
@@ -1381,7 +1384,10 @@ body.night-mode .mode-toggle {
     align-items: start !important;
     padding-bottom: 16px !important;
   }
-
+  .screen::before {
+    width: 100% !important;
+    animation: none !important;
+  }
 
   .top-bar {
     grid-area: topbar !important;
