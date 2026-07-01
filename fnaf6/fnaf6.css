@@ -1046,7 +1046,7 @@ body.night-mode .mode-toggle {
     width: 100% !important;
     height: auto !important;
     min-height: unset !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     display: grid !important;
     grid-template-columns: 43% 57% !important;
     grid-template-rows: auto !important;
@@ -1060,8 +1060,8 @@ body.night-mode .mode-toggle {
     padding-bottom: 16px !important;
   }
   .screen::before {
-    width: 100% !important;
-    animation: none !important;
+    width: 200% !important;
+    background-size: 50vw auto !important; animation: catalogBgScroll 40s linear infinite !important;
   }
 
   .top-bar {
@@ -1371,7 +1371,7 @@ body.night-mode .mode-toggle {
     width: 100% !important;
     height: auto !important;
     min-height: unset !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     display: grid !important;
     grid-template-columns: 1fr !important;
     grid-template-areas:
@@ -1385,8 +1385,8 @@ body.night-mode .mode-toggle {
     padding-bottom: 16px !important;
   }
   .screen::before {
-    width: 100% !important;
-    animation: none !important;
+    width: 200% !important;
+    background-size: 50vw auto !important; animation: catalogBgScroll 40s linear infinite !important;
   }
 
   .top-bar {
