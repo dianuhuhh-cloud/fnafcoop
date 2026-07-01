@@ -1059,10 +1059,10 @@ body.night-mode .mode-toggle {
     align-items: start !important;
     padding-bottom: 16px !important;
   }
-  .screen::before {
-    width: 200% !important;
-    background-size: 50vw auto !important; animation: catalogBgScroll 40s linear infinite !important;
-  }
+  .screen::before { display: none !important; }
+
+
+
 
   .top-bar {
     grid-area: topbar !important;
@@ -1384,10 +1384,10 @@ body.night-mode .mode-toggle {
     align-items: start !important;
     padding-bottom: 16px !important;
   }
-  .screen::before {
-    width: 200% !important;
-    background-size: 50vw auto !important; animation: catalogBgScroll 40s linear infinite !important;
-  }
+  .screen::before { display: none !important; }
+
+
+
 
   .top-bar {
     grid-area: topbar !important;
