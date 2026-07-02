@@ -1731,10 +1731,3 @@ body.night-mode .mode-toggle {
   }
   .day-tagline { letter-spacing: 4px !important; font-size: 0.72rem !important; }
 }
-
-@media (max-width: 900px) {
-  .screen::before {
-    display: none !important;
-    animation: none !important;
-  }
-}
