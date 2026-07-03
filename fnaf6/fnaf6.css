@@ -1048,7 +1048,7 @@ body.night-mode .mode-toggle {
     min-height: unset !important;
     overflow: hidden !important;
     display: grid !important;
-    grid-template-columns: 36% 64% !important;
+    grid-template-columns: 42% 58% !important;
     grid-template-rows: auto !important;
     grid-template-areas:
       "topbar  topbar"
@@ -1135,12 +1135,12 @@ body.night-mode .mode-toggle {
     z-index: 3 !important;
   }
   .cost-row {
-    flex: 0 0 45% !important;
-    width: 45% !important;
-    height: 56px !important;
+    flex: 0 0 38% !important;
+    width: 38% !important;
+    height: 68px !important;
   }
-  .cost-val { font-size: clamp(18px, 3vw, 32px) !important; }
-  .buy-button { flex: 1 !important; height: 56px !important; }
+  .cost-val { font-size: clamp(22px, 3.5vw, 36px) !important; }
+  .buy-button { flex: 1 !important; height: 68px !important; }
 
   /* Helpy mascot */
   .helpy-group {
