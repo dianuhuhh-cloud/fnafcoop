@@ -1048,7 +1048,7 @@ body.night-mode .mode-toggle {
     min-height: unset !important;
     overflow: hidden !important;
     display: grid !important;
-    grid-template-columns: 43% 57% !important;
+    grid-template-columns: 36% 64% !important;
     grid-template-rows: auto !important;
     grid-template-areas:
       "topbar  topbar"
