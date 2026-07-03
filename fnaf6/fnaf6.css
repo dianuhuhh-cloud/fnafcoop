@@ -1422,7 +1422,7 @@ body.night-mode .mode-toggle {
     grid-area: item !important;
     position: relative !important;
     left: unset !important; top: unset !important;
-    width: calc(100% - 180px) !important;
+    width: calc(100% - 60px) !important;
     margin: 0 auto !important;
     height: auto !important;
     min-height: 180px !important;
