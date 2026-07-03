@@ -1422,11 +1422,11 @@ body.night-mode .mode-toggle {
     grid-area: item !important;
     position: relative !important;
     left: unset !important; top: unset !important;
-    width: calc(100% - 60px) !important;
+    width: 100% !important;
     margin: 0 auto !important;
     height: auto !important;
     min-height: 180px !important;
-    max-height: 220px !important;
+    max-height: 280px !important;
     border-radius: 6px !important;
     border: var(--thick-border) !important;
     z-index: 2 !important;
