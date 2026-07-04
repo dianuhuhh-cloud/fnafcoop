@@ -987,6 +987,12 @@ body.night-mode .mode-toggle {
   .item-panel { left: 36%; width: 34%; }
   .stats-panel { left: 3%; width: 33%; top: 54%; }
   .buy-wrap { left: 36%; width: 34%; }
+  .cost-row {
+    flex: 0 0 38% !important;
+    width: 38% !important;
+    height: 60px !important;
+  }
+  .buy-button { flex: 1 !important; height: 60px !important; }
   .helpy-group { width: 200px; height: 260px; }
 }
 
@@ -1048,7 +1054,7 @@ body.night-mode .mode-toggle {
     min-height: unset !important;
     overflow: hidden !important;
     display: grid !important;
-    grid-template-columns: 42% 58% !important;
+    grid-template-columns: 43% 57% !important;
     grid-template-rows: auto !important;
     grid-template-areas:
       "topbar  topbar"
@@ -1135,12 +1141,12 @@ body.night-mode .mode-toggle {
     z-index: 3 !important;
   }
   .cost-row {
-    flex: 0 0 38% !important;
-    width: 38% !important;
-    height: 68px !important;
+    flex: 0 0 45% !important;
+    width: 45% !important;
+    height: 56px !important;
   }
-  .cost-val { font-size: clamp(22px, 3.5vw, 36px) !important; }
-  .buy-button { flex: 1 !important; height: 68px !important; }
+  .cost-val { font-size: clamp(18px, 3vw, 32px) !important; }
+  .buy-button { flex: 1 !important; height: 56px !important; }
 
   /* Helpy mascot */
   .helpy-group {
@@ -1422,11 +1428,11 @@ body.night-mode .mode-toggle {
     grid-area: item !important;
     position: relative !important;
     left: unset !important; top: unset !important;
-    width: 100% !important;
+    width: calc(100% - 180px) !important;
     margin: 0 auto !important;
     height: auto !important;
     min-height: 180px !important;
-    max-height: 280px !important;
+    max-height: 220px !important;
     border-radius: 6px !important;
     border: var(--thick-border) !important;
     z-index: 2 !important;
