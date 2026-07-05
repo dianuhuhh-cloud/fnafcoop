@@ -429,7 +429,7 @@ const salvages = [
     img: "./fnaf6assets/lefty2.webp",
     link: "https://freddy-fazbears-pizza.fandom.com/wiki/Lefty",
     condition: "UNKNOWN",
-    desc: "A black bear animatronic in rough condition, sent by an anonymous buyer through the catalog. The name on the shipping form is not one you will recognize. Something ancient is contained inside.",
+    desc: "A black bear animatronic in rough condition, sent by an anonymous buyer through the catalog. The name on the shipping form is not one you will recognize. Something ancient is contained inside this rockstar.",
   },
 ];
 
