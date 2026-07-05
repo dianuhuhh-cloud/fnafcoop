@@ -441,6 +441,7 @@ body.night-mode .mode-toggle {
   color: var(--night-text);
   font-family: 'Candara', 'Trebuchet MS', sans-serif;
   padding-bottom: 0;
+  overflow-x: hidden;
 }
 
 .night-particles {
@@ -1724,10 +1725,11 @@ body.night-mode .mode-toggle {
     margin-bottom: 24px !important;
   }
   .intro-box h2 {
-    font-size: clamp(0.7rem, 4.6vw, 1.05rem) !important;
+    font-size: clamp(0.75rem, 3.5vw, 1rem) !important;
     letter-spacing: 1px !important;
     line-height: 1.4 !important;
-    white-space: nowrap !important;
+    white-space: normal !important;
+    word-break: break-word !important;
   }
   .day-eyebrow { letter-spacing: 3px !important; font-size: clamp(0.8rem, 3.3vw, 1.15rem) !important; }
   .day-title-fallback {
