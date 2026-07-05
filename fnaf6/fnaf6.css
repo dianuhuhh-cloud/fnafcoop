@@ -1199,7 +1199,7 @@ body.night-mode .mode-toggle {
     min-height: 25vh !important;
   }
   .day-banner-content {
-    padding: 28px 20px 18px !important;
+    padding: 52px 20px 18px !important;
     gap: 8px !important;
   }
   .night-header {
@@ -1207,7 +1207,7 @@ body.night-mode .mode-toggle {
     min-height: 25vh !important;
   }
   .night-header-content {
-    padding: 28px 20px !important;
+    padding: 52px 20px 28px !important;
   }
   .night-header-bg {
     filter: brightness(0.5) contrast(1.15) saturate(0.85) !important;
