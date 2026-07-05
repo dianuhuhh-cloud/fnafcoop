@@ -984,12 +984,12 @@ body.night-mode .mode-toggle {
 
 @media (max-width: 1100px) {
   .left-menu { left: 3%; width: 30%; }
-  .item-panel { left: 36%; width: 34%; }
+  .item-panel { left: 30%; width: 44%; }
   .stats-panel { left: 3%; width: 33%; top: 54%; }
-  .buy-wrap { left: 36%; width: 34%; }
+  .buy-wrap { left: 22%; width: 54%; }
   .cost-row {
-    flex: 0 0 38% !important;
-    width: 38% !important;
+    flex: 0 0 34% !important;
+    width: 34% !important;
     height: 60px !important;
   }
   .buy-button { flex: 1 !important; height: 60px !important; }
