@@ -14,7 +14,7 @@
   --night-dim: rgba(240,216,144,0.65);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 *::before, *::after { box-sizing: border-box; }
 
 body {
@@ -1725,7 +1725,7 @@ body.night-mode .mode-toggle {
     margin-bottom: 24px !important;
   }
   .intro-box h2 {
-    font-size: clamp(0.75rem, 3.5vw, 1rem) !important;
+    font-size: clamp(0.9rem, 4.2vw, 1.15rem) !important;
     letter-spacing: 1px !important;
     line-height: 1.4 !important;
     white-space: normal !important;
