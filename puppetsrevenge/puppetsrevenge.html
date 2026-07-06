@@ -329,7 +329,7 @@ function makeStringAnimator(pathEl, wavyFn, straightY, phase, speed) {
     requestAnimationFrame(tick);
 
     return {
-        calm    : () => { ampTarget = 0.12; },
+        calm    : () => { ampTarget = 0; },
         release : () => { ampTarget = 1; }
     };
 }
