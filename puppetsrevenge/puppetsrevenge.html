@@ -205,7 +205,7 @@ function puppetize(el, stringHeight, originDist, fallStaggerBase, fallStaggerSte
     const MAX_SWING  = 11;
     const SWING_FREQ = 2.6;
 
-    const text = el.textContent;
+    const text = el.textContent.trim().replace(/\s+/g, ' ');
     el.textContent = '';
 
     Array.from(text).forEach((char, i) => {
