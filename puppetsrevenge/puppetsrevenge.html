@@ -432,6 +432,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const playBtnEl = document.getElementById('play-btn');
     if (playBtnEl) {
+        if (window.innerWidth <= 768) {
+            // Mobile-only fix: strip stray indentation/newline whitespace from the
+            // button's raw textContent before it gets split into letter-spans, so
+            // the invisible characters don't inflate the button's real width and
+            // push the strings away from the visible "PLAY" text. Desktop is left
+            // untouched on purpose.
+            playBtnEl.textContent = playBtnEl.textContent.trim().replace(/\s+/g, ' ');
+        }
         puppetize(playBtnEl, 200, 180, 0, 38);
     }
 
