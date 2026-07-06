@@ -432,14 +432,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const playBtnEl = document.getElementById('play-btn');
     if (playBtnEl) {
-        if (window.innerWidth <= 768) {
-            // Mobile-only fix: strip stray indentation/newline whitespace from the
-            // button's raw textContent before it gets split into letter-spans, so
-            // the invisible characters don't inflate the button's real width and
-            // push the strings away from the visible "PLAY" text. Desktop is left
-            // untouched on purpose.
-            playBtnEl.textContent = playBtnEl.textContent.trim().replace(/\s+/g, ' ');
-        }
+        // Strip stray indentation/newline whitespace from the button's raw
+        // textContent before it gets split into letter-spans, so invisible
+        // characters don't inflate the button's real width on either platform.
+        playBtnEl.textContent = playBtnEl.textContent.trim().replace(/\s+/g, ' ');
         puppetize(playBtnEl, 200, 180, 0, 38);
     }
 
@@ -455,11 +451,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const svgL    = document.getElementById('play-str-left');
         const svgR    = document.getElementById('play-str-right');
         if (!section || !btn || !svgL || !svgR) return;
-        const secRect = section.getBoundingClientRect();
-        const btnRect = btn.getBoundingClientRect();
-        const leftW  = btnRect.left  - secRect.left;
-        const rightW = secRect.right - btnRect.right;
-        if (leftW <= 0 || rightW <= 0) return;
+        // Measure the button's own natural width (plus its margins) rather than
+        // deriving it from the strings' current sizes. Using the strings' own
+        // in-progress widths to recompute themselves is circular and, combined
+        // with the button's negative margin, caused the whole assembly to drift
+        // further left every time this ran during the retry loop below.
+        const secRect   = section.getBoundingClientRect();
+        const btnRect   = btn.getBoundingClientRect();
+        const btnStyle  = getComputedStyle(btn);
+        const btnOuterW = btnRect.width + parseFloat(btnStyle.marginLeft) + parseFloat(btnStyle.marginRight);
+        const available = secRect.width - btnOuterW;
+        if (available <= 0) return;
+        const leftW  = available / 2;
+        const rightW = available / 2;
         svgL.style.width = leftW  + 'px';
         svgR.style.width = rightW + 'px';
     }
@@ -753,7 +757,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .play-btn {
         font-size: 1.3rem !important;
         letter-spacing: 6px !important;
-        margin: 0 18px 0 -12px !important;
+        margin: 0 18px 0 14px !important;
         padding: 0 !important;
         flex-shrink: 0 !important;
         transform-origin: center top !important;
