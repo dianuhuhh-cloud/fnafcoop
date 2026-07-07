@@ -165,7 +165,7 @@
                     <stop offset="15%"  stop-color="white" stop-opacity="1"/>
                     <stop offset="100%" stop-color="white" stop-opacity="1"/>
                 </linearGradient>
-                <mask id="mask-left">
+                <mask id="mask-left" maskUnits="userSpaceOnUse" x="0" y="0" width="1" height="30">
                     <rect x="0" y="0" width="1" height="30" fill="url(#fade-left)"/>
                 </mask>
             </defs>
@@ -183,7 +183,7 @@
                     <stop offset="85%"  stop-color="white" stop-opacity="1"/>
                     <stop offset="100%" stop-color="white" stop-opacity="0"/>
                 </linearGradient>
-                <mask id="mask-right">
+                <mask id="mask-right" maskUnits="userSpaceOnUse" x="0" y="0" width="1" height="30">
                     <rect x="0" y="0" width="1" height="30" fill="url(#fade-right)"/>
                 </mask>
             </defs>
@@ -384,11 +384,6 @@ function animatePlayBtn() {
             : '';
 
         const strokeAlpha = (0.22 + g * 0.55).toFixed(2);
-        const glowFilter  = g > 0.01 ? `drop-shadow(0 0 ${(5*g).toFixed(1)}px rgba(255,255,255,${(0.5*g).toFixed(2)}))` : '';
-        const svgL = document.getElementById('play-str-left');
-        const svgR = document.getElementById('play-str-right');
-        if (svgL) svgL.style.filter = glowFilter;
-        if (svgR) svgR.style.filter = glowFilter;
         document.querySelectorAll('#play-path-left, #play-path-right').forEach(p => {
             p.style.stroke = `rgba(255,255,255,${strokeAlpha})`;
         });
