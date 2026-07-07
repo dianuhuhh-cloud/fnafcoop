@@ -657,33 +657,36 @@ body::before {
     }
 
     .grid {
-        grid-template-columns: 1.1fr 0.9fr !important;
-        gap: 12px !important;
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
         margin-top: 14px !important;
         margin-bottom: 26px !important;
-        align-items: center;
         padding-left: 4% !important;
         padding-right: 4% !important;
     }
 
-    .grid .description { order: 1; }
-    .grid .video-preview {
+    .grid .description {
         order: 2;
+        padding-top: 14px;
+        border-top: 1px solid rgba(158,200,255,0.25);
+    }
+    .grid .video-preview {
+        order: 1;
         width: 100%;
-        aspect-ratio: 16/10;
+        aspect-ratio: 16/9;
         min-height: unset;
     }
 
     .description h3 {
-        font-size: 0.6rem !important;
-        letter-spacing: 2.5px !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 3px !important;
         padding-right: 0 !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 10px !important;
     }
 
     .description p {
-        font-size: 0.6rem !important;
-        line-height: 1.6 !important;
+        font-size: 0.85rem !important;
+        line-height: 1.7 !important;
     }
 
     /* ── CHARACTERS ── */
@@ -827,10 +830,5 @@ body::before {
         margin: 24px auto 42px auto !important;
         padding: 0 !important; 
         width: 100% !important;
-    }
-
-    @media (max-width: 768px) {
-    .fnaf1-nav {
-        top: 8x;
     }
 }
