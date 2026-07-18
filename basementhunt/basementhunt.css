@@ -772,6 +772,8 @@ body {
 
 @media (max-width: 768px) {
 
+    * { -webkit-tap-highlight-color: transparent !important; outline: none !important; }
+
     .bh-nav {
         top: 10px !important;
         width: 92% !important;
@@ -851,10 +853,19 @@ body {
     }
     .bh-dropdown.open .bh-dropdown-menu { display: block !important; }
     .bh-dropdown-menu a {
+        display: block !important;
         font-size: 0.72rem !important;
         padding: 9px 18px !important;
         letter-spacing: 1.5px !important;
         margin: 0 -18px !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+    .bh-dropdown-menu a:hover,
+    .bh-dropdown-menu a:active {
+        background: rgba(196,154,58,0.07) !important;
+        color: #c49a3a !important;
+        text-shadow: 0 0 8px rgba(196,154,58,0.4) !important;
+        padding-left: 18px !important;
     }
     .bh-discord {
         justify-content: center !important;
@@ -900,7 +911,6 @@ body {
     }
     .ping-terminal { display: none !important; }
 
-    /* CONTENT */
     .bh-content { padding: 10px 4% 40px !important; }
 
     .intro-box {
@@ -910,26 +920,6 @@ body {
     .intro-box h2 {
         font-size: 0.78rem !important;
         letter-spacing: 4px !important;
-    }
-    #introTypewriter {
-        font-size: 0.72rem !important;
-        letter-spacing: 0.12em !important;
-        padding: 0 18px !important;
-        text-align: center !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        flex-wrap: wrap !important;
-    }
-    .description p {
-        font-size: 0.82rem !important;
-        line-height: 1.85 !important;
-        color: rgba(196,154,58,0.9) !important;
-        text-shadow: none !important;
-    }
-    .warning-line {
-        font-size: 0.58rem !important;
-        letter-spacing: 2px !important;
-        color: rgba(196,154,58,0.85) !important;
     }
 
     .grid {
@@ -943,6 +933,8 @@ body {
 
     .description { padding: 20px 18px !important; gap: 14px !important; }
     .description h3 { font-size: 0.56rem !important; letter-spacing: 6px !important; }
+    .description p  { font-size: 0.82rem !important; line-height: 1.85 !important; }
+    .warning-line   { font-size: 0.58rem !important; letter-spacing: 2px !important; }
 
     .video-preview { max-height: 200px !important; overflow: hidden !important; }
     .video-preview video { height: 100% !important; object-fit: cover !important; }
