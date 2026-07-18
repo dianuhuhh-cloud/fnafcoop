@@ -52,12 +52,17 @@
 
     const MESSAGE  = 'The lights are the only thing keeping it away.';
     let charIdx    = 0;
+    
+    // Timer references for skipping
     let typeTimer  = null;
+    let tExit1     = null;
+    let tExit2     = null;
+    let tExit3     = null;
 
     function typeNext() {
         if (!textEl) return;
         if (charIdx >= MESSAGE.length) {
-            setTimeout(beginExit, 1500);
+            tExit1 = setTimeout(beginExit, 1500);
             return;
         }
         textEl.textContent += MESSAGE[charIdx];
@@ -71,12 +76,12 @@
 
     function beginExit() {
         if (cursor) { cursor.style.animation = 'none'; cursor.style.opacity = '0'; }
-        setTimeout(() => {
+        tExit2 = setTimeout(() => {
             if (content) {
                 content.style.transition = 'opacity 0.9s ease';
                 content.style.opacity = '0';
             }
-            setTimeout(() => {
+            tExit3 = setTimeout(() => {
                 overlay.classList.add('fade-out');
                 site.classList.add('fade-in');
                 const nav = document.getElementById('bh-nav');
@@ -87,18 +92,60 @@
 
     if (staticCvs) { staticCvs.style.opacity = '0.9'; drawStatic(); }
 
-    setTimeout(() => {
+    let t1 = setTimeout(() => {
         stopStatic();
         fireWipe();
     }, 850);
 
-    setTimeout(() => {
+    let t2 = setTimeout(() => {
         if (content) {
             content.style.transition = 'opacity 0.4s ease';
             content.style.opacity = '1';
         }
-        setTimeout(typeNext, 120);
+        typeTimer = setTimeout(typeNext, 120);
     }, 1550);
+
+    // Skip functionality
+    function skipIntro() {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(typeTimer);
+        clearTimeout(tExit1);
+        clearTimeout(tExit2);
+        clearTimeout(tExit3);
+
+        stopStatic();
+
+        if (wipe) { wipe.style.transition = 'none'; wipe.style.opacity = '0'; }
+        if (cursor) { cursor.style.animation = 'none'; cursor.style.opacity = '0'; }
+        if (content) { content.style.transition = 'none'; content.style.opacity = '0'; }
+
+        overlay.style.transition = 'opacity 0.4s ease';
+        overlay.style.opacity = '0';
+        
+        site.style.transition = 'opacity 0.4s ease';
+        site.classList.add('fade-in');
+
+        const nav = document.getElementById('bh-nav');
+        if (nav) nav.style.opacity = '1';
+
+        setTimeout(() => {
+            overlay.classList.add('fade-out');
+        }, 400);
+
+        document.removeEventListener('click', handleSkipTrigger, true);
+    }
+
+    let lastTap = 0;
+    function handleSkipTrigger(e) {
+        const now = Date.now();
+        if (now - lastTap < 400) {
+            skipIntro();
+        }
+        lastTap = now;
+    }
+
+    document.addEventListener('click', handleSkipTrigger, true);
 
 }());
 
